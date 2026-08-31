@@ -29,8 +29,6 @@ const SERVICES = [
     icon: "furniture-design",
     image: "/images/service-furniture-design.jpg",
     imageAlt: "A built-in media unit in oak and grey with lit display shelving",
-    // Photo fills the whole card, copy sits over it
-    full: true,
     title: "Furniture Design",
     description: "Custom furniture that suits your lifestyle."
   }
@@ -347,12 +345,7 @@ function App() {
 
         <div className="service-container">
           {SERVICES.map((service) => (
-            <div
-              className={
-                service.full ? "service-card is-full" : "service-card"
-              }
-              key={service.number}
-            >
+            <div className="service-card" key={service.number}>
               {service.image && (
                 <div className="service-media">
                   <img src={service.image} alt={service.imageAlt} />
