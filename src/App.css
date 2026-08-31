@@ -77,9 +77,25 @@
   transform: translateY(-4px);
 }
 
-.service-number {
-  display: block;
+/* Icon left, number right — the same balance as the residence headings */
+.service-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 26px;
+}
+
+.service-icon {
+  display: block;
+  color: var(--brass);
+  transition: color 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  color: var(--gold-dark);
+}
+
+.service-number {
   font-family: var(--serif);
   font-size: 15px;
   letter-spacing: 0.1em;

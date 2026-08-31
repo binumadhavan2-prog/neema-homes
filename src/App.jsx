@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { SOCIAL_ICONS } from "./SocialIcons.jsx";
+import { SERVICE_ICONS } from "./ServiceIcons.jsx";
 
 // Add the studio's real profiles and the footer block appears on its own.
 // `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
@@ -9,16 +10,19 @@ const SOCIALS = [];
 const SERVICES = [
   {
     number: "01",
+    icon: "interior-design",
     title: "Interior Design",
     description: "Modern and elegant home interior designs."
   },
   {
     number: "02",
+    icon: "space-planning",
     title: "Space Planning",
     description: "Smart layouts to maximize comfort and functionality."
   },
   {
     number: "03",
+    icon: "furniture-design",
     title: "Furniture Design",
     description: "Custom furniture that suits your lifestyle."
   }
@@ -252,7 +256,14 @@ function App() {
         <div className="service-container">
           {SERVICES.map((service) => (
             <div className="service-card" key={service.number}>
-              <span className="service-number">{service.number}</span>
+              <div className="service-head">
+                <span className="service-icon" aria-hidden="true">
+                  {SERVICE_ICONS[service.icon]}
+                </span>
+
+                <span className="service-number">{service.number}</span>
+              </div>
+
               <h3>{service.title}</h3>
               <p>{service.description}</p>
             </div>
