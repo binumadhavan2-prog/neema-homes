@@ -307,6 +307,71 @@
   margin: 28px 44px 0;
 }
 
+/* ---------- testimonials ---------- */
+
+/* Dark band: portfolio and contact sit either side on light grounds */
+.testimonials {
+  padding: var(--section) var(--pad);
+  background: var(--ink-deep);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.testimonials .section-head h2 {
+  color: #fff;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+}
+
+.testimonial-card {
+  margin: 0;
+  padding: 40px 34px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.testimonial-card blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+/* Hanging open-quote, so the text itself stays flush left */
+.testimonial-card blockquote::before {
+  content: "\201C";
+  display: block;
+  margin-bottom: 6px;
+  font-size: 44px;
+  line-height: 0.6;
+  color: var(--gold);
+}
+
+.testimonial-card figcaption {
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.testimonial-name {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.testimonial-residence {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
 /* ---------- contact ---------- */
 
 .contact {

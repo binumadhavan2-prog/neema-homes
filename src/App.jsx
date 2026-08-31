@@ -109,6 +109,10 @@ const RESIDENCES = [
   }
 ];
 
+// Real client quotes only — add entries as they come in and the section
+// appears on its own. Shape: { quote, name, residence }
+const TESTIMONIALS = [];
+
 const scrollToSection = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 };
@@ -138,6 +142,9 @@ function App() {
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
+            {TESTIMONIALS.length > 0 && (
+              <li><a href="#testimonials">Testimonials</a></li>
+            )}
             <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>
@@ -294,6 +301,37 @@ function App() {
           </div>
         )}
       </section>
+
+      {TESTIMONIALS.length > 0 && (
+        <section id="testimonials" className="testimonials">
+          <div className="shell">
+            <div className="section-head">
+              <p className="eyebrow">What our clients say</p>
+              <h2>Testimonials</h2>
+            </div>
+
+            <div className="testimonial-grid">
+              {TESTIMONIALS.map((testimonial) => (
+                <figure className="testimonial-card" key={testimonial.name}>
+                  <blockquote>{testimonial.quote}</blockquote>
+
+                  <figcaption>
+                    <span className="testimonial-name">
+                      {testimonial.name}
+                    </span>
+
+                    {testimonial.residence && (
+                      <span className="testimonial-residence">
+                        {testimonial.residence}
+                      </span>
+                    )}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section id="contact" className="contact">
         <div className="contact-container">
