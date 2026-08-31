@@ -18,78 +18,94 @@ const SERVICES = [
   }
 ];
 
-const PROJECTS = [
+// Each residence is one home; the rooms below it are spaces within it.
+const RESIDENCES = [
   {
-    title: "Arched Foyer",
+    name: "The Adyar Residence",
     locality: "Adyar",
-    caption: "Lime plaster · Teak · Jute",
-    image: "/images/project-foyer.jpg",
-    description:
-      "A plastered entry hall framed by a black arched doorway, with a jute runner over dark timber and cane-fronted storage running the length of one wall."
+    rooms: [
+      {
+        title: "Arched Foyer",
+        caption: "Lime plaster · Teak · Jute",
+        image: "/images/project-foyer.jpg",
+        description:
+          "A plastered entry hall framed by a black arched doorway, with a jute runner over dark timber and cane-fronted storage running the length of one wall."
+      },
+      {
+        title: "Library Study",
+        caption: "Black shelving · Walnut · Limestone",
+        image: "/images/project-study.jpg",
+        description:
+          "Black built-in shelving and closed storage set against a solid walnut desk, a brass task lamp and full-height linen curtains."
+      },
+      {
+        title: "Balcony Garden",
+        caption: "Timber deck · Rattan · Terracotta",
+        image: "/images/project-balcony.jpg",
+        description:
+          "Timber decking and a rattan lounger set among frangipani and palms, with a terrazzo side table against a cast-iron railing."
+      }
+    ]
   },
   {
-    title: "Dark Timber Kitchen",
+    name: "The Kilpauk Residence",
     locality: "Kilpauk",
-    caption: "Shaker joinery · Stone · Brass",
-    image: "/images/project-kitchen.jpg",
-    description:
-      "Near-black shaker cabinetry with brass cup pulls and pale stone counters, set off by a fluted-glass dresser beside the window."
+    rooms: [
+      {
+        title: "Dark Timber Kitchen",
+        caption: "Shaker joinery · Stone · Brass",
+        image: "/images/project-kitchen.jpg",
+        description:
+          "Near-black shaker cabinetry with brass cup pulls and pale stone counters, set off by a fluted-glass dresser beside the window."
+      },
+      {
+        title: "Travertine Bathroom",
+        caption: "Travertine · Fluted wood · Brass",
+        image: "/images/project-bath.jpg",
+        description:
+          "Full-height travertine behind a solid stone tub, paired with a fluted wood vanity, dark stone top and unlacquered brass fittings."
+      }
+    ]
   },
   {
-    title: "Slatted Oak Bedroom",
+    name: "The Besant Nagar Residence",
     locality: "Besant Nagar",
-    caption: "Slatted oak · Linen · Brass",
-    image: "/images/project-bedroom.jpg",
-    description:
-      "A slatted oak headboard wall with a brass swing-arm light, layered linen bedding and sheer curtains that keep the light soft and even."
+    rooms: [
+      {
+        title: "Slatted Oak Bedroom",
+        caption: "Slatted oak · Linen · Brass",
+        image: "/images/project-bedroom.jpg",
+        description:
+          "A slatted oak headboard wall with a brass swing-arm light, layered linen bedding and sheer curtains that keep the light soft and even."
+      },
+      {
+        title: "Walk-in Wardrobe",
+        caption: "Dark oak · Stone · Leather",
+        image: "/images/project-wardrobe.jpg",
+        description:
+          "Dark-stained joinery with lit shelving and a stone-topped island, finished with a leather bench and a glazed door to the garden."
+      }
+    ]
   },
   {
-    title: "Dining Room",
+    name: "The Alwarpet Residence",
     locality: "Alwarpet",
-    caption: "Charcoal walls · Teak · Cane",
-    image: "/images/project-dining.jpg",
-    description:
-      "A charcoal feature wall and tiered brass pendant over a solid teak table with cane-back chairs, opening through an arch to the living room."
-  },
-  {
-    title: "Travertine Bathroom",
-    locality: "Kilpauk",
-    caption: "Travertine · Fluted wood · Brass",
-    image: "/images/project-bath.jpg",
-    description:
-      "Full-height travertine behind a solid stone tub, paired with a fluted wood vanity, dark stone top and unlacquered brass fittings."
-  },
-  {
-    title: "Library Study",
-    locality: "Adyar",
-    caption: "Black shelving · Walnut · Limestone",
-    image: "/images/project-study.jpg",
-    description:
-      "Black built-in shelving and closed storage set against a solid walnut desk, a brass task lamp and full-height linen curtains."
-  },
-  {
-    title: "Walk-in Wardrobe",
-    locality: "Besant Nagar",
-    caption: "Dark oak · Stone · Leather",
-    image: "/images/project-wardrobe.jpg",
-    description:
-      "Dark-stained joinery with lit shelving and a stone-topped island, finished with a leather bench and a glazed door to the garden."
-  },
-  {
-    title: "Pooja Room",
-    locality: "Alwarpet",
-    caption: "Carved teak · Brass · Marble",
-    image: "/images/project-pooja.jpg",
-    description:
-      "A carved teak mandir on a raised stone plinth, flanked by standing brass lamps and hanging bells, lit by a sheer-curtained window."
-  },
-  {
-    title: "Balcony Garden",
-    locality: "Adyar",
-    caption: "Timber deck · Rattan · Terracotta",
-    image: "/images/project-balcony.jpg",
-    description:
-      "Timber decking and a rattan lounger set among frangipani and palms, with a terrazzo side table against a cast-iron railing."
+    rooms: [
+      {
+        title: "Dining Room",
+        caption: "Charcoal walls · Teak · Cane",
+        image: "/images/project-dining.jpg",
+        description:
+          "A charcoal feature wall and tiered brass pendant over a solid teak table with cane-back chairs, opening through an arch to the living room."
+      },
+      {
+        title: "Pooja Room",
+        caption: "Carved teak · Brass · Marble",
+        image: "/images/project-pooja.jpg",
+        description:
+          "A carved teak mandir on a raised stone plinth, flanked by standing brass lamps and hanging bells, lit by a sheer-curtained window."
+      }
+    ]
   }
 ];
 
@@ -213,32 +229,41 @@ function App() {
           </div>
         </div>
 
-        <div className="portfolio-grid">
-          {PROJECTS.map((project) => (
-            <div
-              className="portfolio-card"
-              key={project.title}
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className="portfolio-media">
-                <img src={project.image} alt={project.title} />
-              </div>
-
-              <div className="portfolio-info">
-                {project.locality && (
-                  <p className="portfolio-locality">{project.locality}</p>
-                )}
-
-                <h3>{project.title}</h3>
-                <p>{project.caption}</p>
-
-                <button className="view-project">
-                  View Project <span aria-hidden="true">→</span>
-                </button>
-              </div>
+        {RESIDENCES.map((residence) => (
+          <div className="residence" key={residence.name}>
+            <div className="residence-head">
+              <h3>{residence.name}</h3>
+              <span className="residence-meta">
+                {residence.locality} · {residence.rooms.length} rooms
+              </span>
             </div>
-          ))}
-        </div>
+
+            <div className="portfolio-grid">
+              {residence.rooms.map((room) => (
+                <div
+                  className="portfolio-card"
+                  key={room.title}
+                  onClick={() =>
+                    setSelectedProject({ ...room, residence: residence.name })
+                  }
+                >
+                  <div className="portfolio-media">
+                    <img src={room.image} alt={room.title} />
+                  </div>
+
+                  <div className="portfolio-info">
+                    <h3>{room.title}</h3>
+                    <p>{room.caption}</p>
+
+                    <button className="view-project">
+                      View Project <span aria-hidden="true">→</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
 
         {/* Project Details */}
         {selectedProject && (
@@ -252,6 +277,8 @@ function App() {
               </button>
 
               <img src={selectedProject.image} alt={selectedProject.title} />
+
+              <p className="modal-residence">{selectedProject.residence}</p>
 
               <h2>{selectedProject.title}</h2>
 
