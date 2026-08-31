@@ -160,6 +160,39 @@ const scrollToSection = (id) => {
 function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Hold the loader until the images are in, with a floor on the duration so
+  // it settles rather than flashing on a warm cache.
+  useEffect(() => {
+    const MINIMUM_MS = 700;
+    const startedAt = performance.now();
+    let timer;
+
+    const finish = () => {
+      const remaining = MINIMUM_MS - (performance.now() - startedAt);
+      timer = setTimeout(() => setIsLoading(false), Math.max(0, remaining));
+    };
+
+    if (document.readyState === "complete") {
+      finish();
+    } else {
+      window.addEventListener("load", finish, { once: true });
+    }
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("load", finish);
+    };
+  }, []);
+
+  // Nothing should scroll behind the loader
+  useEffect(() => {
+    document.body.style.overflow = isLoading ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isLoading]);
 
   // The header sits transparent over the hero photo and solidifies past it.
   useEffect(() => {
@@ -171,6 +204,19 @@ function App() {
 
   return (
     <>
+      <div
+        className={isLoading ? "loader" : "loader is-done"}
+        role="status"
+        aria-label="Loading"
+        aria-hidden={!isLoading}
+      >
+        <img className="loader-mark" src="/images/logo-symbol.png" alt="" />
+
+        <span className="loader-track" aria-hidden="true">
+          <span className="loader-bar" />
+        </span>
+      </div>
+
       <header className={isScrolled ? "header is-scrolled" : "header"}>
         <div className="logo">
           <img src="/images/logo-horizontal.png" alt="NEEMA HOMES" />
