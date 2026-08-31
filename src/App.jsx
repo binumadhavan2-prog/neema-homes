@@ -53,6 +53,7 @@ const PROJECTS = [
   },
   {
     title: "Travertine Bathroom",
+    locality: "Kilpauk",
     caption: "Travertine · Fluted wood · Brass",
     image: "/images/project-bath.jpg",
     description:
@@ -60,6 +61,7 @@ const PROJECTS = [
   },
   {
     title: "Library Study",
+    locality: "Adyar",
     caption: "Black shelving · Walnut · Limestone",
     image: "/images/project-study.jpg",
     description:
@@ -67,6 +69,7 @@ const PROJECTS = [
   },
   {
     title: "Walk-in Wardrobe",
+    locality: "Besant Nagar",
     caption: "Dark oak · Stone · Leather",
     image: "/images/project-wardrobe.jpg",
     description:
@@ -74,6 +77,7 @@ const PROJECTS = [
   },
   {
     title: "Pooja Room",
+    locality: "Alwarpet",
     caption: "Carved teak · Brass · Marble",
     image: "/images/project-pooja.jpg",
     description:
@@ -81,6 +85,7 @@ const PROJECTS = [
   },
   {
     title: "Balcony Garden",
+    locality: "Adyar",
     caption: "Timber deck · Rattan · Terracotta",
     image: "/images/project-balcony.jpg",
     description:
