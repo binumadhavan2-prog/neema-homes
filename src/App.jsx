@@ -4,86 +4,83 @@ const SERVICES = [
   {
     number: "01",
     title: "Interior Design",
-    description:
-      "Full-home design, from concept boards and material palettes through to the final styling."
+    description: "Modern and elegant home interior designs."
   },
   {
     number: "02",
     title: "Space Planning",
-    description:
-      "Smart layouts that make every square foot work — circulation, storage and natural light."
+    description: "Smart layouts to maximize comfort and functionality."
   },
   {
     number: "03",
     title: "Furniture Design",
-    description:
-      "Custom joinery and loose furniture built to your dimensions by our own workshop."
+    description: "Custom furniture that suits your lifestyle."
   }
 ];
 
 const PROJECTS = [
   {
     title: "Arched Foyer",
-    caption: "Entrance · Anna Nagar",
+    caption: "Lime plaster · Teak · Jute",
     image: "/images/project-foyer.jpg",
     description:
-      "An arched entry in fluted oak and travertine that sets the tone for the rest of the home."
+      "A plastered entry hall framed by a black arched doorway, with a jute runner over dark timber and cane-fronted storage running the length of one wall."
   },
   {
-    title: "Modern Kitchen",
-    caption: "Kitchen · Adyar",
+    title: "Dark Timber Kitchen",
+    caption: "Shaker joinery · Stone · Brass",
     image: "/images/project-kitchen.jpg",
     description:
-      "A working kitchen planned around the cook — deep drawers, a quiet stone island and concealed appliances."
+      "Near-black shaker cabinetry with brass cup pulls and pale stone counters, set off by a fluted-glass dresser beside the window."
   },
   {
-    title: "Primary Bedroom",
-    caption: "Bedroom · Besant Nagar",
+    title: "Slatted Oak Bedroom",
+    caption: "Slatted oak · Linen · Brass",
     image: "/images/project-bedroom.jpg",
     description:
-      "Layered neutrals, soft linen and a panelled headboard wall for a calm, low-contrast retreat."
+      "A slatted oak headboard wall with a brass swing-arm light, layered linen bedding and sheer curtains that keep the light soft and even."
   },
   {
     title: "Dining Room",
-    caption: "Dining · Alwarpet",
+    caption: "Charcoal walls · Teak · Cane",
     image: "/images/project-dining.jpg",
     description:
-      "A dining room built around a single long table, with brass lighting and a full-height display wall."
+      "A charcoal feature wall and tiered brass pendant over a solid teak table with cane-back chairs, opening through an arch to the living room."
   },
   {
-    title: "Guest Bath",
-    caption: "Bathroom · Nungambakkam",
+    title: "Travertine Bathroom",
+    caption: "Travertine · Fluted wood · Brass",
     image: "/images/project-bath.jpg",
     description:
-      "Full-height stone, a floating vanity and warm brass fittings in a compact guest bathroom."
+      "Full-height travertine behind a solid stone tub, paired with a fluted wood vanity, dark stone top and unlacquered brass fittings."
   },
   {
-    title: "Study",
-    caption: "Workspace · Kotturpuram",
+    title: "Library Study",
+    caption: "Black shelving · Walnut · Limestone",
     image: "/images/project-study.jpg",
     description:
-      "A quiet study with a bespoke desk, closed storage and a reading corner set into the window."
+      "Black built-in shelving and closed storage set against a solid walnut desk, a brass task lamp and full-height linen curtains."
   },
   {
     title: "Walk-in Wardrobe",
-    caption: "Wardrobe · Boat Club",
+    caption: "Dark oak · Stone · Leather",
     image: "/images/project-wardrobe.jpg",
     description:
-      "Open shelving, lit rails and a central island — every item visible without feeling cluttered."
+      "Dark-stained joinery with lit shelving and a stone-topped island, finished with a leather bench and a glazed door to the garden."
   },
   {
     title: "Pooja Room",
-    caption: "Pooja · Mylapore",
+    caption: "Carved teak · Brass · Marble",
     image: "/images/project-pooja.jpg",
     description:
-      "A carved teak shrine with concealed lighting, detailed with traditional joinery and brass inlay."
+      "A carved teak mandir on a raised stone plinth, flanked by standing brass lamps and hanging bells, lit by a sheer-curtained window."
   },
   {
     title: "Balcony Garden",
-    caption: "Outdoor · ECR",
+    caption: "Timber deck · Rattan · Terracotta",
     image: "/images/project-balcony.jpg",
     description:
-      "A planted balcony with weatherproof seating, designed as an extension of the living room."
+      "Timber decking and a rattan lounger set among frangipani and palms, with a terrazzo side table against a cast-iron railing."
   }
 ];
 
@@ -132,8 +129,7 @@ function App() {
           <h1>Premium Residential Interior Design</h1>
 
           <p>
-            Creating beautiful, functional homes that reflect your lifestyle —
-            designed, detailed and delivered by a single studio.
+            Creating beautiful, functional homes that reflect your lifestyle.
           </p>
 
           <div className="hero-actions">
@@ -166,12 +162,6 @@ function App() {
               in Chennai. We create elegant and functional living spaces
               tailored to every client.
             </p>
-
-            <p>
-              Every project runs through one team — space planning, material
-              selection, custom joinery and site supervision — so what you
-              approve on the drawings is what gets handed over.
-            </p>
           </div>
 
           <div className="about-media">
@@ -188,10 +178,6 @@ function App() {
           <div className="section-head">
             <p className="eyebrow">What we do</p>
             <h2>Our Services</h2>
-            <p>
-              Three ways we work with homeowners, from a single room to a
-              complete residence.
-            </p>
           </div>
         </div>
 
@@ -212,7 +198,7 @@ function App() {
             <p className="eyebrow">Featured</p>
             <h2>Our Portfolio</h2>
             <p>
-              A selection of residential interiors completed across Chennai.
+              Explore some of our residential interior design projects.
             </p>
           </div>
         </div>
