@@ -1,93 +1,280 @@
+/* ==========================================================
+   NEEMA HOMES — design tokens, base type, header, hero
+   ========================================================== */
+
+:root {
+  /* colour */
+  --ink: #12203c;
+  --ink-deep: #0d1930;
+  --muted: #5b6070;
+  --gold: #c9a24d;
+  --gold-dark: #ad8632;
+  --brass: #b89b6a;
+  --cream: #f5efe6;
+  --paper: #fcfbf8;
+  --line: #e6dfd3;
+
+  /* type */
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  /* layout */
+  --shell: 1200px;
+  --pad: 60px;
+  --section: 110px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
 }
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin: 0 auto;
+}
+
+/* Small letterspaced label that sits above every section heading */
+.eyebrow {
+  margin: 0 0 18px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+/* ---------- buttons ---------- */
+
+.btn,
+.hero-btn,
+.ghost-btn,
+.submit-btn,
+.close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.btn,
+.hero-btn,
+.submit-btn {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.btn:hover,
+.hero-btn:hover,
+.submit-btn:hover {
+  background: var(--gold-dark);
+}
+
+.ghost-btn {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+.ghost-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+
+/* ---------- header ---------- */
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 60px;
-  background: white;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 22px var(--pad);
+  transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
 }
 
-.logo h2 {
-  margin: 0;
+/* Over the hero photo the bar is transparent; it solidifies once scrolled. */
+.header.is-scrolled {
+  padding: 14px var(--pad);
+  background: rgba(252, 251, 248, 0.94);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  width: auto;
+  height: 34px;
+  object-fit: contain;
 }
 
 .nav-links {
   display: flex;
+  gap: 34px;
+  margin: 0;
+  padding: 0;
   list-style: none;
-  gap: 25px;
 }
 
 .nav-links a {
+  position: relative;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  color: black;
+  transition: color 0.25s ease;
 }
 
-.btn {
-  padding: 10px 20px;
-  background: #000;
-  color: white;
-  border: none;
-  cursor: pointer;
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.25s ease;
 }
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.header.is-scrolled .nav-links a {
+  color: var(--ink);
+}
+
+.nav-links a:hover {
+  color: var(--gold);
+}
+
+.header .btn {
+  padding: 11px 24px;
+  font-size: 14px;
+}
+
+/* ---------- hero ---------- */
 
 .hero {
-  min-height: 80vh;
-  background: #f5f5f5;
+  position: relative;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 20px;
+  padding: 140px var(--pad) 90px;
+  background: url("/images/hero-living.jpg") center / cover no-repeat;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Warm dark scrim, heavier on the left so the copy stays readable. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(9, 16, 32, 0.86) 0%,
+    rgba(13, 22, 40, 0.7) 42%,
+    rgba(24, 20, 14, 0.34) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  width: 100%;
+  max-width: var(--shell);
+  margin: 0 auto;
+}
+
+.hero .eyebrow {
+  color: var(--gold);
 }
 
 .hero h1 {
-  font-size: 48px;
-  margin-bottom: 20px;
+  max-width: 15ch;
+  font-size: clamp(42px, 5.4vw, 74px);
+  color: #fff;
 }
 
 .hero p {
-  font-size: 20px;
-  margin-bottom: 30px;
+  max-width: 52ch;
+  margin: 26px 0 40px;
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.82);
 }
 
-.hero-btn {
-  padding: 12px 24px;
-  background: black;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-.about {
-  padding: 80px 60px;
-  text-align: center;
-  background: #ffffff;
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
 }
 
-.about h2 {
-  font-size: 36px;
-  margin-bottom: 20px;
+/* ---------- stats band ---------- */
+
+.stats {
+  padding: 64px var(--pad);
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
 }
 
-.about p {
-  font-size: 18px;
-  line-height: 1.8;
-  max-width: 800px;
-  margin: auto;
-}
-.view-project {
-  margin-top: 15px;
-  padding: 10px 20px;
-  background: #000;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  max-width: var(--shell);
+  margin: 0 auto;
 }
 
-.view-project:hover {
-  opacity: 0.8;
+.stat-value {
+  font-family: var(--serif);
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.stat-label {
+  margin: 12px 0 0;
+  font-size: 14px;
+  color: var(--muted);
 }
