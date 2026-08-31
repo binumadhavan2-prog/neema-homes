@@ -21,6 +21,7 @@ const SERVICES = [
 const PROJECTS = [
   {
     title: "Arched Foyer",
+    locality: "Adyar",
     caption: "Lime plaster · Teak · Jute",
     image: "/images/project-foyer.jpg",
     description:
@@ -28,6 +29,7 @@ const PROJECTS = [
   },
   {
     title: "Dark Timber Kitchen",
+    locality: "Kilpauk",
     caption: "Shaker joinery · Stone · Brass",
     image: "/images/project-kitchen.jpg",
     description:
@@ -35,6 +37,7 @@ const PROJECTS = [
   },
   {
     title: "Slatted Oak Bedroom",
+    locality: "Besant Nagar",
     caption: "Slatted oak · Linen · Brass",
     image: "/images/project-bedroom.jpg",
     description:
@@ -42,6 +45,7 @@ const PROJECTS = [
   },
   {
     title: "Dining Room",
+    locality: "Alwarpet",
     caption: "Charcoal walls · Teak · Cane",
     image: "/images/project-dining.jpg",
     description:
@@ -216,6 +220,10 @@ function App() {
               </div>
 
               <div className="portfolio-info">
+                {project.locality && (
+                  <p className="portfolio-locality">{project.locality}</p>
+                )}
+
                 <h3>{project.title}</h3>
                 <p>{project.caption}</p>
 
