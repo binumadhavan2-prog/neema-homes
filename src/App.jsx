@@ -145,6 +145,17 @@ const TESTIMONIALS = [];
 // Swap in the studio's street address and the map recentres on it.
 const STUDIO_LOCATION = "Chennai, Tamil Nadu, India";
 
+// Single source for the phone number: shown in contact and the footer, and
+// stripped to digits for the WhatsApp link. Change it here only.
+const STUDIO_PHONE = "+91 98765 43210";
+
+const whatsappHref = `https://wa.me/${STUDIO_PHONE.replace(
+  /\D/g,
+  ""
+)}?text=${encodeURIComponent(
+  "Hello NEEMA HOMES, I would like to discuss an interior design project."
+)}`;
+
 const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
   STUDIO_LOCATION
 )}&output=embed`;
@@ -506,7 +517,7 @@ function App() {
 
             <div className="contact-line">
               <strong>Phone</strong>
-              <span>+91 98765 43210</span>
+              <span>{STUDIO_PHONE}</span>
             </div>
 
             <div className="contact-line">
@@ -610,7 +621,7 @@ function App() {
           <div className="footer-contact">
             <h3>Contact</h3>
             <p>Chennai</p>
-            <p>+91 98765 43210</p>
+            <p>{STUDIO_PHONE}</p>
             <p>info@neemahomes.com</p>
           </div>
         </div>
@@ -619,6 +630,16 @@ function App() {
           <p>© 2026 NEEMA HOMES. All rights reserved.</p>
         </div>
       </footer>
+
+      <a
+        className="whatsapp-float"
+        href={whatsappHref}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Message NEEMA HOMES on WhatsApp"
+      >
+        {SOCIAL_ICONS.whatsapp}
+      </a>
 
       <button
         className={showScrollTop ? "scroll-top is-visible" : "scroll-top"}
