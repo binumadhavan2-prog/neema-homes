@@ -220,6 +220,16 @@ function App() {
             </button>
           </div>
         </div>
+
+        <button
+          className={isScrolled ? "hero-scroll is-hidden" : "hero-scroll"}
+          onClick={() => scrollToSection("about")}
+          aria-label="Scroll to the next section"
+          tabIndex={isScrolled ? -1 : 0}
+        >
+          <span className="hero-scroll-label">Scroll</span>
+          <span className="hero-scroll-line" aria-hidden="true" />
+        </button>
       </section>
 
       <section id="about" className="about">

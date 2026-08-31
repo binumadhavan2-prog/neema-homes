@@ -248,3 +248,83 @@ img {
   flex-wrap: wrap;
   gap: 14px;
 }
+
+/* ---------- hero scroll indicator ---------- */
+
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 34px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Fades itself out as soon as the reader starts scrolling */
+.hero-scroll.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.hero-scroll-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.25s ease;
+}
+
+.hero-scroll:hover .hero-scroll-label {
+  color: var(--gold);
+}
+
+.hero-scroll-line {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 54px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* A gold segment travelling down the track, on a loop */
+.hero-scroll-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 50%;
+  background: var(--gold);
+  animation: hero-scroll-travel 2.2s ease-in-out infinite;
+}
+
+@keyframes hero-scroll-travel {
+  0% {
+    top: -55%;
+  }
+  100% {
+    top: 105%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll {
+    transition: none;
+  }
+
+  .hero-scroll-line::after {
+    animation: none;
+    top: 0;
+    height: 100%;
+    opacity: 0.7;
+  }
+}
