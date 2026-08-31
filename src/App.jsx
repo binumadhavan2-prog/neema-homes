@@ -19,6 +19,8 @@ const SERVICES = [
   {
     number: "02",
     icon: "space-planning",
+    image: "/images/service-space-planning.jpg",
+    imageAlt: "A colour-rendered floor plan being marked up by hand",
     title: "Space Planning",
     description: "Smart layouts to maximize comfort and functionality."
   },
