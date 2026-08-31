@@ -109,6 +109,25 @@ const RESIDENCES = [
   }
 ];
 
+// `imageHover` is the second view of the same room, cross-faded in on hover.
+// Optional — without it the photo simply sits still.
+const INTERIORS = [
+  {
+    title: "Reading Nook",
+    caption: "Teak panelling · Linen · Brass",
+    image: "/images/project-nook.jpg",
+    description:
+      "A window seat set into teak panelling, with a fluted base, a linen bolster and a brass side table turned to the trees outside."
+  },
+  {
+    title: "Powder Room",
+    caption: "Dark marble · Walnut · Brass",
+    image: "/images/project-powder.jpg",
+    description:
+      "A single veined marble slab behind a round mirror, with a floating walnut vanity, stone counter and unlacquered brass fittings."
+  }
+];
+
 // Real client quotes only — add entries as they come in and the section
 // appears on its own. Shape: { quote, name, residence }
 const TESTIMONIALS = [];
@@ -221,6 +240,40 @@ function App() {
               <p>{service.description}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="interiors">
+        <div className="shell">
+          <div className="section-head">
+            <p className="eyebrow">Inside our work</p>
+            <h2>Details from our interiors</h2>
+          </div>
+
+          <div className="interiors-grid">
+            {INTERIORS.map((room) => (
+              <figure className="interior-figure" key={room.title}>
+                <div className="interior-media">
+                  <img src={room.image} alt={room.title} />
+
+                  {room.imageHover && (
+                    <img
+                      className="interior-hover"
+                      src={room.imageHover}
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  )}
+                </div>
+
+                <figcaption>
+                  <h3>{room.title}</h3>
+                  <p className="interior-caption">{room.caption}</p>
+                  <p>{room.description}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
