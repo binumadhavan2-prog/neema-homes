@@ -94,6 +94,61 @@
   transform: scale(1.04);
 }
 
+/* Full-bleed variant: photo fills the card, copy sits over it */
+.service-card.is-full {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 400px;
+  overflow: hidden;
+  border-color: transparent;
+}
+
+.service-card.is-full .service-media {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.service-card.is-full .service-media img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+/* Scrim over the photo, under the copy */
+.service-card.is-full::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(9, 16, 32, 0.88) 0%,
+    rgba(9, 16, 32, 0.5) 55%,
+    rgba(9, 16, 32, 0.2) 100%
+  );
+}
+
+.service-card.is-full > *:not(.service-media) {
+  position: relative;
+  z-index: 1;
+}
+
+.service-card.is-full h3 {
+  color: #fff;
+}
+
+.service-card.is-full p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.service-card.is-full .service-icon,
+.service-card.is-full .service-number,
+.service-card.is-full:hover .service-icon {
+  color: var(--gold);
+}
+
 /* Icon left, number right — the same balance as the residence headings */
 .service-head {
   display: flex;
