@@ -153,13 +153,26 @@ const mapLinkSrc = `https://www.google.com/maps/search/?api=1&query=${encodeURIC
   STUDIO_LOCATION
 )}`;
 
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 const scrollToSection = (id) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  document.getElementById(id)?.scrollIntoView({
+    behavior: prefersReducedMotion() ? "auto" : "smooth"
+  });
+};
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: prefersReducedMotion() ? "auto" : "smooth"
+  });
 };
 
 function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   // Hold the loader until the images are in, with a floor on the duration so
@@ -194,9 +207,13 @@ function App() {
     };
   }, [isLoading]);
 
-  // The header sits transparent over the hero photo and solidifies past it.
+  // One listener drives both the header state and the back-to-top button.
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 80);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setIsScrolled(y > 80);
+      setShowScrollTop(y > 600);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -602,6 +619,15 @@ function App() {
           <p>© 2026 NEEMA HOMES. All rights reserved.</p>
         </div>
       </footer>
+
+      <button
+        className={showScrollTop ? "scroll-top is-visible" : "scroll-top"}
+        onClick={scrollToTop}
+        aria-label="Scroll back to top"
+        tabIndex={showScrollTop ? 0 : -1}
+      >
+        <span aria-hidden="true">↑</span>
+      </button>
     </>
   );
 }

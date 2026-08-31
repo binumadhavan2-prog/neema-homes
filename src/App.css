@@ -598,6 +598,51 @@
   border: 1px solid var(--line);
 }
 
+/* ---------- back to top ---------- */
+
+/* Below the project modal, above everything else */
+.scroll-top {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  box-shadow: 0 8px 24px rgba(18, 32, 60, 0.18);
+  transition: opacity 0.35s ease, visibility 0.35s ease,
+    transform 0.35s ease, background 0.25s ease;
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.scroll-top:hover {
+  background: var(--gold-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top {
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    transform: none;
+  }
+}
+
 /* ---------- footer ---------- */
 
 .footer {
@@ -829,6 +874,13 @@
 
   .contact-map iframe {
     height: 300px;
+  }
+
+  .scroll-top {
+    right: 18px;
+    bottom: 18px;
+    width: 42px;
+    height: 42px;
   }
 
   .residence-head {
