@@ -11,6 +11,8 @@ const SERVICES = [
   {
     number: "01",
     icon: "interior-design",
+    image: "/images/service-interior-design.jpg",
+    imageAlt: "Living room with built-in shelving opening onto a garden",
     title: "Interior Design",
     description: "Modern and elegant home interior designs."
   },
@@ -340,6 +342,12 @@ function App() {
         <div className="service-container">
           {SERVICES.map((service) => (
             <div className="service-card" key={service.number}>
+              {service.image && (
+                <div className="service-media">
+                  <img src={service.image} alt={service.imageAlt} />
+                </div>
+              )}
+
               <div className="service-head">
                 <span className="service-icon" aria-hidden="true">
                   {SERVICE_ICONS[service.icon]}
