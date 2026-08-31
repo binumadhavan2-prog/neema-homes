@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
 
-const STATS = [
-  { value: "120+", label: "Homes delivered" },
-  { value: "14", label: "Years of experience" },
-  { value: "40+", label: "Projects in Chennai" },
-  { value: "9", label: "Design awards" }
-];
-
 const SERVICES = [
   {
     number: "01",
@@ -158,17 +151,6 @@ function App() {
               Contact Us
             </button>
           </div>
-        </div>
-      </section>
-
-      <section className="stats">
-        <div className="stats-grid">
-          {STATS.map((stat) => (
-            <div key={stat.label}>
-              <div className="stat-value">{stat.value}</div>
-              <p className="stat-label">{stat.label}</p>
-            </div>
-          ))}
         </div>
       </section>
 

@@ -248,33 +248,3 @@ img {
   flex-wrap: wrap;
   gap: 14px;
 }
-
-/* ---------- stats band ---------- */
-
-.stats {
-  padding: 64px var(--pad);
-  background: var(--cream);
-  border-bottom: 1px solid var(--line);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  max-width: var(--shell);
-  margin: 0 auto;
-}
-
-.stat-value {
-  font-family: var(--serif);
-  font-size: 44px;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--ink);
-}
-
-.stat-label {
-  margin: 12px 0 0;
-  font-size: 14px;
-  color: var(--muted);
-}
