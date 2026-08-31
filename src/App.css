@@ -386,10 +386,13 @@
   text-align: left;
 }
 
+/* contain, not cover — most of these rooms are shot portrait and a fixed
+   crop cut the top and bottom off them. Cream behind reads as a mount. */
 .project-modal-content img {
   width: 100%;
-  max-height: 420px;
-  object-fit: cover;
+  max-height: 68vh;
+  object-fit: contain;
+  background: var(--cream);
 }
 
 .modal-residence {
