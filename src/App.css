@@ -65,27 +65,30 @@
   margin: 0 auto;
 }
 
+/* Each card is a full-bleed photo with the copy sitting over it */
 .service-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 420px;
   padding: 40px 34px 44px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  transition: border-color 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
 .service-card:hover {
-  border-color: var(--brass);
   transform: translateY(-4px);
 }
 
-/* Bleeds to the card edges, cancelling the card's own padding */
 .service-media {
-  margin: -40px -34px 32px;
-  overflow: hidden;
+  position: absolute;
+  inset: 0;
 }
 
 .service-media img {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
 }
@@ -94,31 +97,8 @@
   transform: scale(1.04);
 }
 
-/* Full-bleed variant: photo fills the card, copy sits over it */
-.service-card.is-full {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 400px;
-  overflow: hidden;
-  border-color: transparent;
-}
-
-.service-card.is-full .service-media {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-}
-
-.service-card.is-full .service-media img {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: auto;
-}
-
 /* Scrim over the photo, under the copy */
-.service-card.is-full::after {
+.service-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -130,23 +110,9 @@
   );
 }
 
-.service-card.is-full > *:not(.service-media) {
+.service-card > *:not(.service-media) {
   position: relative;
   z-index: 1;
-}
-
-.service-card.is-full h3 {
-  color: #fff;
-}
-
-.service-card.is-full p {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.service-card.is-full .service-icon,
-.service-card.is-full .service-number,
-.service-card.is-full:hover .service-icon {
-  color: var(--gold);
 }
 
 /* Icon left, number right — the same balance as the residence headings */
@@ -159,28 +125,36 @@
 
 .service-icon {
   display: block;
-  color: var(--brass);
-  transition: color 0.3s ease;
-}
-
-.service-card:hover .service-icon {
-  color: var(--gold-dark);
+  color: var(--gold);
 }
 
 .service-number {
   font-family: var(--serif);
   font-size: 15px;
   letter-spacing: 0.1em;
-  color: var(--brass);
+  color: var(--gold);
 }
 
 .service-card h3 {
   font-size: 23px;
+  color: #fff;
 }
 
 .service-card p {
   margin: 14px 0 0;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-media img {
+    transition: none;
+  }
+
+  .service-card:hover,
+  .service-card:hover .service-media img {
+    transform: none;
+  }
 }
 
 /* ---------- interiors ---------- */
