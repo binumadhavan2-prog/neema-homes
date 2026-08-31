@@ -198,7 +198,8 @@ function App() {
             <p className="eyebrow">Featured</p>
             <h2>Our Portfolio</h2>
             <p>
-              Explore some of our residential interior design projects.
+              A selection of our completed residential interiors across
+              Chennai.
             </p>
           </div>
         </div>
