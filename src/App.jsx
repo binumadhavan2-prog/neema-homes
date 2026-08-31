@@ -1,4 +1,10 @@
 import { useEffect, useState } from "react";
+import { SOCIAL_ICONS } from "./SocialIcons.jsx";
+
+// Add the studio's real profiles and the footer block appears on its own.
+// `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
+// linkedin, youtube, pinterest, whatsapp.
+const SOCIALS = [];
 
 const SERVICES = [
   {
@@ -489,6 +495,23 @@ function App() {
             <p>
               Creating beautiful, functional homes that reflect your lifestyle.
             </p>
+
+            {SOCIALS.length > 0 && (
+              <ul className="footer-social">
+                {SOCIALS.map((social) => (
+                  <li key={social.platform}>
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`NEEMA HOMES on ${social.platform}`}
+                    >
+                      {SOCIAL_ICONS[social.platform]}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div className="footer-links">
