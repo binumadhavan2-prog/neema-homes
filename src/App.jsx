@@ -132,6 +132,17 @@ const INTERIORS = [
 // appears on its own. Shape: { quote, name, residence }
 const TESTIMONIALS = [];
 
+// Swap in the studio's street address and the map recentres on it.
+const STUDIO_LOCATION = "Chennai, Tamil Nadu, India";
+
+const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+  STUDIO_LOCATION
+)}&output=embed`;
+
+const mapLinkSrc = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  STUDIO_LOCATION
+)}`;
+
 const scrollToSection = (id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 };
@@ -445,6 +456,29 @@ function App() {
               Submit Enquiry
             </button>
           </form>
+        </div>
+
+        <div className="contact-map">
+          <div className="contact-map-head">
+            <h3>Find the studio</h3>
+
+            <a
+              className="map-link"
+              href={mapLinkSrc}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Open in Google Maps <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <iframe
+            title={`Map showing NEEMA HOMES in ${STUDIO_LOCATION}`}
+            src={mapEmbedSrc}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
         </div>
       </section>
 
