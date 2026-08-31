@@ -598,13 +598,40 @@
   border: 1px solid var(--line);
 }
 
-/* ---------- back to top ---------- */
+/* ---------- floating actions ---------- */
+
+/* WhatsApp sits at the corner; back-to-top stacks above it */
+.whatsapp-float {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(18, 32, 60, 0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.whatsapp-float svg {
+  width: 26px;
+  height: 26px;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(18, 32, 60, 0.28);
+}
 
 /* Below the project modal, above everything else */
 .scroll-top {
   position: fixed;
   right: 32px;
-  bottom: 32px;
+  bottom: 100px;
   z-index: 900;
   display: grid;
   place-items: center;
@@ -639,6 +666,14 @@
 @media (prefers-reduced-motion: reduce) {
   .scroll-top {
     transition: opacity 0.35s ease, visibility 0.35s ease;
+    transform: none;
+  }
+
+  .whatsapp-float {
+    transition: box-shadow 0.25s ease;
+  }
+
+  .whatsapp-float:hover {
     transform: none;
   }
 }
@@ -876,9 +911,16 @@
     height: 300px;
   }
 
-  .scroll-top {
+  .whatsapp-float {
     right: 18px;
     bottom: 18px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .scroll-top {
+    right: 18px;
+    bottom: 80px;
     width: 42px;
     height: 42px;
   }
