@@ -383,7 +383,7 @@ img {
   width: 100%;
 }
 
-/* ---------- what we do dropdown ---------- */
+/* ---------- nav dropdowns ---------- */
 
 .nav-dropdown {
   position: relative;
@@ -392,7 +392,7 @@ img {
   gap: 4px;
 }
 
-.what-we-do-toggle {
+.nav-dropdown-toggle {
   display: grid;
   place-items: center;
   width: 20px;
@@ -404,7 +404,7 @@ img {
   cursor: pointer;
 }
 
-.what-we-do-arrow {
+.nav-dropdown-arrow {
   display: block;
   font-size: 12px;
   line-height: 1;
@@ -412,15 +412,15 @@ img {
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
-.header.is-scrolled .what-we-do-arrow {
+.header.is-scrolled .nav-dropdown-arrow {
   color: var(--ink);
 }
 
-.what-we-do-toggle:hover .what-we-do-arrow {
+.nav-dropdown-toggle:hover .nav-dropdown-arrow {
   color: var(--gold);
 }
 
-.what-we-do-toggle.is-open .what-we-do-arrow {
+.nav-dropdown-toggle.is-open .nav-dropdown-arrow {
   transform: rotate(180deg);
 }
 
@@ -457,7 +457,7 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .what-we-do-arrow {
+  .nav-dropdown-arrow {
     transition: color 0.25s ease;
   }
 }

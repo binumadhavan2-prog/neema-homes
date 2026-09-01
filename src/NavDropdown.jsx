@@ -1,13 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-// "What We Do" in the navbar: the label still links through, and the arrow
-// beside it opens the two offerings.
-const OPTIONS = [
-  { label: "Customised Interior", href: "#services" },
-  { label: "Design and Build", href: "#portfolio" }
-];
+// A navbar item whose label links through, with an arrow beside it that
+// opens a short list of options.
 
-export default function WhatWeDoNav() {
+export default function NavDropdown({ label, href, options }) {
   const [isOpen, setIsOpen] = useState(false);
   const wrapRef = useRef(null);
 
@@ -33,26 +29,28 @@ export default function WhatWeDoNav() {
 
   return (
     <div className="nav-dropdown" ref={wrapRef}>
-      <a href="#services" className="nav-what-we-do">
-        What We Do
+      <a href={href} className="nav-dropdown-label">
+        {label}
       </a>
 
       <button
         type="button"
-        className={isOpen ? "what-we-do-toggle is-open" : "what-we-do-toggle"}
+        className={
+          isOpen ? "nav-dropdown-toggle is-open" : "nav-dropdown-toggle"
+        }
         onClick={() => setIsOpen((open) => !open)}
         aria-expanded={isOpen}
         aria-haspopup="true"
-        aria-label="Show what we do options"
+        aria-label={`Show ${label} options`}
       >
-        <span className="what-we-do-arrow" aria-hidden="true">
+        <span className="nav-dropdown-arrow" aria-hidden="true">
           ↓
         </span>
       </button>
 
       {isOpen && (
         <ul className="nav-submenu">
-          {OPTIONS.map((option) => (
+          {options.map((option) => (
             <li key={option.label}>
               <a href={option.href} onClick={() => setIsOpen(false)}>
                 {option.label}
