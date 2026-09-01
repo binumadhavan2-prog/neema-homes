@@ -9,6 +9,7 @@ import CallSpinner from "./CallSpinner.jsx";
 import NavDropdown from "./NavDropdown.jsx";
 import KitchenPage from "./KitchenPage.jsx";
 import BedroomPage from "./BedroomPage.jsx";
+import DiningPage from "./DiningPage.jsx";
 import MessageBox from "./MessageBox.jsx";
 import HeroShowcase from "./HeroShowcase.jsx";
 
@@ -20,7 +21,7 @@ const WHAT_WE_DO = [
 const PRODUCTS = [
   { label: "Kitchen", href: "#/kitchen" },
   { label: "Bedroom", href: "#/bedroom" },
-  { label: "Dining Room", href: "#portfolio" },
+  { label: "Dining Room", href: "#/dining" },
   { label: "Living Room", href: "#portfolio" },
   { label: "Decorative Units", href: "#services" },
   { label: "Kids Room", href: "#portfolio" }
@@ -28,7 +29,11 @@ const PRODUCTS = [
 
 // Tiny hash router: "#/name" is a page, every other hash is an anchor on the
 // home page. Avoids pulling in a router for a handful of routes.
-const PAGES = { "#/kitchen": "kitchen", "#/bedroom": "bedroom" };
+const PAGES = {
+  "#/kitchen": "kitchen",
+  "#/bedroom": "bedroom",
+  "#/dining": "dining"
+};
 
 const readRoute = () => PAGES[window.location.hash] ?? "home";
 
@@ -390,6 +395,8 @@ function App() {
         <KitchenPage onBookConsultation={bookConsultation} />
       ) : route === "bedroom" ? (
         <BedroomPage onBookConsultation={bookConsultation} />
+      ) : route === "dining" ? (
+        <DiningPage onBookConsultation={bookConsultation} />
       ) : (
       <>
       <section id="home" className="hero">

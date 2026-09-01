@@ -27,7 +27,9 @@ const BEDROOM = [
     name: "Dressing Unit",
     span: 12,
     description:
-      "Freestanding or run into the wardrobe, sized to the wall it sits on, with a lit mirror and drawers where you reach for them."
+      "Freestanding or run into the wardrobe, sized to the wall it sits on, with a lit mirror and drawers where you reach for them.",
+    image: "/images/bedroom-dressing.avif",
+    alt: "Dressing table with a mirror and drawers"
   }
 ];
 
