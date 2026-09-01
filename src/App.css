@@ -1651,8 +1651,8 @@
 }
 
 .social-flip-back {
-  background: var(--gold);
-  color: var(--ink-deep);
+  background: var(--coffee);
+  color: var(--cream);
   transform: rotateY(180deg);
 }
 
