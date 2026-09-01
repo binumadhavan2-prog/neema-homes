@@ -47,7 +47,9 @@ const LIVING = [
     name: "Living–Dining Partition",
     span: 12,
     description:
-      "A screen that keeps the dining table out of direct view while staying open to the light, often doubling as display."
+      "A screen that keeps the dining table out of direct view while staying open to the light, often doubling as display.",
+    image: "/images/living-partition.webp",
+    alt: "Black-framed glass partition in reeded and frosted panels screening the room beyond, with a wall-mounted screen and low console alongside"
   },
   {
     id: "prayer-unit",
