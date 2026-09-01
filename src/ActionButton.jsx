@@ -10,6 +10,7 @@ const BUSY_MS = 550;
 export default function ActionButton({
   className = "",
   onAction,
+  spinner,
   children,
   ...rest
 }) {
@@ -37,7 +38,7 @@ export default function ActionButton({
       {...rest}
     >
       <span className="btn-label">{children}</span>
-      <FingerprintSpinner />
+      {spinner ?? <FingerprintSpinner />}
     </button>
   );
 }

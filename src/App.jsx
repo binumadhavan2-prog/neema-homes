@@ -5,6 +5,7 @@ import ContactIllustration from "./ContactIllustration.jsx";
 import ActionButton from "./ActionButton.jsx";
 import FingerprintSpinner from "./FingerprintSpinner.jsx";
 import WhatsAppLink from "./WhatsAppLink.jsx";
+import CallSpinner from "./CallSpinner.jsx";
 
 // Add the studio's real profiles and the footer block appears on its own.
 // `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
@@ -292,6 +293,7 @@ function App() {
         <ActionButton
           className="btn"
           onAction={() => scrollToSection("contact")}
+          spinner={<CallSpinner />}
         >
           Enquire Now
         </ActionButton>
