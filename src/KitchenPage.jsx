@@ -25,7 +25,9 @@ const KITCHENS = [
     id: "parallel",
     name: "Parallel Kitchen",
     description:
-      "Two facing runs of counter, keeping the cook between them. A clean, organised layout for a galley footprint."
+      "Two facing runs of counter, keeping the cook between them. A clean, organised layout for a galley footprint.",
+    image: "/images/kitchen-parallel.jpg",
+    alt: "Parallel kitchen with facing timber counter runs, marble splashback and pendant lighting"
   },
   {
     id: "straight",
@@ -106,7 +108,8 @@ export default function KitchenPage({ onBookConsultation }) {
           </p>
 
           <ActionButton className="btn" onAction={onBookConsultation}>
-            Book a Consultation <span aria-hidden="true">→</span>
+            Talk to Our Interior Design Team{" "}
+            <span aria-hidden="true">→</span>
           </ActionButton>
         </div>
       </section>
