@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { SOCIAL_ICONS } from "./SocialIcons.jsx";
 import { SERVICE_ICONS } from "./ServiceIcons.jsx";
+import ContactIllustration from "./ContactIllustration.jsx";
 
 // Add the studio's real profiles and the footer block appears on its own.
 // `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
@@ -216,6 +217,18 @@ function App() {
     };
   }, []);
 
+  // Escape closes the project view
+  useEffect(() => {
+    if (!selectedProject) return undefined;
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setSelectedProject(null);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [selectedProject]);
+
   // Nothing should scroll behind the loader
   useEffect(() => {
     document.body.style.overflow = isLoading ? "hidden" : "";
@@ -313,8 +326,15 @@ function App() {
       </section>
 
       <section id="about" className="about">
-        <div className="about-grid">
-          <div>
+        <div className="about-panel">
+          <div className="about-media">
+            <img
+              src="/images/materials.jpg"
+              alt="Oak, travertine, brass and linen material samples"
+            />
+          </div>
+
+          <div className="about-copy">
             <p className="eyebrow">About the studio</p>
 
             <h2>A studio built around how you actually live</h2>
@@ -324,13 +344,6 @@ function App() {
               in Chennai. We create elegant and functional living spaces
               tailored to every client.
             </p>
-          </div>
-
-          <div className="about-media">
-            <img
-              src="/images/materials.jpg"
-              alt="Oak, travertine, brass and linen material samples"
-            />
           </div>
         </div>
       </section>
@@ -451,7 +464,15 @@ function App() {
 
         {/* Project Details */}
         {selectedProject && (
-          <div className="project-modal">
+          <div
+            className="project-modal"
+            onClick={(event) => {
+              // Only a click on the backdrop itself, not the panel
+              if (event.target === event.currentTarget) {
+                setSelectedProject(null);
+              }
+            }}
+          >
             <div className="project-modal-content">
               <button
                 className="close-project"
@@ -462,18 +483,13 @@ function App() {
 
               <img src={selectedProject.image} alt={selectedProject.title} />
 
-              <p className="modal-residence">{selectedProject.residence}</p>
+              <div className="project-modal-copy">
+                <p className="modal-residence">{selectedProject.residence}</p>
 
-              <h2>{selectedProject.title}</h2>
+                <h2>{selectedProject.title}</h2>
 
-              <p>{selectedProject.description}</p>
-
-              <button
-                className="close-btn"
-                onClick={() => setSelectedProject(null)}
-              >
-                Close
-              </button>
+                <p>{selectedProject.description}</p>
+              </div>
             </div>
           </div>
         )}
@@ -511,64 +527,83 @@ function App() {
       )}
 
       <section id="contact" className="contact">
-        <div className="contact-container">
-          <div className="contact-info">
-            <p className="eyebrow">Get in touch</p>
+        <div className="contact-card">
+          <div className="contact-form-panel">
+            <h2>Let's Talk About Your Project</h2>
 
-            <h3>Let's Talk About Your Project</h3>
-
-            <p>
-              Ready to transform your home? We would love to hear about your
-              interior design requirements.
+            <p className="contact-sub">
+              Tell us about your home and we will be in touch.
             </p>
 
-            <div className="contact-line">
-              <strong>Location</strong>
-              <span>Chennai</span>
-            </div>
+            <form
+              className="contact-form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                alert("Enquiry submitted successfully!");
+              }}
+            >
+              <div className="form-group">
+                <label htmlFor="contact-name">Name</label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  placeholder="Enter your name"
+                />
+              </div>
 
-            <div className="contact-line">
-              <strong>Phone</strong>
-              <span>{STUDIO_PHONE}</span>
-            </div>
+              <div className="form-group">
+                <label htmlFor="contact-email">Email</label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  placeholder="Enter your email"
+                />
+              </div>
 
-            <div className="contact-line">
-              <strong>Email</strong>
-              <span>info@neemahomes.com</span>
-            </div>
+              <div className="form-group">
+                <label htmlFor="contact-phone">Phone</label>
+                <input
+                  id="contact-phone"
+                  type="tel"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="contact-message">Message</label>
+                <textarea
+                  id="contact-message"
+                  rows="4"
+                  placeholder="Tell us about your project"
+                />
+              </div>
+
+              <button type="submit" className="submit-btn">
+                Contact Us
+              </button>
+            </form>
           </div>
 
-          <form
-            className="contact-form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Enquiry submitted successfully!");
-            }}
-          >
-            <div className="form-group">
-              <label>Name</label>
-              <input type="text" placeholder="Enter your name" />
-            </div>
+          <div className="contact-art-panel">
+            <ContactIllustration />
 
-            <div className="form-group">
-              <label>Email</label>
-              <input type="email" placeholder="Enter your email" />
-            </div>
+            <div className="contact-art-details">
+              <div className="contact-line">
+                <strong>Location</strong>
+                <span>Chennai</span>
+              </div>
 
-            <div className="form-group">
-              <label>Phone</label>
-              <input type="tel" placeholder="Enter your phone number" />
-            </div>
+              <div className="contact-line">
+                <strong>Phone</strong>
+                <span>{STUDIO_PHONE}</span>
+              </div>
 
-            <div className="form-group">
-              <label>Message</label>
-              <textarea rows="5" placeholder="Tell us about your project" />
+              <div className="contact-line">
+                <strong>Email</strong>
+                <span>info@neemahomes.com</span>
+              </div>
             </div>
-
-            <button type="submit" className="submit-btn">
-              Submit Enquiry
-            </button>
-          </form>
+          </div>
         </div>
 
         <div className="contact-map">

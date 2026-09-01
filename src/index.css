@@ -14,6 +14,15 @@
   --paper: #fcfbf8;
   --line: #e6dfd3;
 
+  /* Muted eucalyptus, so the mint reads premium beside the brass */
+  --mint: #d6e6e0;
+  --mint-light: #9fc6bc;
+  --mint-deep: #2e6f66;
+  --mint-deeper: #235851;
+
+  /* Coffee ground for the contact illustration panel */
+  --coffee: #5a4638;
+
   /* type */
   --serif: "Playfair Display", Georgia, "Times New Roman", serif;
   --sans: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
@@ -154,8 +163,7 @@ img {
 .btn,
 .hero-btn,
 .ghost-btn,
-.submit-btn,
-.close-btn {
+.submit-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
