@@ -27,7 +27,11 @@ const LIVING = [
     name: "Centre Table",
     span: 5,
     description:
-      "Sized to the sofa and to the walkway around it, in timber, stone or both, so it suits the room rather than the showroom floor."
+      "Sized to the sofa and to the walkway around it, in timber, stone or both, so it suits the room rather than the showroom floor.",
+    // PLACEHOLDER: supplied stock shot carries another retailer's nameplate on
+    // the table top and a tag on its right edge. Replace before the site goes live.
+    image: "/images/living-centre-table.avif",
+    alt: "Rectangular centre table in walnut and white with two open display cubbies, on a rug in front of a cream sofa"
   },
   {
     id: "bookshelves",
