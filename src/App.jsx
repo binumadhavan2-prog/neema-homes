@@ -15,7 +15,10 @@ const WHAT_WE_DO = [
   { label: "Our Portfolio", href: "#portfolio" }
 ];
 
-const PRODUCTS = [{ label: "Kitchen", href: "#/kitchen" }];
+const PRODUCTS = [
+  { label: "Kitchen", href: "#/kitchen" },
+  { label: "Bedroom", href: "#portfolio" }
+];
 
 // Tiny hash router: "#/kitchen" is a page, every other hash is an anchor on
 // the home page. Avoids pulling in a router for two routes.

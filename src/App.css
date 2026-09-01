@@ -855,11 +855,15 @@
 
 /* ---------- message composer ---------- */
 
+/* Motion here follows one curve — a fast settle, no bounce */
 .message-box {
+  --ease-settle: cubic-bezier(0.23, 1, 0.32, 1);
+
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 14px;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: border-color 150ms var(--ease-settle),
+    box-shadow 150ms var(--ease-settle);
 }
 
 .message-box:focus-within {
@@ -904,6 +908,7 @@
   border-radius: 999px;
   font-size: 12.5px;
   color: var(--muted);
+  animation: pop-in 200ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 .message-file svg {
@@ -933,12 +938,19 @@
   line-height: 1;
   color: var(--muted);
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    color 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 150ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .message-file button:hover {
   background: rgba(18, 32, 60, 0.08);
   color: var(--ink);
+}
+
+/* Presses give slightly, then settle */
+.message-file button:active {
+  transform: scale(0.94);
 }
 
 .message-tools {
@@ -959,12 +971,15 @@
   font-size: 12.5px;
   color: var(--muted);
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    color 150ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 150ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .message-attach span {
   font-size: 15px;
   line-height: 1;
+  transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .message-attach:hover {
@@ -972,16 +987,144 @@
   color: var(--ink);
 }
 
+.message-attach:hover span {
+  transform: rotate(90deg);
+}
+
+.message-attach:active {
+  transform: scale(0.94);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .message-file {
+    animation: none;
+  }
+
+  .message-file button,
+  .message-attach,
+  .message-attach span {
+    transition: background 150ms ease, color 150ms ease;
+  }
+
+  .message-file button:active,
+  .message-attach:active,
+  .message-attach:hover span {
+    transform: none;
+  }
+}
+
+/* Animated: a diagonal shine crosses the label and the rim every 2s, with a
+   spring-ish lift on hover and a give on press. */
+@property --mask-x {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
 .contact-form .submit-btn {
+  --mask-x: 100%;
+  --shine: rgba(255, 255, 255, 0.66);
+
+  position: relative;
   width: 100%;
   justify-content: center;
   margin-top: 8px;
+  overflow: hidden;
   background: var(--coffee-light);
   color: #fff;
+  transition: background 200ms cubic-bezier(0.23, 1, 0.32, 1),
+    transform 220ms cubic-bezier(0.16, 1.06, 0.3, 1);
 }
 
 .contact-form .submit-btn:hover {
   background: var(--coffee-dark);
+  transform: scale(1.01);
+}
+
+.contact-form .submit-btn:active {
+  transform: scale(0.97);
+}
+
+/* The label is masked, so the shine passes through the letterforms */
+.contact-form .submit-btn .btn-label {
+  -webkit-mask-image: linear-gradient(
+    -75deg,
+    #fff calc(var(--mask-x) + 20%),
+    transparent calc(var(--mask-x) + 30%),
+    #fff calc(var(--mask-x) + 100%)
+  );
+  mask-image: linear-gradient(
+    -75deg,
+    #fff calc(var(--mask-x) + 20%),
+    transparent calc(var(--mask-x) + 30%),
+    #fff calc(var(--mask-x) + 100%)
+  );
+  animation: btn-shine-label 2s linear infinite;
+}
+
+/* Gradient ring, hollowed out by compositing so only the rim shows */
+.contact-form .submit-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    -75deg,
+    transparent 30%,
+    var(--shine) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: btn-shine-rim 2s linear infinite;
+}
+
+/* One second of travel, one second of rest */
+@keyframes btn-shine-label {
+  0% {
+    --mask-x: 100%;
+  }
+  50%,
+  100% {
+    --mask-x: -100%;
+  }
+}
+
+@keyframes btn-shine-rim {
+  0% {
+    background-position: 100% 0;
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    background-position: 0 0;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form .submit-btn .btn-label,
+  .contact-form .submit-btn::after {
+    animation: none;
+  }
+
+  .contact-form .submit-btn::after {
+    opacity: 0;
+  }
+
+  .contact-form .submit-btn:hover,
+  .contact-form .submit-btn:active {
+    transform: none;
+  }
 }
 
 /* Illustration panel */
