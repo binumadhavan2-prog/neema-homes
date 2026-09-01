@@ -4,6 +4,7 @@ import { SERVICE_ICONS } from "./ServiceIcons.jsx";
 import ContactIllustration from "./ContactIllustration.jsx";
 import ActionButton from "./ActionButton.jsx";
 import FingerprintSpinner from "./FingerprintSpinner.jsx";
+import WhatsAppLink from "./WhatsAppLink.jsx";
 
 // Add the studio's real profiles and the footer block appears on its own.
 // `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
@@ -701,15 +702,7 @@ function App() {
         </div>
       </footer>
 
-      <a
-        className="whatsapp-float"
-        href={whatsappHref}
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Message NEEMA HOMES on WhatsApp"
-      >
-        {SOCIAL_ICONS.whatsapp}
-      </a>
+      <WhatsAppLink href={whatsappHref} />
 
       <button
         className={showScrollTop ? "scroll-top is-visible" : "scroll-top"}
