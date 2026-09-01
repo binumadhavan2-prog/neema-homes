@@ -17,7 +17,9 @@ const KITCHENS = [
     id: "l-shaped",
     name: "L-Shaped Kitchen",
     description:
-      "Cabinetry along two adjoining walls, turning an awkward corner into working storage. Suits apartments and villas alike."
+      "Cabinetry along two adjoining walls, turning an awkward corner into working storage. Suits apartments and villas alike.",
+    image: "/images/kitchen-l-shaped.jpg",
+    alt: "L-shaped kitchen in graphite and white handleless cabinetry with lit wall units"
   },
   {
     id: "parallel",
@@ -29,13 +31,17 @@ const KITCHENS = [
     id: "straight",
     name: "Straight Kitchen",
     description:
-      "A single wall of modular cabinetry, minimal and unobtrusive. The efficient answer for a compact home."
+      "A single wall of modular cabinetry, minimal and unobtrusive. The efficient answer for a compact home.",
+    image: "/images/kitchen-straight.jpg",
+    alt: "Single-wall kitchen in taupe cabinetry with a wood-panelled backdrop and open shelving"
   },
   {
     id: "u-shaped",
     name: "U-Shaped Kitchen",
     description:
-      "Counters and storage on three sides, giving the most capacity of any layout and a work triangle within easy reach."
+      "Counters and storage on three sides, giving the most capacity of any layout and a work triangle within easy reach.",
+    image: "/images/kitchen-u-shaped.jpg",
+    alt: "U-shaped kitchen in cream cabinetry with dark stone counters and a raised breakfast bar"
   }
 ];
 
