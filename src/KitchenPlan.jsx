@@ -35,7 +35,7 @@ const PLANS = {
 export default function KitchenPlan({ type, label }) {
   return (
     <svg
-      className="kitchen-plan"
+      className="product-drawing"
       viewBox="0 0 120 90"
       role="img"
       aria-label={`Plan diagram of a ${label.toLowerCase()}`}

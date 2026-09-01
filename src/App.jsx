@@ -8,6 +8,7 @@ import WhatsAppLink from "./WhatsAppLink.jsx";
 import CallSpinner from "./CallSpinner.jsx";
 import NavDropdown from "./NavDropdown.jsx";
 import KitchenPage from "./KitchenPage.jsx";
+import BedroomPage from "./BedroomPage.jsx";
 import MessageBox from "./MessageBox.jsx";
 
 const WHAT_WE_DO = [
@@ -17,13 +18,14 @@ const WHAT_WE_DO = [
 
 const PRODUCTS = [
   { label: "Kitchen", href: "#/kitchen" },
-  { label: "Bedroom", href: "#portfolio" }
+  { label: "Bedroom", href: "#/bedroom" }
 ];
 
-// Tiny hash router: "#/kitchen" is a page, every other hash is an anchor on
-// the home page. Avoids pulling in a router for two routes.
-const readRoute = () =>
-  window.location.hash.startsWith("#/kitchen") ? "kitchen" : "home";
+// Tiny hash router: "#/name" is a page, every other hash is an anchor on the
+// home page. Avoids pulling in a router for a handful of routes.
+const PAGES = { "#/kitchen": "kitchen", "#/bedroom": "bedroom" };
+
+const readRoute = () => PAGES[window.location.hash] ?? "home";
 
 // Add the studio's real profiles and the footer block appears on its own.
 // `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
@@ -229,7 +231,7 @@ function App() {
       const next = readRoute();
       setRoute(next);
 
-      if (next === "kitchen") {
+      if (next !== "home") {
         window.scrollTo({ top: 0, behavior: "auto" });
         return;
       }
@@ -244,12 +246,12 @@ function App() {
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
-  // From the kitchen page, go home and land on the contact card.
+  // From a product page, go home and land on the contact card.
   const bookConsultation = () => {
-    if (route === "kitchen") {
-      window.location.hash = "#contact";
-    } else {
+    if (route === "home") {
       scrollToSection("contact");
+    } else {
+      window.location.hash = "#contact";
     }
   };
 
@@ -328,7 +330,7 @@ function App() {
         className={[
           "header",
           isScrolled ? "is-scrolled" : "",
-          route === "kitchen" ? "is-kitchen" : ""
+          route !== "home" ? "is-kitchen" : ""
         ]
           .filter(Boolean)
           .join(" ")}
@@ -373,6 +375,8 @@ function App() {
 
       {route === "kitchen" ? (
         <KitchenPage onBookConsultation={bookConsultation} />
+      ) : route === "bedroom" ? (
+        <BedroomPage onBookConsultation={bookConsultation} />
       ) : (
       <>
       <section id="home" className="hero">
