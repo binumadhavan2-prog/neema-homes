@@ -19,14 +19,18 @@ const DECOR = [
     name: "Open Shelves",
     span: 5,
     description:
-      "Set into a niche or run along a wall, in solid timber or slim steel, spaced for what you actually put on them rather than to a standard pitch."
+      "Set into a niche or run along a wall, in solid timber or slim steel, spaced for what you actually put on them rather than to a standard pitch.",
+    image: "/images/decor-open-shelves.jpg",
+    alt: "Two timber shelves on brackets against a dark teal wall, holding plants, ceramics and baskets above a console"
   },
   {
     id: "cabinets",
     name: "Cabinets",
     span: 12,
     description:
-      "Closed storage detailed to disappear: handleless fronts, grain matched across the run, and a top that continues the line of the room."
+      "Closed storage detailed to disappear: handleless fronts, grain matched across the run, and a top that continues the line of the room.",
+    image: "/images/decor-cabinets.avif",
+    alt: "A run of handleless fluted cabinets under a continuous stone top, with lit glazed cupboards above"
   }
 ];
 
