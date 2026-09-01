@@ -764,7 +764,8 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.whatsapp-float svg {
+/* Scoped to the label, so it does not resize the fingerprint spinner */
+.whatsapp-float .btn-label svg {
   width: 26px;
   height: 26px;
 }
