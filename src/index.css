@@ -197,6 +197,69 @@ img {
   border-color: #fff;
 }
 
+/* ---------- button busy state ---------- */
+
+.btn,
+.hero-btn,
+.ghost-btn,
+.submit-btn {
+  position: relative;
+}
+
+/* Label keeps its space while hidden, so the button does not resize */
+.is-busy .btn-label {
+  visibility: hidden;
+}
+
+.btn-spinner {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  border: 2px solid;
+  animation: btn-spin 0.7s linear infinite;
+}
+
+.is-busy .btn-spinner {
+  display: block;
+}
+
+/* Dark spinner on the gold buttons, light on the dark ones */
+.btn .btn-spinner,
+.hero-btn .btn-spinner {
+  border-color: rgba(18, 32, 60, 0.25);
+  border-top-color: var(--ink);
+}
+
+.ghost-btn .btn-spinner,
+.submit-btn .btn-spinner {
+  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+}
+
+.btn:disabled,
+.hero-btn:disabled,
+.ghost-btn:disabled,
+.submit-btn:disabled {
+  cursor: default;
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-spinner {
+    animation: none;
+  }
+}
+
 /* ---------- header ---------- */
 
 .header {
