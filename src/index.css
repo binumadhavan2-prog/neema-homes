@@ -14,14 +14,10 @@
   --paper: #fcfbf8;
   --line: #e6dfd3;
 
-  /* Muted eucalyptus, so the mint reads premium beside the brass */
-  --mint: #d6e6e0;
-  --mint-light: #9fc6bc;
-  --mint-deep: #2e6f66;
-  --mint-deeper: #235851;
-
-  /* Coffee ground for the contact illustration panel */
+  /* Coffee: ground for the contact illustration panel, and the form button */
   --coffee: #5a4638;
+  --coffee-light: #7a6250;
+  --coffee-dark: #67523f;
 
   /* type */
   --serif: "Playfair Display", Georgia, "Times New Roman", serif;
