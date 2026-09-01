@@ -10,6 +10,9 @@ import NavDropdown from "./NavDropdown.jsx";
 import KitchenPage from "./KitchenPage.jsx";
 import BedroomPage from "./BedroomPage.jsx";
 import DiningPage from "./DiningPage.jsx";
+import LivingPage from "./LivingPage.jsx";
+import DecorPage from "./DecorPage.jsx";
+import KidsPage from "./KidsPage.jsx";
 import MessageBox from "./MessageBox.jsx";
 import HeroShowcase from "./HeroShowcase.jsx";
 
@@ -22,9 +25,9 @@ const PRODUCTS = [
   { label: "Kitchen", href: "#/kitchen" },
   { label: "Bedroom", href: "#/bedroom" },
   { label: "Dining Room", href: "#/dining" },
-  { label: "Living Room", href: "#portfolio" },
-  { label: "Decorative Units", href: "#services" },
-  { label: "Kids Room", href: "#portfolio" }
+  { label: "Living Room", href: "#/living" },
+  { label: "Decorative Units", href: "#/decor" },
+  { label: "Kids Room", href: "#/kids" }
 ];
 
 // Tiny hash router: "#/name" is a page, every other hash is an anchor on the
@@ -32,7 +35,10 @@ const PRODUCTS = [
 const PAGES = {
   "#/kitchen": "kitchen",
   "#/bedroom": "bedroom",
-  "#/dining": "dining"
+  "#/dining": "dining",
+  "#/living": "living",
+  "#/decor": "decor",
+  "#/kids": "kids"
 };
 
 const readRoute = () => PAGES[window.location.hash] ?? "home";
@@ -397,6 +403,12 @@ function App() {
         <BedroomPage onBookConsultation={bookConsultation} />
       ) : route === "dining" ? (
         <DiningPage onBookConsultation={bookConsultation} />
+      ) : route === "living" ? (
+        <LivingPage onBookConsultation={bookConsultation} />
+      ) : route === "decor" ? (
+        <DecorPage onBookConsultation={bookConsultation} />
+      ) : route === "kids" ? (
+        <KidsPage onBookConsultation={bookConsultation} />
       ) : (
       <>
       <section id="home" className="hero">
