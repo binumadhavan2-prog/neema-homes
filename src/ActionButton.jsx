@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import FingerprintSpinner from "./FingerprintSpinner.jsx";
 
 // A button that shows a spinner in place of its label for a beat, so the
 // click visibly registers, then runs the action. Disabled while busy, so a
@@ -36,7 +37,7 @@ export default function ActionButton({
       {...rest}
     >
       <span className="btn-label">{children}</span>
-      <span className="btn-spinner" aria-hidden="true" />
+      <FingerprintSpinner />
     </button>
   );
 }

@@ -211,34 +211,37 @@ img {
   visibility: hidden;
 }
 
+/* Fingerprint mark, inheriting the button's own colour */
 .btn-spinner {
   display: none;
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 18px;
-  height: 18px;
-  margin: -9px 0 0 -9px;
-  border-radius: 50%;
-  border: 2px solid;
-  animation: btn-spin 0.7s linear infinite;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
 }
 
 .is-busy .btn-spinner {
   display: block;
 }
 
-/* Dark spinner on the gold buttons, light on the dark ones */
-.btn .btn-spinner,
-.hero-btn .btn-spinner {
-  border-color: rgba(18, 32, 60, 0.25);
-  border-top-color: var(--ink);
+/* Ridges light from the core outwards, like a print being read */
+.fp-ridge {
+  opacity: 0.22;
+  animation: fp-scan 1.15s ease-in-out infinite;
 }
 
-.ghost-btn .btn-spinner,
-.submit-btn .btn-spinner {
-  border-color: rgba(255, 255, 255, 0.35);
-  border-top-color: #fff;
+.fp-2 {
+  animation-delay: 0.1s;
+}
+
+.fp-3 {
+  animation-delay: 0.2s;
+}
+
+.fp-4 {
+  animation-delay: 0.3s;
 }
 
 .btn:disabled,
@@ -248,15 +251,20 @@ img {
   cursor: default;
 }
 
-@keyframes btn-spin {
-  to {
-    transform: rotate(360deg);
+@keyframes fp-scan {
+  0%,
+  100% {
+    opacity: 0.22;
+  }
+  45% {
+    opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn-spinner {
+  .fp-ridge {
     animation: none;
+    opacity: 0.7;
   }
 }
 
