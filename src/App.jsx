@@ -280,6 +280,12 @@ function App() {
         <nav>
           <ul className="nav-links">
             <li><a href="#home">Home</a></li>
+            <li>
+              <a href="#services" className="nav-what-we-do">
+                What We Do
+                <span className="what-we-do-arrow" aria-hidden="true">↓</span>
+              </a>
+            </li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
@@ -336,15 +342,6 @@ function App() {
           <span className="hero-scroll-line" aria-hidden="true" />
         </button>
       </section>
-
-      <div className="what-we-do">
-        <ActionButton
-          className="btn what-we-do-btn"
-          onAction={() => scrollToSection("services")}
-        >
-          What We Do <span className="what-we-do-arrow" aria-hidden="true">↓</span>
-        </ActionButton>
-      </div>
 
       <section id="about" className="about">
         <div className="about-panel">

@@ -188,45 +188,6 @@
   }
 }
 
-/* ---------- what we do ---------- */
-
-/* Sits between the hero and About, pointing down the page */
-.what-we-do {
-  display: flex;
-  justify-content: center;
-  padding: 64px var(--pad) 0;
-  background: var(--paper);
-}
-
-.what-we-do .btn {
-  background: transparent;
-  border-color: var(--line);
-  color: var(--ink);
-}
-
-.what-we-do .btn:hover {
-  background: transparent;
-  border-color: var(--brass);
-  color: var(--gold-dark);
-}
-
-.what-we-do-arrow {
-  display: inline-block;
-  transition: transform 0.25s ease;
-}
-
-.what-we-do .btn:hover .what-we-do-arrow {
-  transform: translateY(3px);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .what-we-do-arrow,
-  .what-we-do .btn:hover .what-we-do-arrow {
-    transition: none;
-    transform: none;
-  }
-}
-
 /* ---------- interiors ---------- */
 
 .interiors {

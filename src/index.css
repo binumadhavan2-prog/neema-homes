@@ -383,6 +383,32 @@ img {
   width: 100%;
 }
 
+.nav-what-we-do {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.what-we-do-arrow {
+  display: inline-block;
+  font-size: 12px;
+  transition: transform 0.25s ease;
+}
+
+.nav-what-we-do:hover .what-we-do-arrow {
+  transform: translateY(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .what-we-do-arrow {
+    transition: none;
+  }
+
+  .nav-what-we-do:hover .what-we-do-arrow {
+    transform: none;
+  }
+}
+
 .header.is-scrolled .nav-links a {
   color: var(--ink);
 }
