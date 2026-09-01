@@ -631,8 +631,8 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--mint-deep);
-  box-shadow: 0 0 0 3px rgba(46, 111, 102, 0.12);
+  border-color: var(--coffee-light);
+  box-shadow: 0 0 0 3px rgba(122, 98, 80, 0.14);
 }
 
 .form-group textarea {
@@ -643,12 +643,12 @@
   width: 100%;
   justify-content: center;
   margin-top: 8px;
-  background: var(--mint-deep);
+  background: var(--coffee-light);
   color: #fff;
 }
 
 .contact-form .submit-btn:hover {
-  background: var(--mint-deeper);
+  background: var(--coffee-dark);
 }
 
 /* Illustration panel */
