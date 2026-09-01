@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { SOCIAL_ICONS } from "./SocialIcons.jsx";
 import { SERVICE_ICONS } from "./ServiceIcons.jsx";
+import SocialFlipButton from "./SocialFlipButton.jsx";
 import ContactIllustration from "./ContactIllustration.jsx";
 import ActionButton from "./ActionButton.jsx";
 import FingerprintSpinner from "./FingerprintSpinner.jsx";
@@ -794,22 +794,7 @@ function App() {
               Creating beautiful, functional homes that reflect your lifestyle.
             </p>
 
-            {SOCIALS.length > 0 && (
-              <ul className="footer-social">
-                {SOCIALS.map((social) => (
-                  <li key={social.platform}>
-                    <a
-                      href={social.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`NEEMA HOMES on ${social.platform}`}
-                    >
-                      {SOCIAL_ICONS[social.platform]}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <SocialFlipButton items={SOCIALS} />
           </div>
 
           <div className="footer-links">
