@@ -340,6 +340,25 @@ img {
   box-shadow: 0 1px 0 var(--line);
 }
 
+/* The kitchen page has no dark hero to sit over, so the bar carries its own
+   brown ground and keeps the light links at every scroll position. */
+.header.is-kitchen,
+.header.is-kitchen.is-scrolled {
+  background: var(--coffee);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: none;
+}
+
+.header.is-kitchen.is-scrolled .nav-links a,
+.header.is-kitchen.is-scrolled .nav-dropdown-arrow {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.header.is-kitchen .nav-links a:hover,
+.header.is-kitchen .nav-dropdown-toggle:hover .nav-dropdown-arrow {
+  color: var(--gold);
+}
+
 .logo {
   display: flex;
   align-items: center;

@@ -376,6 +376,17 @@
   color: var(--muted);
 }
 
+.kitchen-cta .btn {
+  padding: 16px 36px;
+  font-size: 15px;
+  background: var(--coffee-light);
+  color: #fff;
+}
+
+.kitchen-cta .btn:hover {
+  background: var(--coffee-dark);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .kitchen-card,
   .kitchen-media img,
@@ -842,6 +853,125 @@
   resize: vertical;
 }
 
+/* ---------- message composer ---------- */
+
+.message-box {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.message-box:focus-within {
+  border-color: var(--coffee-light);
+  box-shadow: 0 0 0 3px rgba(122, 98, 80, 0.14);
+}
+
+/* The field carries no chrome of its own — the wrapper is the control */
+.message-box textarea {
+  display: block;
+  width: 100%;
+  padding: 15px 18px 6px;
+  background: none;
+  border: none;
+  border-radius: 14px 14px 0 0;
+  resize: none;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.message-box textarea:focus {
+  outline: none;
+}
+
+.message-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 4px 14px 0;
+  list-style: none;
+}
+
+.message-file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 10px;
+  background: var(--cream);
+  border-radius: 999px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.message-file svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  color: var(--brass);
+}
+
+.message-file-name {
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.message-file button {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.message-file button:hover {
+  background: rgba(18, 32, 60, 0.08);
+  color: var(--ink);
+}
+
+.message-tools {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px 10px;
+}
+
+.message-attach {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 999px;
+  background: none;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.message-attach span {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.message-attach:hover {
+  background: var(--cream);
+  color: var(--ink);
+}
+
 .contact-form .submit-btn {
   width: 100%;
   justify-content: center;
@@ -1209,6 +1339,12 @@
   .nav-links a {
     color: var(--ink);
     font-size: 13px;
+  }
+
+  /* The kitchen bar stays brown, so its links stay light */
+  .header.is-kitchen .nav-links a,
+  .header.is-kitchen .nav-dropdown-arrow {
+    color: rgba(255, 255, 255, 0.85);
   }
 
   .hero {

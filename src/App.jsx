@@ -8,6 +8,7 @@ import WhatsAppLink from "./WhatsAppLink.jsx";
 import CallSpinner from "./CallSpinner.jsx";
 import NavDropdown from "./NavDropdown.jsx";
 import KitchenPage from "./KitchenPage.jsx";
+import MessageBox from "./MessageBox.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -211,6 +212,8 @@ function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
+  const [attachments, setAttachments] = useState([]);
   const [route, setRoute] = useState(readRoute);
   const submitTimer = useRef(null);
 
@@ -318,7 +321,15 @@ function App() {
         </span>
       </div>
 
-      <header className={isScrolled ? "header is-scrolled" : "header"}>
+      <header
+        className={[
+          "header",
+          isScrolled ? "is-scrolled" : "",
+          route === "kitchen" ? "is-kitchen" : ""
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
         <div className="logo">
           <img src="/images/logo-horizontal.png" alt="NEEMA HOMES" />
         </div>
@@ -619,6 +630,8 @@ function App() {
                 setIsSubmitting(true);
                 submitTimer.current = setTimeout(() => {
                   setIsSubmitting(false);
+                  setMessage("");
+                  setAttachments([]);
                   alert("Enquiry submitted successfully!");
                 }, 550);
               }}
@@ -652,9 +665,19 @@ function App() {
 
               <div className="form-group">
                 <label htmlFor="contact-message">Message</label>
-                <textarea
+                <MessageBox
                   id="contact-message"
-                  rows="4"
+                  value={message}
+                  onChange={setMessage}
+                  attachments={attachments}
+                  onAttach={(files) =>
+                    setAttachments((current) => [...current, ...files])
+                  }
+                  onRemove={(index) =>
+                    setAttachments((current) =>
+                      current.filter((_, i) => i !== index)
+                    )
+                  }
                   placeholder="Tell us about your project"
                 />
               </div>
