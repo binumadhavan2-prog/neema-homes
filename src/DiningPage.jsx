@@ -18,21 +18,27 @@ const DINING = [
     name: "Crockery Shelf",
     span: 5,
     description:
-      "Display and storage in one run — glazed above for the pieces you want seen, closed below for the ones you do not."
+      "Display and storage in one run — lit shelving above for the pieces you want seen, closed below for the ones you do not.",
+    image: "/images/dining-crockery.jpg",
+    alt: "Crockery unit in dark timber with lit open shelves, a stone back panel and closed storage beneath"
   },
   {
     id: "bar-counter",
     name: "Bar Counter",
     span: 5,
     description:
-      "Worked into the dining room rather than added to it, with bottle storage, glass racks and a top carrying the same stone as the kitchen."
+      "Worked into the dining room rather than added to it, with bottle storage, glass racks and a top carrying the same stone as the kitchen.",
+    image: "/images/dining-bar-counter.jpg",
+    alt: "Bar counter with stools, a stone top and lit bottle shelving behind"
   },
   {
     id: "dining-chair",
     name: "Dining Chair",
     span: 7,
     description:
-      "Made to the table rather than bought to it, so height, reach and finish match the room instead of approximating it."
+      "Made to the table rather than bought to it, so height, reach and finish match the room instead of approximating it.",
+    image: "/images/dining-chair.webp",
+    alt: "Upholstered dining chairs on slim black legs around a round dark timber table"
   },
   {
     id: "wash-counter",
