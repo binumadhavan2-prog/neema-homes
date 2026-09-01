@@ -3,6 +3,7 @@ import { SOCIAL_ICONS } from "./SocialIcons.jsx";
 import { SERVICE_ICONS } from "./ServiceIcons.jsx";
 import ContactIllustration from "./ContactIllustration.jsx";
 import ActionButton from "./ActionButton.jsx";
+import FingerprintSpinner from "./FingerprintSpinner.jsx";
 
 // Add the studio's real profiles and the footer block appears on its own.
 // `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
@@ -601,7 +602,7 @@ function App() {
                 disabled={isSubmitting}
               >
                 <span className="btn-label">Contact Us</span>
-                <span className="btn-spinner" aria-hidden="true" />
+                <FingerprintSpinner />
               </button>
             </form>
           </div>
