@@ -337,6 +337,15 @@ function App() {
         </button>
       </section>
 
+      <div className="what-we-do">
+        <ActionButton
+          className="btn what-we-do-btn"
+          onAction={() => scrollToSection("services")}
+        >
+          What We Do <span className="what-we-do-arrow" aria-hidden="true">↓</span>
+        </ActionButton>
+      </div>
+
       <section id="about" className="about">
         <div className="about-panel">
           <div className="about-media">
