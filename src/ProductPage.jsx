@@ -11,6 +11,7 @@ export default function ProductPage({
   renderFallback,
   ctaTitle,
   ctaText,
+  ctaGlow = false,
   onCta
 }) {
   return (
@@ -68,7 +69,11 @@ export default function ProductPage({
           <h2>{ctaTitle}</h2>
           <p>{ctaText}</p>
 
-          <ActionButton className="btn" onAction={onCta}>
+          <ActionButton
+            className={ctaGlow ? "btn rg-button" : "btn"}
+            glow={ctaGlow}
+            onAction={onCta}
+          >
             Talk to Our Interior Design Team{" "}
             <span aria-hidden="true">→</span>
           </ActionButton>

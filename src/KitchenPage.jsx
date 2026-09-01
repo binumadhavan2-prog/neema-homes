@@ -63,6 +63,7 @@ export default function KitchenPage({ onBookConsultation }) {
       )}
       ctaTitle="Design Your Dream Kitchen"
       ctaText="Let our designers create a kitchen that perfectly fits your space and lifestyle."
+      ctaGlow
       onCta={onBookConsultation}
     />
   );

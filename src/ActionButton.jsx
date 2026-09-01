@@ -11,6 +11,7 @@ export default function ActionButton({
   className = "",
   onAction,
   spinner,
+  glow = false,
   children,
   ...rest
 }) {
@@ -37,6 +38,16 @@ export default function ActionButton({
       disabled={isBusy}
       {...rest}
     >
+      {/* Glow layers sit under the label; see .rg-button in App.css */}
+      {glow && (
+        <>
+          <span className="rg-shine" aria-hidden="true">
+            <span />
+          </span>
+          <span className="rg-bg" aria-hidden="true" />
+        </>
+      )}
+
       <span className="btn-label">{children}</span>
       {spinner ?? <FingerprintSpinner />}
     </button>

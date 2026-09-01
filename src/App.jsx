@@ -18,7 +18,11 @@ const WHAT_WE_DO = [
 
 const PRODUCTS = [
   { label: "Kitchen", href: "#/kitchen" },
-  { label: "Bedroom", href: "#/bedroom" }
+  { label: "Bedroom", href: "#/bedroom" },
+  { label: "Dining Room", href: "#portfolio" },
+  { label: "Living Room", href: "#portfolio" },
+  { label: "Decorative Units", href: "#services" },
+  { label: "Kids Room", href: "#portfolio" }
 ];
 
 // Tiny hash router: "#/name" is a page, every other hash is an anchor on the
