@@ -6,6 +6,7 @@ import ActionButton from "./ActionButton.jsx";
 import FingerprintSpinner from "./FingerprintSpinner.jsx";
 import WhatsAppLink from "./WhatsAppLink.jsx";
 import CallSpinner from "./CallSpinner.jsx";
+import WhatWeDoNav from "./WhatWeDoNav.jsx";
 
 // Add the studio's real profiles and the footer block appears on its own.
 // `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
@@ -280,12 +281,7 @@ function App() {
         <nav>
           <ul className="nav-links">
             <li><a href="#home">Home</a></li>
-            <li>
-              <a href="#services" className="nav-what-we-do">
-                What We Do
-                <span className="what-we-do-arrow" aria-hidden="true">↓</span>
-              </a>
-            </li>
+            <li><WhatWeDoNav /></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
