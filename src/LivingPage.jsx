@@ -74,7 +74,9 @@ const LIVING = [
     name: "Shoe Rack",
     span: 12,
     description:
-      "Storage at the entrance sized to the wall beside the door, closed and vented, so the foyer stays clear."
+      "Storage at the entrance sized to the wall beside the door, closed and vented, so the foyer stays clear.",
+    image: "/images/living-shoe-rack.jpg",
+    alt: "Floor-to-ceiling shoe rack in oak, its open cubbies set in an irregular grid and filled with shoes"
   }
 ];
 
