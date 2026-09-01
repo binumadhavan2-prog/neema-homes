@@ -6,7 +6,20 @@ import ActionButton from "./ActionButton.jsx";
 import FingerprintSpinner from "./FingerprintSpinner.jsx";
 import WhatsAppLink from "./WhatsAppLink.jsx";
 import CallSpinner from "./CallSpinner.jsx";
-import WhatWeDoNav from "./WhatWeDoNav.jsx";
+import NavDropdown from "./NavDropdown.jsx";
+import KitchenPage from "./KitchenPage.jsx";
+
+const WHAT_WE_DO = [
+  { label: "Customised Interior", href: "#services" },
+  { label: "Our Portfolio", href: "#portfolio" }
+];
+
+const PRODUCTS = [{ label: "Kitchen", href: "#/kitchen" }];
+
+// Tiny hash router: "#/kitchen" is a page, every other hash is an anchor on
+// the home page. Avoids pulling in a router for two routes.
+const readRoute = () =>
+  window.location.hash.startsWith("#/kitchen") ? "kitchen" : "home";
 
 // Add the studio's real profiles and the footer block appears on its own.
 // `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
@@ -198,9 +211,41 @@ function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [route, setRoute] = useState(readRoute);
   const submitTimer = useRef(null);
 
   useEffect(() => () => clearTimeout(submitTimer.current), []);
+
+  // The browser jumps on hashchange before React swaps the page in, so an
+  // anchor arrived at from the kitchen page needs scrolling again after.
+  useEffect(() => {
+    const onHashChange = () => {
+      const next = readRoute();
+      setRoute(next);
+
+      if (next === "kitchen") {
+        window.scrollTo({ top: 0, behavior: "auto" });
+        return;
+      }
+
+      const id = window.location.hash.slice(1);
+      if (id) {
+        setTimeout(() => scrollToSection(id), 0);
+      }
+    };
+
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  // From the kitchen page, go home and land on the contact card.
+  const bookConsultation = () => {
+    if (route === "kitchen") {
+      window.location.hash = "#contact";
+    } else {
+      scrollToSection("contact");
+    }
+  };
 
   // Hold the loader until the images are in, with a floor on the duration so
   // it settles rather than flashing on a warm cache.
@@ -281,10 +326,21 @@ function App() {
         <nav>
           <ul className="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><WhatWeDoNav /></li>
+            <li>
+              <NavDropdown
+                label="What We Do"
+                href="#services"
+                options={WHAT_WE_DO}
+              />
+            </li>
+            <li>
+              <NavDropdown
+                label="Products"
+                href="#services"
+                options={PRODUCTS}
+              />
+            </li>
             <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
             {TESTIMONIALS.length > 0 && (
               <li><a href="#testimonials">Testimonials</a></li>
             )}
@@ -301,6 +357,10 @@ function App() {
         </ActionButton>
       </header>
 
+      {route === "kitchen" ? (
+        <KitchenPage onBookConsultation={bookConsultation} />
+      ) : (
+      <>
       <section id="home" className="hero">
         <div className="hero-content">
           <p className="eyebrow">Neema Homes · Chennai</p>
@@ -657,6 +717,8 @@ function App() {
           />
         </div>
       </section>
+      </>
+      )}
 
       <footer className="footer">
         <div className="footer-container">
