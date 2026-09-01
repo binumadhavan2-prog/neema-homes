@@ -65,7 +65,9 @@ const LIVING = [
     name: "Chairs",
     span: 6,
     description:
-      "Occasional chairs made or chosen to work with the sofa without matching it, so the seating reads as a group rather than a set."
+      "Occasional chairs made or chosen to work with the sofa without matching it, so the seating reads as a group rather than a set.",
+    image: "/images/living-chairs.avif",
+    alt: "A pair of barrel-back armchairs in solid timber with floral upholstery, either side of a round pedestal side table"
   },
   {
     id: "shoe-rack",
