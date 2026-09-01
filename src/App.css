@@ -1537,7 +1537,7 @@
 
 .footer {
   padding: 84px var(--pad) 26px;
-  background: var(--ink-deep);
+  background: var(--coffee);
   color: rgba(255, 255, 255, 0.72);
 }
 
@@ -1560,28 +1560,148 @@
   margin: 0;
 }
 
-.footer-social {
-  display: flex;
-  gap: 12px;
+/* Footer socials. The tiles carry the platform's initial and turn to their
+   icon while the row is hovered, each one a little after the last. */
+.social-flip {
   margin: 28px 0 0;
-  padding: 0;
-  list-style: none;
 }
 
-.footer-social a {
-  display: grid;
-  place-items: center;
+.social-flip-row {
+  position: relative;
+  display: inline-flex;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* Two hairlines crossing the row in opposite directions */
+.social-flip-line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.social-flip-line--top {
+  top: 0;
+  animation: social-flip-sweep 2.5s linear infinite;
+}
+
+.social-flip-line--bottom {
+  bottom: 0;
+  animation: social-flip-sweep 2.5s linear infinite reverse;
+}
+
+@keyframes social-flip-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.social-flip-tile {
+  position: relative;
   width: 42px;
   height: 42px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  color: rgba(255, 255, 255, 0.72);
-  transition: color 0.25s ease, border-color 0.25s ease;
+  perspective: 1000px;
 }
 
-.footer-social a:hover {
-  color: var(--gold);
-  border-color: var(--gold);
+.social-flip-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition-delay: calc(var(--i) * 0.08s);
+}
+
+.social-flip-row:hover .social-flip-inner,
+.social-flip-tile:focus-visible .social-flip-inner {
+  transform: rotateY(180deg);
+}
+
+.social-flip-face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  backface-visibility: hidden;
+}
+
+.social-flip-front {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.social-flip-back {
+  background: var(--gold);
+  color: var(--coffee);
+  transform: rotateY(180deg);
+}
+
+.social-flip-label {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--coffee);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, 6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.social-flip-label::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.social-flip-tile:hover .social-flip-label,
+.social-flip-tile:focus-visible .social-flip-label {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-flip-line {
+    animation: none;
+  }
+
+  .social-flip-inner,
+  .social-flip-label {
+    transition: none;
+  }
 }
 
 .footer h3 {
