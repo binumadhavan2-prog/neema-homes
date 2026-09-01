@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 // beside it opens the two offerings.
 const OPTIONS = [
   { label: "Customised Interior", href: "#services" },
-  { label: "Design and Build", href: "#services" }
+  { label: "Design and Build", href: "#portfolio" }
 ];
 
 export default function WhatWeDoNav() {
