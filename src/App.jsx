@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SOCIAL_ICONS } from "./SocialIcons.jsx";
 import { SERVICE_ICONS } from "./ServiceIcons.jsx";
 import ContactIllustration from "./ContactIllustration.jsx";
+import ActionButton from "./ActionButton.jsx";
 
 // Add the studio's real profiles and the footer block appears on its own.
 // `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
@@ -192,6 +193,10 @@ function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitTimer = useRef(null);
+
+  useEffect(() => () => clearTimeout(submitTimer.current), []);
 
   // Hold the loader until the images are in, with a floor on the duration so
   // it settles rather than flashing on a warm cache.
@@ -282,9 +287,12 @@ function App() {
           </ul>
         </nav>
 
-        <button className="btn" onClick={() => scrollToSection("contact")}>
+        <ActionButton
+          className="btn"
+          onAction={() => scrollToSection("contact")}
+        >
           Enquire Now
-        </button>
+        </ActionButton>
       </header>
 
       <section id="home" className="hero">
@@ -298,19 +306,19 @@ function App() {
           </p>
 
           <div className="hero-actions">
-            <button
+            <ActionButton
               className="hero-btn"
-              onClick={() => scrollToSection("portfolio")}
+              onAction={() => scrollToSection("portfolio")}
             >
               Explore Our Work <span aria-hidden="true">→</span>
-            </button>
+            </ActionButton>
 
-            <button
+            <ActionButton
               className="ghost-btn"
-              onClick={() => scrollToSection("contact")}
+              onAction={() => scrollToSection("contact")}
             >
               Contact Us
-            </button>
+            </ActionButton>
           </div>
         </div>
 
@@ -539,7 +547,14 @@ function App() {
               className="contact-form"
               onSubmit={(e) => {
                 e.preventDefault();
-                alert("Enquiry submitted successfully!");
+                if (isSubmitting) return;
+
+                // Same beat as ActionButton, so the click registers
+                setIsSubmitting(true);
+                submitTimer.current = setTimeout(() => {
+                  setIsSubmitting(false);
+                  alert("Enquiry submitted successfully!");
+                }, 550);
               }}
             >
               <div className="form-group">
@@ -578,8 +593,15 @@ function App() {
                 />
               </div>
 
-              <button type="submit" className="submit-btn">
-                Contact Us
+              <button
+                type="submit"
+                className={
+                  isSubmitting ? "submit-btn is-busy" : "submit-btn"
+                }
+                disabled={isSubmitting}
+              >
+                <span className="btn-label">Contact Us</span>
+                <span className="btn-spinner" aria-hidden="true" />
               </button>
             </form>
           </div>
