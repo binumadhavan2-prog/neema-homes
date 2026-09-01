@@ -10,6 +10,7 @@ import NavDropdown from "./NavDropdown.jsx";
 import KitchenPage from "./KitchenPage.jsx";
 import BedroomPage from "./BedroomPage.jsx";
 import MessageBox from "./MessageBox.jsx";
+import HeroShowcase from "./HeroShowcase.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -202,6 +203,14 @@ const mapLinkSrc = `https://www.google.com/maps/search/?api=1&query=${encodeURIC
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// Three rooms for the hero showcase, carrying their residence so the modal
+// reads the same as it does from the portfolio.
+const SHOWCASE = [
+  { ...RESIDENCES[0].rooms[0], residence: RESIDENCES[0].name },
+  { ...RESIDENCES[2].rooms[0], residence: RESIDENCES[2].name },
+  { ...RESIDENCES[2].rooms[1], residence: RESIDENCES[2].name }
+];
+
 const scrollToSection = (id) => {
   document.getElementById(id)?.scrollIntoView({
     behavior: prefersReducedMotion() ? "auto" : "smooth"
@@ -384,6 +393,7 @@ function App() {
       ) : (
       <>
       <section id="home" className="hero">
+        <div className="hero-inner">
         <div className="hero-content">
           <p className="eyebrow">Neema Homes · Chennai</p>
 
@@ -408,6 +418,9 @@ function App() {
               Contact Us
             </ActionButton>
           </div>
+        </div>
+
+        <HeroShowcase items={SHOWCASE} onOpen={setSelectedProject} />
         </div>
 
         <button

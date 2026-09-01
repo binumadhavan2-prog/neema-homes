@@ -1650,6 +1650,20 @@
     --section: 80px;
   }
 
+  /* Showcase drops under the copy and shrinks */
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 44px;
+  }
+
+  .showcase {
+    justify-content: flex-start;
+  }
+
+  .showcase-card {
+    width: 120px;
+  }
+
   .about-panel {
     min-height: 460px;
   }
@@ -1729,6 +1743,11 @@
 
   .hero p {
     font-size: 16px;
+  }
+
+  /* Three tilted cards are too cramped to be readable at phone width */
+  .showcase {
+    display: none;
   }
 
   .hero-actions .btn,
