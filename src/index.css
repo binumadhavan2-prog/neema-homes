@@ -383,29 +383,82 @@ img {
   width: 100%;
 }
 
-.nav-what-we-do {
+/* ---------- what we do dropdown ---------- */
+
+.nav-dropdown {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+}
+
+.what-we-do-toggle {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .what-we-do-arrow {
-  display: inline-block;
+  display: block;
   font-size: 12px;
-  transition: transform 0.25s ease;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.85);
+  transition: transform 0.25s ease, color 0.25s ease;
 }
 
-.nav-what-we-do:hover .what-we-do-arrow {
-  transform: translateY(2px);
+.header.is-scrolled .what-we-do-arrow {
+  color: var(--ink);
+}
+
+.what-we-do-toggle:hover .what-we-do-arrow {
+  color: var(--gold);
+}
+
+.what-we-do-toggle.is-open .what-we-do-arrow {
+  transform: rotate(180deg);
+}
+
+.nav-submenu {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 0;
+  z-index: 10;
+  min-width: 218px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 40px rgba(18, 32, 60, 0.14);
+}
+
+/* Beat .nav-links a, which is white for the hero */
+.nav-links .nav-submenu a {
+  display: block;
+  padding: 11px 20px;
+  font-size: 14px;
+  color: var(--ink);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-links .nav-submenu a::after {
+  display: none;
+}
+
+.nav-links .nav-submenu a:hover {
+  background: var(--cream);
+  color: var(--gold-dark);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .what-we-do-arrow {
-    transition: none;
-  }
-
-  .nav-what-we-do:hover .what-we-do-arrow {
-    transform: none;
+    transition: color 0.25s ease;
   }
 }
 
