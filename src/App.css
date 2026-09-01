@@ -25,29 +25,60 @@
   background: var(--paper);
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
+/* Copy sits over the materials photo, scrimmed like the service cards */
+.about-panel {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 560px;
   max-width: var(--shell);
   margin: 0 auto;
+  overflow: hidden;
+}
+
+.about-media {
+  position: absolute;
+  inset: 0;
+}
+
+.about-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(9, 16, 32, 0.9) 0%,
+    rgba(9, 16, 32, 0.55) 55%,
+    rgba(9, 16, 32, 0.15) 100%
+  );
+}
+
+.about-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  padding: 120px 56px 56px;
+}
+
+.about-copy .eyebrow {
+  color: var(--gold);
 }
 
 .about h2 {
   font-size: clamp(30px, 3.2vw, 44px);
+  color: #fff;
 }
 
 .about p {
   margin: 24px 0 0;
   font-size: 17px;
-  color: var(--muted);
-}
-
-.about-media img {
-  width: 100%;
-  height: 460px;
-  object-fit: cover;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 /* ---------- services ---------- */
@@ -171,7 +202,9 @@
 }
 
 .interior-figure {
+  position: relative;
   margin: 0;
+  overflow: hidden;
 }
 
 .interior-media {
@@ -198,12 +231,24 @@
   opacity: 1;
 }
 
+/* Copy over the photo, scrimmed like the service cards */
 .interior-figure figcaption {
-  padding-top: 24px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 100px 34px 34px;
+  background: linear-gradient(
+    to top,
+    rgba(9, 16, 32, 0.9) 0%,
+    rgba(9, 16, 32, 0.55) 55%,
+    rgba(9, 16, 32, 0) 100%
+  );
 }
 
 .interior-figure h3 {
   font-size: 24px;
+  color: #fff;
 }
 
 .interior-caption {
@@ -212,13 +257,14 @@
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--brass);
+  color: var(--gold);
 }
 
 .interior-figure figcaption p:last-child {
   margin: 14px 0 0;
   max-width: 46ch;
-  color: var(--muted);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -375,44 +421,59 @@
   background: rgba(9, 16, 32, 0.78);
 }
 
+/* The photo sizes the panel, so it shows whole and still fills the frame */
 .project-modal-content {
   position: relative;
-  width: 100%;
-  max-width: 760px;
-  max-height: 90vh;
-  overflow-y: auto;
-  background: var(--paper);
-  padding: 0 0 40px;
+  width: auto;
+  max-width: 100%;
   text-align: left;
+  line-height: 0;
 }
 
-/* contain, not cover — most of these rooms are shot portrait and a fixed
-   crop cut the top and bottom off them. Cream behind reads as a mount. */
 .project-modal-content img {
-  width: 100%;
-  max-height: 68vh;
-  object-fit: contain;
-  background: var(--cream);
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 88vh;
+}
+
+/* Copy over the photo, scrimmed like the service cards */
+.project-modal-copy {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 90px 44px 40px;
+  line-height: 1.65;
+  background: linear-gradient(
+    to top,
+    rgba(9, 16, 32, 0.92) 0%,
+    rgba(9, 16, 32, 0.6) 55%,
+    rgba(9, 16, 32, 0) 100%
+  );
 }
 
 .modal-residence {
-  margin: 30px 44px 0;
+  margin: 0;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--brass);
+  color: var(--gold);
 }
 
 .project-modal-content h2 {
-  margin: 8px 44px 0;
+  margin: 8px 0 0;
   font-size: 32px;
+  color: #fff;
 }
 
-.project-modal-content p {
-  margin: 16px 44px 0;
-  font-size: 17px;
-  color: var(--muted);
+.project-modal-copy p:last-child {
+  margin: 14px 0 0;
+  max-width: 60ch;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .close-project {
@@ -436,10 +497,6 @@
 
 .close-project:hover {
   background: var(--ink);
-}
-
-.close-btn {
-  margin: 28px 44px 0;
 }
 
 /* ---------- testimonials ---------- */
@@ -514,59 +571,42 @@
   background: var(--cream);
 }
 
-.contact-container {
+/* Two equal panels in one rounded card: form left, illustration right */
+.contact-card {
   display: grid;
-  grid-template-columns: 1fr 1.15fr;
-  gap: 70px;
+  grid-template-columns: 1fr 1fr;
   max-width: var(--shell);
   margin: 0 auto;
+  overflow: hidden;
+  background: var(--paper);
+  border-radius: 32px;
+  box-shadow: 0 26px 64px rgba(18, 32, 60, 0.1);
   text-align: left;
 }
 
-.contact-info h3 {
-  font-size: 28px;
+.contact-form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 68px 60px;
 }
 
-.contact-info > p {
-  margin: 18px 0 34px;
+.contact-form-panel h2 {
+  font-size: 34px;
+}
+
+.contact-sub {
+  margin: 14px 0 38px;
   color: var(--muted);
 }
 
-.contact-line {
-  display: flex;
-  gap: 16px;
-  padding: 18px 0;
-  border-top: 1px solid var(--line);
-  font-size: 15px;
-}
-
-.contact-line:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.contact-line strong {
-  min-width: 90px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 12px;
-  color: var(--brass);
-  padding-top: 2px;
-}
-
-.contact-form {
-  padding: 44px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-}
-
 .form-group {
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 9px;
+  margin-bottom: 8px;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -574,27 +614,85 @@
   color: var(--muted);
 }
 
+/* Soft filled fields rather than boxed outlines */
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 13px 16px;
+  padding: 15px 18px;
   background: #fff;
   border: 1px solid var(--line);
-  border-radius: 2px;
+  border-radius: 14px;
   font-family: var(--sans);
   font-size: 15px;
   color: var(--ink);
-  transition: border-color 0.25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--brass);
+  border-color: var(--mint-deep);
+  box-shadow: 0 0 0 3px rgba(46, 111, 102, 0.12);
 }
 
 .form-group textarea {
   resize: vertical;
+}
+
+.contact-form .submit-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+  background: var(--mint-deep);
+  color: #fff;
+}
+
+.contact-form .submit-btn:hover {
+  background: var(--mint-deeper);
+}
+
+/* Illustration panel */
+.contact-art-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 56px 52px;
+  background: var(--coffee);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.contact-art {
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.contact-art-details {
+  margin-top: 44px;
+}
+
+.contact-line {
+  display: flex;
+  gap: 16px;
+  padding: 15px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 15px;
+}
+
+.contact-line:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-line strong {
+  min-width: 88px;
+  padding-top: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
 }
 
 .error {
@@ -844,13 +942,12 @@
     --section: 80px;
   }
 
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 44px;
+  .about-panel {
+    min-height: 460px;
   }
 
-  .about-media img {
-    height: 320px;
+  .about-copy {
+    padding: 100px 36px 44px;
   }
 
   .service-container,
@@ -858,9 +955,14 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .contact-container {
+  .contact-card {
     grid-template-columns: 1fr;
-    gap: 44px;
+    border-radius: 26px;
+  }
+
+  /* Form first on narrow screens */
+  .contact-art-panel {
+    order: 2;
   }
 
   .footer-container {
@@ -933,6 +1035,14 @@
     gap: 44px;
   }
 
+  .about-panel {
+    min-height: 400px;
+  }
+
+  .about-copy {
+    padding: 90px 24px 34px;
+  }
+
   .service-container,
   .portfolio-grid {
     grid-template-columns: 1fr;
@@ -942,8 +1052,16 @@
     height: 250px;
   }
 
-  .contact-form {
-    padding: 28px;
+  .contact-form-panel {
+    padding: 40px 26px;
+  }
+
+  .contact-form-panel h2 {
+    font-size: 27px;
+  }
+
+  .contact-art-panel {
+    padding: 36px 26px 40px;
   }
 
   .contact-map {
@@ -984,12 +1102,12 @@
     margin-top: 56px;
   }
 
-  .project-modal-content h2,
-  .project-modal-content p,
-  .modal-residence,
-  .close-btn {
-    margin-left: 26px;
-    margin-right: 26px;
+  .project-modal-copy {
+    padding: 70px 24px 26px;
+  }
+
+  .project-modal-content h2 {
+    font-size: 24px;
   }
 
   .footer-container {
