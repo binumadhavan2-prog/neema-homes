@@ -1747,6 +1747,141 @@ a.flip-tile:hover .flip-back {
   }
 }
 
+/* ---------- faq ---------- */
+
+.faq {
+  padding: var(--section) var(--pad);
+  background: var(--paper);
+}
+
+.faq-shell {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.faq .section-head {
+  margin-bottom: 44px;
+}
+
+.faq-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-item h3 {
+  margin: 0;
+  font-size: inherit;
+}
+
+.faq-question {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  padding: 26px 0;
+  border: none;
+  background: none;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: left;
+  color: var(--ink);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.faq-question:hover,
+.faq-item.is-open .faq-question {
+  color: var(--gold-dark);
+}
+
+.faq-arrow {
+  flex: none;
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--brass);
+  transition: transform 0.3s ease;
+}
+
+.faq-item.is-open .faq-arrow {
+  transform: rotate(180deg);
+}
+
+/* The row collapses from 1fr to 0fr, which animates where `height: auto`
+   cannot; the inner box carries the overflow */
+.faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s ease;
+}
+
+.faq-item.is-open .faq-answer {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility 0.32s;
+}
+
+.faq-item.is-open .faq-answer-inner {
+  visibility: visible;
+}
+
+.faq-answer-inner p {
+  margin: 0 0 26px;
+  max-width: 68ch;
+  color: var(--muted);
+}
+
+.faq-prices {
+  margin: 0 0 26px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.faq-prices li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-prices span {
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.faq-prices strong {
+  font-weight: 500;
+  color: var(--gold-dark);
+}
+
+.faq-note {
+  font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-answer,
+  .faq-arrow {
+    transition: none;
+  }
+}
+
 /* ---------- footer ---------- */
 
 .footer {
@@ -2167,6 +2302,17 @@ a.flip-tile:hover .flip-back {
 
   .project-modal-content h2 {
     font-size: 24px;
+  }
+
+  .faq-question {
+    gap: 16px;
+    padding: 22px 0;
+    font-size: 17px;
+  }
+
+  .faq-prices li {
+    flex-direction: column;
+    gap: 2px;
   }
 
   .footer-container {
