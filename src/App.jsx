@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { SOCIAL_ICONS } from "./SocialIcons.jsx";
 import { SERVICE_ICONS } from "./ServiceIcons.jsx";
 import ContactIllustration from "./ContactIllustration.jsx";
 import ActionButton from "./ActionButton.jsx";
@@ -13,8 +12,10 @@ import DiningPage from "./DiningPage.jsx";
 import LivingPage from "./LivingPage.jsx";
 import DecorPage from "./DecorPage.jsx";
 import KidsPage from "./KidsPage.jsx";
+import GalleryPage from "./GalleryPage.jsx";
 import MessageBox from "./MessageBox.jsx";
-import HeroShowcase from "./HeroShowcase.jsx";
+import HeroSlider from "./HeroSlider.jsx";
+import SocialFlipButton from "./SocialFlipButton.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -38,15 +39,11 @@ const PAGES = {
   "#/dining": "dining",
   "#/living": "living",
   "#/decor": "decor",
-  "#/kids": "kids"
+  "#/kids": "kids",
+  "#/gallery": "gallery"
 };
 
 const readRoute = () => PAGES[window.location.hash] ?? "home";
-
-// Add the studio's real profiles and the footer block appears on its own.
-// `platform` must match a key in SOCIAL_ICONS: instagram, facebook,
-// linkedin, youtube, pinterest, whatsapp.
-const SOCIALS = [];
 
 const SERVICES = [
   {
@@ -196,12 +193,31 @@ const STUDIO_LOCATION = "Chennai, Tamil Nadu, India";
 // stripped to digits for the WhatsApp link. Change it here only.
 const STUDIO_PHONE = "+91 98765 43210";
 
+// Shown in the contact panel and the footer, and used for the email tile
+// in the footer flip row. Change it here only.
+const STUDIO_EMAIL = "info@neemahomes.com";
+
 const whatsappHref = `https://wa.me/${STUDIO_PHONE.replace(
   /\D/g,
   ""
 )}?text=${encodeURIComponent(
   "Hello NEEMA HOMES, I would like to discuss an interior design project."
 )}`;
+
+// The seven tiles in the footer: their letters spell CONTACT, and each
+// turns over to the platform's icon. `platform` must match a key in
+// SOCIAL_ICONS. A tile with no `url` is rendered as a plain tile, so fill
+// these in as the profiles go live rather than leaving a link pointing
+// nowhere.
+const SOCIAL_FLIP = [
+  { letter: "C", platform: "instagram", label: "Instagram", url: "" },
+  { letter: "O", platform: "facebook", label: "Facebook", url: "" },
+  { letter: "N", platform: "linkedin", label: "LinkedIn", url: "" },
+  { letter: "T", platform: "youtube", label: "YouTube", url: "" },
+  { letter: "A", platform: "pinterest", label: "Pinterest", url: "" },
+  { letter: "C", platform: "whatsapp", label: "WhatsApp", url: whatsappHref },
+  { letter: "T", platform: "email", label: "Email", url: `mailto:${STUDIO_EMAIL}` }
+];
 
 const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
   STUDIO_LOCATION
@@ -214,12 +230,13 @@ const mapLinkSrc = `https://www.google.com/maps/search/?api=1&query=${encodeURIC
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// Three rooms for the hero showcase, carrying their residence so the modal
-// reads the same as it does from the portfolio.
-const SHOWCASE = [
-  { ...RESIDENCES[0].rooms[0], residence: RESIDENCES[0].name },
-  { ...RESIDENCES[2].rooms[0], residence: RESIDENCES[2].name },
-  { ...RESIDENCES[2].rooms[1], residence: RESIDENCES[2].name }
+// The three rooms behind the hero. The frames themselves are decorative —
+// the heading sits over them — so `label` is there to name each slide on
+// its button.
+const HERO_SLIDES = [
+  { image: "/images/hero-living.jpg", label: "Living Room" },
+  { image: "/images/project-dining.jpg", label: "Dining Room" },
+  { image: "/images/project-bedroom.jpg", label: "Slatted Oak Bedroom" }
 ];
 
 const scrollToSection = (id) => {
@@ -381,6 +398,7 @@ function App() {
               />
             </li>
             <li><a href="#about">About</a></li>
+            <li><a href="#/gallery">Gallery</a></li>
             {TESTIMONIALS.length > 0 && (
               <li><a href="#testimonials">Testimonials</a></li>
             )}
@@ -409,9 +427,13 @@ function App() {
         <DecorPage onBookConsultation={bookConsultation} />
       ) : route === "kids" ? (
         <KidsPage onBookConsultation={bookConsultation} />
+      ) : route === "gallery" ? (
+        <GalleryPage onBookConsultation={bookConsultation} />
       ) : (
       <>
       <section id="home" className="hero">
+        <HeroSlider slides={HERO_SLIDES} />
+
         <div className="hero-inner">
         <div className="hero-content">
           <p className="eyebrow">Neema Homes · Chennai</p>
@@ -438,8 +460,6 @@ function App() {
             </ActionButton>
           </div>
         </div>
-
-        <HeroShowcase items={SHOWCASE} onOpen={setSelectedProject} />
         </div>
 
         <button
@@ -754,7 +774,7 @@ function App() {
 
               <div className="contact-line">
                 <strong>Email</strong>
-                <span>info@neemahomes.com</span>
+                <span>{STUDIO_EMAIL}</span>
               </div>
             </div>
           </div>
@@ -794,22 +814,7 @@ function App() {
               Creating beautiful, functional homes that reflect your lifestyle.
             </p>
 
-            {SOCIALS.length > 0 && (
-              <ul className="footer-social">
-                {SOCIALS.map((social) => (
-                  <li key={social.platform}>
-                    <a
-                      href={social.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`NEEMA HOMES on ${social.platform}`}
-                    >
-                      {SOCIAL_ICONS[social.platform]}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
+            <SocialFlipButton items={SOCIAL_FLIP} />
           </div>
 
           <div className="footer-links">
@@ -825,7 +830,7 @@ function App() {
             <h3>Contact</h3>
             <p>Chennai</p>
             <p>{STUDIO_PHONE}</p>
-            <p>info@neemahomes.com</p>
+            <p>{STUDIO_EMAIL}</p>
           </div>
         </div>
 

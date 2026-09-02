@@ -45,7 +45,9 @@ const DINING = [
     name: "Wash Counter",
     span: 12,
     description:
-      "The wash point treated as part of the room: a counter, storage beneath and a mirror, finished to match rather than left as an afterthought."
+      "The wash point treated as part of the room: a counter, storage beneath and a mirror, finished to match rather than left as an afterthought.",
+    image: "/images/dining-wash-counter.jpg",
+    alt: "Wash counter with a stone top, vessel basin, brass wall tap and a lit mirror above floating storage"
   }
 ];
 
