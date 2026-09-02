@@ -474,6 +474,7 @@ function App() {
             {TESTIMONIALS.length > 0 && (
               <li><a href="#testimonials">Testimonials</a></li>
             )}
+            <li><a href="#faq">FAQs</a></li>
             <li>
               <NavDropdown
                 label="Contact"
