@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { SERVICE_ICONS } from "./ServiceIcons.jsx";
 import ContactIllustration from "./ContactIllustration.jsx";
 import CalculatorPage from "./CalculatorPage.jsx";
+import { submitEnquiry } from "./enquiries.js";
 import ActionButton from "./ActionButton.jsx";
 import FingerprintSpinner from "./FingerprintSpinner.jsx";
 import WhatsAppLink from "./WhatsAppLink.jsx";
@@ -263,6 +264,10 @@ function App() {
   const [message, setMessage] = useState("");
   const [attachments, setAttachments] = useState([]);
   const [hasConsented, setHasConsented] = useState(false);
+  // The three short fields were uncontrolled; they have to be readable to be
+  // submitted.
+  const [contact, setContact] = useState({ name: "", email: "", phone: "" });
+  const [contactError, setContactError] = useState("");
   const [route, setRoute] = useState(readRoute);
   const submitTimer = useRef(null);
 
@@ -438,7 +443,7 @@ function App() {
       ) : route === "gallery" ? (
         <GalleryPage onBookConsultation={bookConsultation} />
       ) : route === "calculator" ? (
-        <CalculatorPage onEnquire={bookConsultation} />
+        <CalculatorPage />
       ) : (
       <>
       <section id="home" className="hero">
@@ -695,19 +700,40 @@ function App() {
 
             <form
               className="contact-form"
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 if (isSubmitting) return;
 
-                // Same beat as ActionButton, so the click registers
                 setIsSubmitting(true);
-                submitTimer.current = setTimeout(() => {
-                  setIsSubmitting(false);
-                  setMessage("");
-                  setAttachments([]);
-                  setHasConsented(false);
-                  alert("Enquiry submitted successfully!");
-                }, 550);
+                setContactError("");
+
+                // Same beat as ActionButton, so the click registers
+                const [{ error: submitError }] = await Promise.all([
+                  submitEnquiry({
+                    source: "home",
+                    name: contact.name,
+                    phone: contact.phone,
+                    email: contact.email,
+                    message,
+                    consented: hasConsented
+                  }),
+                  new Promise((resolve) => {
+                    submitTimer.current = setTimeout(resolve, 550);
+                  })
+                ]);
+
+                setIsSubmitting(false);
+
+                if (submitError) {
+                  setContactError(submitError);
+                  return;
+                }
+
+                setContact({ name: "", email: "", phone: "" });
+                setMessage("");
+                setAttachments([]);
+                setHasConsented(false);
+                alert("Enquiry submitted successfully!");
               }}
             >
               <div className="form-group">
@@ -715,6 +741,11 @@ function App() {
                 <input
                   id="contact-name"
                   type="text"
+                  required
+                  value={contact.name}
+                  onChange={(e) =>
+                    setContact({ ...contact, name: e.target.value })
+                  }
                   placeholder="Enter your name"
                 />
               </div>
@@ -724,6 +755,10 @@ function App() {
                 <input
                   id="contact-email"
                   type="email"
+                  value={contact.email}
+                  onChange={(e) =>
+                    setContact({ ...contact, email: e.target.value })
+                  }
                   placeholder="Enter your email"
                 />
               </div>
@@ -733,6 +768,10 @@ function App() {
                 <input
                   id="contact-phone"
                   type="tel"
+                  value={contact.phone}
+                  onChange={(e) =>
+                    setContact({ ...contact, phone: e.target.value })
+                  }
                   placeholder="Enter your phone number"
                 />
               </div>
@@ -755,6 +794,10 @@ function App() {
                   placeholder="Tell us about your project"
                 />
               </div>
+
+              {contactError ? (
+                <p className="calc-form-error">{contactError}</p>
+              ) : null}
 
               <label className="form-consent" htmlFor="contact-consent">
                 <input

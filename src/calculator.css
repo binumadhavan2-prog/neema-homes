@@ -228,3 +228,76 @@
     padding: 24px 22px 22px;
   }
 }
+
+/* ---------- enquiry card under the calculator ---------- */
+
+.calc-enquiry {
+  padding: 72px var(--pad) 0;
+}
+
+.calc-enquiry-card {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 46px 52px 44px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(18, 32, 60, 0.06);
+}
+
+.calc-enquiry-head {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.calc-enquiry-head h2 {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 34px);
+}
+
+.calc-enquiry-head p {
+  max-width: 52ch;
+  margin: 14px auto 0;
+  color: var(--muted);
+}
+
+/* Name/phone and email/location pair up; the brief runs full width */
+.calc-enquiry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 22px;
+}
+
+.calc-enquiry-form textarea {
+  width: 100%;
+  padding: 15px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  resize: vertical;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.calc-enquiry-form textarea:focus {
+  outline: none;
+  border-color: var(--coffee-light);
+  box-shadow: 0 0 0 3px rgba(122, 98, 80, 0.14);
+}
+
+@media (max-width: 720px) {
+  .calc-enquiry {
+    padding: 52px 22px 0;
+  }
+
+  .calc-enquiry-card {
+    padding: 32px 24px 30px;
+  }
+
+  .calc-enquiry-grid {
+    grid-template-columns: 1fr;
+  }
+}

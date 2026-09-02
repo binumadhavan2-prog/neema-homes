@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ActionButton from "./ActionButton.jsx";
+import EnquiryCard from "./EnquiryCard.jsx";
 import "./calculator.css";
 import {
   MAX_AREA,
@@ -21,7 +22,12 @@ const defaultValue = (category) => ({
   tier: "premium"
 });
 
-function Estimator({ category, value, onChange, onEnquire }) {
+const scrollToEnquiry = () =>
+  document
+    .getElementById("calc-enquiry")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+function Estimator({ category, value, onChange }) {
   const area = Number(value.area);
   const isBlank = value.area.trim() === "";
   const tooSmall = !isBlank && (!Number.isFinite(area) || area < MIN_AREA);
@@ -105,14 +111,14 @@ function Estimator({ category, value, onChange, onEnquire }) {
         )}
       </div>
 
-      <ActionButton className="calc-cta" onAction={onEnquire}>
+      <ActionButton className="calc-cta" onAction={scrollToEnquiry}>
         Get an exact quote
       </ActionButton>
     </article>
   );
 }
 
-export default function CalculatorPage({ onEnquire }) {
+export default function CalculatorPage() {
   const { categories, settings } = useCalculatorContent();
   const [edits, setEdits] = useState({});
 
@@ -153,7 +159,6 @@ export default function CalculatorPage({ onEnquire }) {
                 category={category}
                 value={edits[category.id] ?? defaultValue(category)}
                 onChange={(next) => update(category.id, next)}
-                onEnquire={onEnquire}
               />
             ))}
           </div>
@@ -163,6 +168,8 @@ export default function CalculatorPage({ onEnquire }) {
           <p className="calc-disclaimer">{settings.disclaimer}</p>
         </div>
       </section>
+
+      <EnquiryCard />
     </main>
   );
 }
