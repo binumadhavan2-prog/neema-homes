@@ -98,3 +98,22 @@ message composer are *not* stored — only the typed message is.
 Anyone can post to this table with the publishable key, so it is open to spam.
 If that becomes a problem, put a captcha or Supabase's built-in rate limiting
 in front of it.
+
+### Database migrations
+
+The schema lives in `supabase/migrations`, applied in filename order:
+
+| | |
+|---|---|
+| `..._gallery_items_and_admins` | the content table and the admin allowlist |
+| `..._gallery_storage_bucket` | the public `gallery` bucket and its policies |
+| `..._seed_gallery_items_from_site` | seeds the copy and photographs the pages shipped with |
+| `..._harden_admin_helper` | moves `is_admin()` into the unexposed `private` schema |
+| `..._create_calculator_tables` | calculator categories, rates and settings |
+| `..._let_anon_evaluate_is_admin` | lets a signed-out visitor evaluate `is_admin()` as false |
+| `..._create_enquiries_table` | public form submissions |
+
+These were applied to the hosted project directly, then written back out of its
+migration history, so each file is byte-identical to what actually ran. The
+project is already at the latest version; a fresh project is brought up to date
+with `supabase link --project-ref <ref>` then `supabase db push`.
