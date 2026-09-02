@@ -80,3 +80,21 @@ Editing it does not change the live figures — edit them in the dashboard.
 > **The seeded rates are placeholders, not NEEMA HOMES' pricing.** While
 > `rates_are_placeholder` is true the public page shows a warning banner
 > saying so. Untick that box in the dashboard once the real rates are in.
+
+### Enquiries
+
+Both public forms — the contact card on the home page and the card under
+`#/calculator` — write to the `enquiries` table, and land in the **Enquiries**
+tab of the dashboard. `source` says which form it came from.
+
+Row level security is deliberately lopsided: anyone may `insert`, and there is
+**no select policy for anon**, so a visitor cannot read anybody's contact
+details back. Only an admin can read, archive or delete.
+
+A row must carry a phone number or an email address; the forms surface that as
+a message rather than a raw error. Attachments added to the home page's
+message composer are *not* stored — only the typed message is.
+
+Anyone can post to this table with the publishable key, so it is open to spam.
+If that becomes a problem, put a captcha or Supabase's built-in rate limiting
+in front of it.

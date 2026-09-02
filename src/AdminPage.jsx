@@ -3,6 +3,7 @@ import { supabase, isSupabaseConfigured, CONFIG_HINT } from "./supabaseClient.js
 import { COLLECTIONS, TABLE, imageSrc, orderedQuery } from "./content.js";
 import ItemEditor from "./ItemEditor.jsx";
 import RatesManager from "./RatesManager.jsx";
+import EnquiriesManager from "./EnquiriesManager.jsx";
 import "./admin.css";
 
 // Sort orders are stored in tens so a single move only has to renumber the
@@ -318,7 +319,8 @@ function ItemsManager({ collection }) {
 // The tab shell: collections, plus the price calculator.
 const TABS = [
   ...COLLECTIONS.map((entry) => ({ key: entry.key, label: entry.label })),
-  { key: "rates", label: "Price Calculator" }
+  { key: "rates", label: "Price Calculator" },
+  { key: "enquiries", label: "Enquiries" }
 ];
 
 function Manager({ session }) {
@@ -361,6 +363,8 @@ function Manager({ session }) {
       {/* Keyed, so switching tabs starts each manager from a clean slate. */}
       {tab === "rates" ? (
         <RatesManager />
+      ) : tab === "enquiries" ? (
+        <EnquiriesManager />
       ) : (
         <ItemsManager collection={tab} key={tab} />
       )}

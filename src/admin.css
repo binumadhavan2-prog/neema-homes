@@ -564,3 +564,93 @@
     overflow-x: auto;
   }
 }
+
+/* ---------- enquiries ---------- */
+
+.enq-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.enq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.enq-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px 22px;
+  border: 1px solid var(--admin-line, #e3e6ec);
+  border-radius: 14px;
+  background: #fff;
+}
+
+/* Unread stands out with a rule down the side */
+.enq-row.is-new {
+  border-left: 4px solid #1d7a4c;
+}
+
+.enq-main {
+  min-width: 0;
+}
+
+.enq-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.enq-head h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.enq-source,
+.enq-head time {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.enq-contact {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #374151;
+}
+
+.enq-contact a {
+  color: #7a6250;
+}
+
+.enq-message {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  color: #4b5563;
+}
+
+.enq-noconsent {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: #9b2c2c;
+}
+
+.enq-actions {
+  display: flex;
+  flex: none;
+  gap: 8px;
+}
+
+@media (max-width: 720px) {
+  .enq-row {
+    flex-direction: column;
+  }
+}
