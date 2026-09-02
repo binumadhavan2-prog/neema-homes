@@ -310,7 +310,10 @@ function App() {
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
-  // From a product page, go home and land on the contact card.
+  // Land on the contact card, from wherever the visitor is. The header rides
+  // above every route, and the contact section only exists on the home page,
+  // so anywhere else has to go home first and let the hashchange handler
+  // scroll once the page is in.
   const bookConsultation = () => {
     if (route === "home") {
       scrollToSection("contact");
@@ -443,7 +446,7 @@ function App() {
 
         <ActionButton
           className="btn"
-          onAction={() => scrollToSection("contact")}
+          onAction={bookConsultation}
           spinner={<CallSpinner />}
         >
           Enquire Now
