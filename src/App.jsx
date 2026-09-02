@@ -231,6 +231,20 @@ const mapLinkSrc = `https://www.google.com/maps/search/?api=1&query=${encodeURIC
   STUDIO_LOCATION
 )}`;
 
+// What the Contact arrow drops down. These are details, not destinations,
+// so each one opens the thing it names: the number dials, the address goes
+// to the map, the email opens a draft. All three read from the constants
+// above, so the nav can never drift from the contact panel and footer.
+const CONTACT_DETAILS = [
+  {
+    hint: "Phone",
+    label: STUDIO_PHONE,
+    href: `tel:${STUDIO_PHONE.replace(/\s/g, "")}`
+  },
+  { hint: "Location", label: "Chennai", href: mapLinkSrc },
+  { hint: "Email", label: STUDIO_EMAIL, href: `mailto:${STUDIO_EMAIL}` }
+];
+
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -416,7 +430,14 @@ function App() {
             {TESTIMONIALS.length > 0 && (
               <li><a href="#testimonials">Testimonials</a></li>
             )}
-            <li><a href="#contact">Contact</a></li>
+            <li>
+              <NavDropdown
+                label="Contact"
+                href="#contact"
+                options={CONTACT_DETAILS}
+                align="right"
+              />
+            </li>
           </ul>
         </nav>
 
