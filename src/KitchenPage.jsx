@@ -1,5 +1,6 @@
 import ProductPage from "./ProductPage.jsx";
 import KitchenPlan from "./KitchenPlan.jsx";
+import { useCollection } from "./content.js";
 
 // Every type has a photograph now; the plan diagram stays as the fallback
 // for any type added later without one.
@@ -52,12 +53,15 @@ const KITCHENS = [
 ];
 
 export default function KitchenPage({ onBookConsultation }) {
+  // Database rows when they load; the array above is the offline fallback.
+  const items = useCollection("kitchen", KITCHENS);
+
   return (
     <ProductPage
       eyebrow="Modular kitchens"
       title="Custom-Made Modular Kitchens"
       intro="Transform your kitchen into a space designed around your lifestyle, needs, and available space. We create customized modular kitchens for apartments, villas, and independent homes across India."
-      items={KITCHENS}
+      items={items}
       renderFallback={(item) => (
         <KitchenPlan type={item.id} label={item.name} />
       )}

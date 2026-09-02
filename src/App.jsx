@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { SERVICE_ICONS } from "./ServiceIcons.jsx";
 import ContactIllustration from "./ContactIllustration.jsx";
 import ActionButton from "./ActionButton.jsx";
@@ -853,4 +853,28 @@ function App() {
   );
 }
 
-export default App;
+// The dashboard is loaded on demand: it has no place in the bundle a visitor
+// downloads, and it renders on its own rather than inside the site chrome.
+const AdminPage = lazy(() => import("./AdminPage.jsx"));
+
+const isAdminHash = () => window.location.hash.startsWith("#/admin");
+
+export default function Root() {
+  const [admin, setAdmin] = useState(isAdminHash);
+
+  useEffect(() => {
+    const onHashChange = () => setAdmin(isAdminHash());
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  if (admin) {
+    return (
+      <Suspense fallback={null}>
+        <AdminPage />
+      </Suspense>
+    );
+  }
+
+  return <App />;
+}

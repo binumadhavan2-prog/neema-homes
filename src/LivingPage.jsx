@@ -1,5 +1,6 @@
 import ProductPage from "./ProductPage.jsx";
 import LivingIcon from "./LivingIcon.jsx";
+import { useCollection } from "./content.js";
 
 // Copy written for NEEMA HOMES. The reference text supplied for this page
 // belonged to another studio and named their brand and showrooms.
@@ -71,12 +72,15 @@ const LIVING = [
 ];
 
 export default function LivingPage({ onBookConsultation }) {
+  // Database rows when they load; the array above is the offline fallback.
+  const items = useCollection("living", LIVING);
+
   return (
     <ProductPage
       eyebrow="Living rooms"
       title="Custom-Made Living Rooms"
       intro="The living room takes the most furniture and the most compromise — a sofa from one shop, a display unit from another, a partition added later. NEEMA HOMES draws the room as one set of pieces in one palette, so the sofa, shelving, partition and prayer unit belong to each other rather than merely sharing a floor."
-      items={LIVING}
+      items={items}
       renderFallback={(item) => <LivingIcon type={item.id} label={item.name} />}
       ctaTitle="Design Your Dream Living Room"
       ctaText="Let our designers plan a living room where every piece is drawn to the same brief."

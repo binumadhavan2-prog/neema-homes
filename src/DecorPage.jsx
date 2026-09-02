@@ -1,5 +1,6 @@
 import ProductPage from "./ProductPage.jsx";
 import DecorIcon from "./DecorIcon.jsx";
+import { useCollection } from "./content.js";
 
 // Copy written for NEEMA HOMES. The reference text supplied for this page
 // belonged to another studio, named their showrooms, and made material
@@ -31,12 +32,15 @@ const DECOR = [
 ];
 
 export default function DecorPage({ onBookConsultation }) {
+  // Database rows when they load; the array above is the offline fallback.
+  const items = useCollection("decor", DECOR);
+
   return (
     <ProductPage
       eyebrow="Decorative units"
       title="Custom-Made Decorative Units"
       intro="Decorative units are what make a room feel finished — the lit display wall, the run of open shelving, the cabinet that hides what should not be seen. NEEMA HOMES builds them to the wall they stand on, in materials chosen against the rest of the room, so they read as part of the architecture rather than furniture pushed up against it."
-      items={DECOR}
+      items={items}
       renderFallback={(item) => <DecorIcon type={item.id} label={item.name} />}
       ctaTitle="Design Your Dream Interiors"
       ctaText="Let our designers work the display and storage into the room from the start."
