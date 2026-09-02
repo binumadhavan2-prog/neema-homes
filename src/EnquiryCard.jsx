@@ -164,7 +164,7 @@ export default function EnquiryCard() {
             className={isSubmitting ? "submit-btn is-busy" : "submit-btn"}
             disabled={isSubmitting || !hasConsented}
           >
-            <span className="btn-label">Submit</span>
+            <span className="btn-label">Get a free estimate</span>
             <FingerprintSpinner />
           </button>
         </form>
