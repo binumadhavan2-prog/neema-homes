@@ -1168,6 +1168,30 @@
   resize: vertical;
 }
 
+/* Consent tick sits between the composer and the submit button */
+.form-consent {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 4px 0 20px;
+  cursor: pointer;
+}
+
+.form-consent input {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  margin-top: 2px;
+  accent-color: var(--coffee-light);
+  cursor: pointer;
+}
+
+.form-consent span {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
 /* ---------- message composer ---------- */
 
 /* Motion here follows one curve — a fast settle, no bounce */
@@ -1358,6 +1382,17 @@
 
 .contact-form .submit-btn:active {
   transform: scale(0.97);
+}
+
+/* Unticked consent — still visible, plainly not ready */
+.contact-form .submit-btn:disabled:not(.is-busy) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.contact-form .submit-btn:disabled:not(.is-busy):hover {
+  background: var(--coffee-light);
+  transform: none;
 }
 
 /* The label is masked, so the shine passes through the letterforms */
