@@ -488,6 +488,12 @@ img {
   box-shadow: 0 16px 40px rgba(18, 32, 60, 0.14);
 }
 
+/* Contact sits at the end of the bar, so its menu hangs from the right */
+.nav-submenu.is-right {
+  left: auto;
+  right: 0;
+}
+
 /* Beat .nav-links a, which is white for the hero */
 .nav-links .nav-submenu a {
   display: block;
@@ -504,6 +510,23 @@ img {
 .nav-links .nav-submenu a:hover {
   background: var(--cream);
   color: var(--gold-dark);
+}
+
+.nav-submenu-hint {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+/* A detail is a line of information, not a destination — it wraps rather
+   than forcing the menu wider than the number or the address needs */
+.nav-links .nav-submenu a:has(.nav-submenu-hint) {
+  padding: 10px 20px;
+  line-height: 1.4;
 }
 
 @media (prefers-reduced-motion: reduce) {

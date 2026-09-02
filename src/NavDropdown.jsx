@@ -2,8 +2,13 @@ import { useEffect, useRef, useState } from "react";
 
 // A navbar item whose label links through, with an arrow beside it that
 // opens a short list of options.
+//
+// An option is { label, href }, plus an optional `hint` — a caption above
+// the label, for a menu of details ("Phone" over the number) rather than a
+// menu of destinations. `align` puts the menu's right edge under the arrow,
+// for items sitting close to the end of the bar.
 
-export default function NavDropdown({ label, href, options }) {
+export default function NavDropdown({ label, href, options, align = "left" }) {
   const [isOpen, setIsOpen] = useState(false);
   const wrapRef = useRef(null);
 
@@ -49,14 +54,25 @@ export default function NavDropdown({ label, href, options }) {
       </button>
 
       {isOpen && (
-        <ul className="nav-submenu">
-          {options.map((option) => (
-            <li key={option.label}>
-              <a href={option.href} onClick={() => setIsOpen(false)}>
-                {option.label}
-              </a>
-            </li>
-          ))}
+        <ul className={align === "right" ? "nav-submenu is-right" : "nav-submenu"}>
+          {options.map((option) => {
+            const isExternal = option.href.startsWith("http");
+
+            return (
+              <li key={option.label}>
+                <a
+                  href={option.href}
+                  onClick={() => setIsOpen(false)}
+                  {...(isExternal && { target: "_blank", rel: "noreferrer" })}
+                >
+                  {option.hint ? (
+                    <span className="nav-submenu-hint">{option.hint}</span>
+                  ) : null}
+                  {option.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
