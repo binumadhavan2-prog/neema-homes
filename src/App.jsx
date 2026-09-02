@@ -260,6 +260,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [attachments, setAttachments] = useState([]);
+  const [hasConsented, setHasConsented] = useState(false);
   const [route, setRoute] = useState(readRoute);
   const submitTimer = useRef(null);
 
@@ -695,6 +696,7 @@ function App() {
                   setIsSubmitting(false);
                   setMessage("");
                   setAttachments([]);
+                  setHasConsented(false);
                   alert("Enquiry submitted successfully!");
                 }, 550);
               }}
@@ -745,12 +747,25 @@ function App() {
                 />
               </div>
 
+              <label className="form-consent" htmlFor="contact-consent">
+                <input
+                  id="contact-consent"
+                  type="checkbox"
+                  checked={hasConsented}
+                  onChange={(e) => setHasConsented(e.target.checked)}
+                />
+                <span>
+                  By proceeding, I authorise NEEMA HOMES to contact me via
+                  WhatsApp, phone calls, SMS and e-mail about my enquiry.
+                </span>
+              </label>
+
               <button
                 type="submit"
                 className={
                   isSubmitting ? "submit-btn is-busy" : "submit-btn"
                 }
-                disabled={isSubmitting}
+                disabled={isSubmitting || !hasConsented}
               >
                 <span className="btn-label">Contact Us</span>
                 <FingerprintSpinner />
