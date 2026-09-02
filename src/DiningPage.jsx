@@ -1,5 +1,6 @@
 import ProductPage from "./ProductPage.jsx";
 import DiningIcon from "./DiningIcon.jsx";
+import { useCollection } from "./content.js";
 
 // Copy written for NEEMA HOMES. The reference text supplied for this page
 // belonged to another studio and named their brand and branches.
@@ -52,12 +53,15 @@ const DINING = [
 ];
 
 export default function DiningPage({ onBookConsultation }) {
+  // Database rows when they load; the array above is the offline fallback.
+  const items = useCollection("dining", DINING);
+
   return (
     <ProductPage
       eyebrow="Dining rooms"
       title="Custom-Made Dining Rooms"
       intro="Dining rooms are usually assembled from separately bought pieces, and it shows. NEEMA HOMES draws the table, chairs, crockery shelf and wash counter together, in one set of materials, so the room reads as one room — and sits properly against the kitchen it opens onto."
-      items={DINING}
+      items={items}
       renderFallback={(item) => <DiningIcon type={item.id} label={item.name} />}
       ctaTitle="Design Your Dream Dining Room"
       ctaText="Let our designers plan a dining room that works with the kitchen beside it."

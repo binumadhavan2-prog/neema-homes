@@ -1,5 +1,6 @@
 import ProductPage from "./ProductPage.jsx";
 import BedroomIcon from "./BedroomIcon.jsx";
+import { useCollection } from "./content.js";
 
 // Copy written for NEEMA HOMES. The reference text supplied for this page
 // belonged to another studio and named their brand and branches.
@@ -34,12 +35,15 @@ const BEDROOM = [
 ];
 
 export default function BedroomPage({ onBookConsultation }) {
+  // Database rows when they load; the array above is the offline fallback.
+  const items = useCollection("bedroom", BEDROOM);
+
   return (
     <ProductPage
       eyebrow="Bedrooms"
       title="Custom-Made Bedrooms"
       intro="The bedroom is the room you spend the most hours in, and the one most often furnished last. NEEMA HOMES designs and builds the pieces that fill it — bed, wardrobe and dressing unit — to the dimensions of your room rather than to a catalogue size."
-      items={BEDROOM}
+      items={items}
       renderFallback={(item) => (
         <BedroomIcon type={item.id} label={item.name} />
       )}
