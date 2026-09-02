@@ -1,0 +1,230 @@
+/* ---------- price calculator ---------- */
+
+.calc-page {
+  background: var(--paper);
+  padding-bottom: var(--section);
+}
+
+/* Loud on purpose: this must not slip out with stand-in numbers on it */
+.calc-warning {
+  margin: 34px 0 0;
+  padding: 16px 20px;
+  border: 1px solid #e0b64a;
+  border-left: 4px solid #c9a24d;
+  border-radius: 12px;
+  background: #fdf6e4;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6b5312;
+}
+
+.calc-warning code {
+  font-size: 13px;
+}
+
+.calc-sections {
+  padding: 48px var(--pad) 0;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 26px;
+}
+
+.calc-card {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 30px 26px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #fff;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.calc-card:hover {
+  border-color: var(--brass);
+  box-shadow: 0 18px 44px rgba(18, 32, 60, 0.07);
+}
+
+.calc-card-head {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.calc-card-head h2 {
+  margin: 0;
+  font-size: 23px;
+}
+
+.calc-card-link {
+  flex: none;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.calc-card-link:hover {
+  color: var(--gold-dark);
+}
+
+.calc-controls {
+  margin-top: 24px;
+}
+
+.calc-field label,
+.calc-tiers legend {
+  display: block;
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.calc-field input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--ink);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.calc-field input:focus {
+  outline: none;
+  border-color: var(--brass);
+  box-shadow: 0 0 0 3px rgba(184, 155, 106, 0.18);
+}
+
+.calc-tiers {
+  margin: 18px 0 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Three tiers as a segmented control */
+.calc-tier-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.calc-tier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 8px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.calc-tier + .calc-tier {
+  border-left: 0;
+}
+
+.calc-tier:first-child {
+  border-radius: 12px 0 0 12px;
+}
+
+.calc-tier:last-child {
+  border-radius: 0 12px 12px 0;
+}
+
+.calc-tier input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.calc-tier:hover {
+  background: var(--cream);
+}
+
+.calc-tier.is-on {
+  border-color: var(--coffee-light);
+  background: var(--coffee-light);
+  color: #fff;
+}
+
+.calc-tier small {
+  margin-top: 2px;
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+/* Keyboard focus has to survive the hidden radio */
+.calc-tier:focus-within {
+  box-shadow: 0 0 0 3px rgba(184, 155, 106, 0.28);
+}
+
+.calc-output {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 92px;
+  margin-top: 24px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: var(--cream);
+}
+
+.calc-range {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.calc-basis,
+.calc-empty {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.calc-empty {
+  margin: 0;
+}
+
+.calc-cta {
+  margin-top: 20px;
+}
+
+.calc-disclaimer {
+  max-width: 70ch;
+  margin: 34px auto 0;
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .calc-sections {
+    padding: 36px 22px 0;
+  }
+
+  .calc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calc-card {
+    padding: 24px 22px 22px;
+  }
+}

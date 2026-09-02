@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { SERVICE_ICONS } from "./ServiceIcons.jsx";
 import ContactIllustration from "./ContactIllustration.jsx";
+import CalculatorPage from "./CalculatorPage.jsx";
 import ActionButton from "./ActionButton.jsx";
 import FingerprintSpinner from "./FingerprintSpinner.jsx";
 import WhatsAppLink from "./WhatsAppLink.jsx";
@@ -40,7 +41,8 @@ const PAGES = {
   "#/living": "living",
   "#/decor": "decor",
   "#/kids": "kids",
-  "#/gallery": "gallery"
+  "#/gallery": "gallery",
+  "#/calculator": "calculator"
 };
 
 const readRoute = () => PAGES[window.location.hash] ?? "home";
@@ -400,6 +402,11 @@ function App() {
             </li>
             <li><a href="#about">About</a></li>
             <li><a href="#/gallery">Gallery</a></li>
+            <li>
+              <a className="nav-calc" href="#/calculator">
+                Price Calculator
+              </a>
+            </li>
             {TESTIMONIALS.length > 0 && (
               <li><a href="#testimonials">Testimonials</a></li>
             )}
@@ -430,6 +437,8 @@ function App() {
         <KidsPage onBookConsultation={bookConsultation} />
       ) : route === "gallery" ? (
         <GalleryPage onBookConsultation={bookConsultation} />
+      ) : route === "calculator" ? (
+        <CalculatorPage onEnquire={bookConsultation} />
       ) : (
       <>
       <section id="home" className="hero">
