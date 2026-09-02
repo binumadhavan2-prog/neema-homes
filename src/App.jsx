@@ -19,6 +19,7 @@ import MessageBox from "./MessageBox.jsx";
 import HeroSlider from "./HeroSlider.jsx";
 import SocialFlipButton from "./SocialFlipButton.jsx";
 import ScrollFloat from "./ScrollFloat.jsx";
+import FaqAccordion from "./FaqAccordion.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -183,6 +184,46 @@ const INTERIORS = [
     image: "/images/project-powder.jpg",
     description:
       "A single veined marble slab behind a round mirror, with a floating walnut vanity, stone counter and unlacquered brass fittings."
+  }
+];
+
+// The questions the studio is asked before a project starts. The starting
+// prices below are the studio's published figures for modular interiors in
+// a new home — keep them in step with the calculator's rates in Supabase,
+// which is the other place the site quotes money.
+const FAQS = [
+  {
+    question: "Where should I start while designing a home?",
+    answer:
+      "The first step of your interior design journey is finding the right inspiration. With our design ideas, you can explore a bunch of different options before you find the one that matches your personality. From master bedrooms to foyers to home offices and balconies, we’ve curated design ideas for every room of your dream house. Once you have zeroed in on the style elements, the next step is to find the perfect interior designer who can help make your dream home a reality."
+  },
+  {
+    question: "What types of rooms are covered under home interior design ideas?",
+    answer:
+      "Interior design ideas typically cover all key areas of a home, including kitchens, bedrooms, living rooms, dining areas, bathrooms, and balconies, helping you design every space cohesively."
+  },
+  {
+    question: "Are these interior design ideas customisable for my home?",
+    answer:
+      "Yes, most design ideas can be customised based on your room dimensions, colour preferences, materials, and storage needs. Interior designers can adapt these inspirations to suit your specific requirements."
+  },
+  {
+    question: "What are the latest trends in home interior design?",
+    answer:
+      "Current trends focus on functional layouts, minimal clutter, neutral colour palettes, and smart storage solutions. Styles like modern, Scandinavian, and minimalist interiors are especially popular in Indian homes."
+  },
+  {
+    question: "How much does it cost to implement interior design ideas in India?",
+    answer:
+      "The cost depends on factors like home size, materials, and scope of work. Following are the standard costs for the respective types of project:",
+    prices: [
+      { label: "1 BHK", value: "Starting at ₹3.62L*" },
+      { label: "2 BHK", value: "Starting at ₹4.52L*" },
+      { label: "3 BHK", value: "Starting at ₹5.57L*" },
+      { label: "4 BHK", value: "Starting at ₹6.33L*" },
+      { label: "Modular Kitchens", value: "Starting at ₹1.7L*" }
+    ],
+    note: "*The prices include only modular interiors for new homes."
   }
 ];
 
@@ -893,6 +934,19 @@ function App() {
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
           />
+        </div>
+      </section>
+
+      <section id="faq" className="faq">
+        <div className="faq-shell">
+          <div className="section-head">
+            <h2>Frequently Asked Questions</h2>
+            <p>
+              The questions that come up most often before a project starts.
+            </p>
+          </div>
+
+          <FaqAccordion items={FAQS} />
         </div>
       </section>
       </>
