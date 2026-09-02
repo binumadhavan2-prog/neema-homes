@@ -418,3 +418,149 @@
     justify-items: start;
   }
 }
+
+/* ---------- price calculator rates ---------- */
+
+.admin-saved {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: #1d7a4c;
+}
+
+.admin-warning {
+  margin: 0 0 18px;
+  padding: 14px 18px;
+  border: 1px solid #e0b64a;
+  border-left: 4px solid #c9a24d;
+  border-radius: 10px;
+  background: #fdf6e4;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6b5312;
+}
+
+.rates-tables {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.rates-card {
+  padding: 22px 24px;
+  border: 1px solid var(--admin-line, #e3e6ec);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.rates-tables + .rates-card {
+  margin-top: 18px;
+}
+
+.rates-card h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.rates-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.rates-inline {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+  font-size: 13px;
+}
+
+.rates-inline input {
+  width: 84px;
+  padding: 7px 10px;
+  border: 1px solid var(--admin-line, #e3e6ec);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.rates-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.rates-table th,
+.rates-table td {
+  padding: 9px 10px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.rates-table thead th {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  border-bottom: 1px solid var(--admin-line, #e3e6ec);
+}
+
+.rates-table tbody th {
+  width: 110px;
+  font-weight: 500;
+}
+
+.rates-table tbody tr + tr th,
+.rates-table tbody tr + tr td {
+  border-top: 1px solid #f1f3f6;
+}
+
+.rates-table input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--admin-line, #e3e6ec);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.rates-table input[type="number"] {
+  max-width: 120px;
+}
+
+.rates-table input:focus {
+  outline: none;
+  border-color: #7a6250;
+  box-shadow: 0 0 0 3px rgba(122, 98, 80, 0.14);
+}
+
+/* Read-only echo of what the visitor would see */
+.rates-preview {
+  white-space: nowrap;
+  color: #4b5563;
+}
+
+.rates-check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.rates-check input {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
+
+@media (max-width: 760px) {
+  .rates-table {
+    display: block;
+    overflow-x: auto;
+  }
+}

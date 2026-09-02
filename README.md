@@ -59,3 +59,24 @@ Photographs that shipped with the site still live in `public/images` and are
 referenced by their `/images/...` path. Anything uploaded through the
 dashboard goes to the `gallery` bucket (public read, admin write, 10 MB cap,
 JPEG/PNG/WebP/AVIF/GIF).
+
+### Price calculator
+
+The **Price Calculator** tab in the dashboard drives `#/calculator`. Rates are
+rupees per square foot; the page multiplies them by the area a visitor enters
+and rounds to the nearest thousand, so an estimate never reads as an exact
+quote.
+
+| | |
+|---|---|
+| `calculator_categories` | one card per row (`key`, `name`, `href`, `default_area`, `sort_order`, `published`) |
+| `calculator_rates` | a `rate_low`/`rate_high` pair per category and tier, plus an optional `note` describing what the tier includes |
+| `calculator_settings` | single row: `rates_are_placeholder` and the `disclaimer` line |
+
+`src/calculatorRates.js` carries a copy of the rates as a fallback, used only
+when Supabase is unconfigured, the request fails, or the tables are empty.
+Editing it does not change the live figures — edit them in the dashboard.
+
+> **The seeded rates are placeholders, not NEEMA HOMES' pricing.** While
+> `rates_are_placeholder` is true the public page shows a warning banner
+> saying so. Untick that box in the dashboard once the real rates are in.

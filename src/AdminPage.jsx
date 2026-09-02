@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { supabase, isSupabaseConfigured, CONFIG_HINT } from "./supabaseClient.js";
 import { COLLECTIONS, TABLE, imageSrc, orderedQuery } from "./content.js";
 import ItemEditor from "./ItemEditor.jsx";
+import RatesManager from "./RatesManager.jsx";
 import "./admin.css";
 
 // Sort orders are stored in tens so a single move only has to renumber the
@@ -97,8 +98,7 @@ function SignIn() {
   );
 }
 
-function Manager({ session }) {
-  const [collection, setCollection] = useState(COLLECTIONS[0].key);
+function ItemsManager({ collection }) {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(null);
@@ -211,46 +211,7 @@ function Manager({ session }) {
   }
 
   return (
-    <div className="admin-shell">
-      <header className="admin-header">
-        <div>
-          <p className="admin-eyebrow">NEEMA HOMES</p>
-          <h1>Content dashboard</h1>
-        </div>
-
-        <div className="admin-header-side">
-          <span className="admin-user">{session.user.email}</span>
-          <a className="admin-btn" href="#/">
-            View site
-          </a>
-          <button
-            className="admin-btn"
-            onClick={() => supabase.auth.signOut()}
-          >
-            Sign out
-          </button>
-        </div>
-      </header>
-
-      <nav className="admin-tabs">
-        {COLLECTIONS.map((entry) => (
-          <button
-            key={entry.key}
-            className={
-              entry.key === collection ? "admin-tab is-active" : "admin-tab"
-            }
-            onClick={() => {
-              setCollection(entry.key);
-              setEditing(null);
-              setRows([]);
-              setLoading(true);
-            }}
-          >
-            {entry.label}
-          </button>
-        ))}
-      </nav>
-
+    <>
       <div className="admin-toolbar">
         <p className="admin-note">
           {meta.kind === "gallery"
@@ -350,6 +311,59 @@ function Manager({ session }) {
           }}
         />
       ) : null}
+    </>
+  );
+}
+
+// The tab shell: collections, plus the price calculator.
+const TABS = [
+  ...COLLECTIONS.map((entry) => ({ key: entry.key, label: entry.label })),
+  { key: "rates", label: "Price Calculator" }
+];
+
+function Manager({ session }) {
+  const [tab, setTab] = useState(TABS[0].key);
+
+  return (
+    <div className="admin-shell">
+      <header className="admin-header">
+        <div>
+          <p className="admin-eyebrow">NEEMA HOMES</p>
+          <h1>Content dashboard</h1>
+        </div>
+
+        <div className="admin-header-side">
+          <span className="admin-user">{session.user.email}</span>
+          <a className="admin-btn" href="#/">
+            View site
+          </a>
+          <button
+            className="admin-btn"
+            onClick={() => supabase.auth.signOut()}
+          >
+            Sign out
+          </button>
+        </div>
+      </header>
+
+      <nav className="admin-tabs">
+        {TABS.map((entry) => (
+          <button
+            key={entry.key}
+            className={entry.key === tab ? "admin-tab is-active" : "admin-tab"}
+            onClick={() => setTab(entry.key)}
+          >
+            {entry.label}
+          </button>
+        ))}
+      </nav>
+
+      {/* Keyed, so switching tabs starts each manager from a clean slate. */}
+      {tab === "rates" ? (
+        <RatesManager />
+      ) : (
+        <ItemsManager collection={tab} key={tab} />
+      )}
     </div>
   );
 }
