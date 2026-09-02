@@ -1750,12 +1750,16 @@ a.flip-tile:hover .flip-back {
 /* ---------- footer ---------- */
 
 .footer {
+  position: relative;
+  overflow: hidden;
   padding: 84px var(--pad) 26px;
   background: var(--ink-deep);
   color: rgba(255, 255, 255, 0.72);
 }
 
 .footer-container {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 60px;
@@ -1804,7 +1808,114 @@ a.flip-tile:hover .flip-back {
   color: var(--gold);
 }
 
+/* ---------- footer wordmark ---------- */
+
+/* A full-width glass NEEMA behind the footer columns, rising into place as
+   the footer scrolls in. The letters are floated by ScrollFloat; everything
+   below is the glass: each glyph carries a vertical white-to-brass gradient
+   clipped to the type, and a second copy of the glyph (the ::after) carries
+   a diagonal highlight that sweeps across it. The sweep is delayed by the
+   letter's index, so the shine travels along the word rather than lighting
+   it all at once. */
+
+.footer-wordmark {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* the word is wider and taller than the footer at this size — the footer
+     clips it, so it reads as a watermark rather than a block of type */
+  pointer-events: none;
+}
+
+/* A pool of light behind the type, so the glass has something to sit on */
+.footer-wordmark::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(900px, 94%);
+  height: 70%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(201, 162, 77, 0.12),
+    rgba(201, 162, 77, 0) 70%
+  );
+}
+
+.footer-wordmark .scroll-float {
+  margin: 0;
+}
+
+.footer-wordmark .scroll-float-text {
+  font-family: var(--serif);
+  font-size: clamp(80px, 24vw, 420px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: 0.04em;
+  /* the tracking above leaves a gap after the last letter */
+  text-indent: 0.04em;
+}
+
+.footer-wordmark .char {
+  position: relative;
+  line-height: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.46) 0%,
+    rgba(255, 255, 255, 0.22) 44%,
+    rgba(201, 162, 77, 0.4) 78%,
+    rgba(201, 162, 77, 0.18) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* the fill is transparent, so this reads as a glow around each letter */
+  text-shadow: 0 0 60px rgba(201, 162, 77, 0.18);
+}
+
+.footer-wordmark .char::after {
+  content: attr(data-char);
+  position: absolute;
+  inset: 0;
+  line-height: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.62) 50%,
+    transparent 60%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: wordmark-shine 2.6s linear infinite;
+  animation-delay: calc(var(--char-index) * 0.06s);
+}
+
+@keyframes wordmark-shine {
+  0% {
+    background-position: 160% 0;
+  }
+  /* the shine crosses in the first half, then the word rests */
+  55%,
+  100% {
+    background-position: -160% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-wordmark .char::after {
+    animation: none;
+  }
+}
+
 .footer-bottom {
+  position: relative;
+  z-index: 1;
   max-width: var(--shell);
   margin: 64px auto 0;
   padding-top: 24px;

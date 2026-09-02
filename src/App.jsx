@@ -18,6 +18,7 @@ import GalleryPage from "./GalleryPage.jsx";
 import MessageBox from "./MessageBox.jsx";
 import HeroSlider from "./HeroSlider.jsx";
 import SocialFlipButton from "./SocialFlipButton.jsx";
+import ScrollFloat from "./ScrollFloat.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -874,6 +875,22 @@ function App() {
       )}
 
       <footer className="footer">
+        {/* Sits behind the columns, filling the footer. The scrub ties the
+            word to the scroll: it rises as the footer comes up and sinks
+            again on the way back, fully formed once the footer is mostly in
+            view. Ending on the word's own centre rather than the component's
+            default keeps that last point reachable — the default ends 40% up
+            the viewport, which the page cannot reach this close to its end. */}
+        <div className="footer-wordmark" aria-hidden="true">
+          <ScrollFloat
+            scrollStart="top bottom"
+            scrollEnd="center bottom-=10%"
+            stagger={0.05}
+          >
+            NEEMA
+          </ScrollFloat>
+        </div>
+
         <div className="footer-container">
           <div className="footer-brand">
             <img src="/images/logo-horizontal.png" alt="NEEMA HOMES" />
