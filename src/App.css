@@ -2390,3 +2390,107 @@ a.store-badge:hover {
   line-height: 1.5;
   color: #9b2c2c;
 }
+
+/* ==========================================================
+   Terms of Service
+   ========================================================== */
+
+/* Sits under the email in the footer's contact column, so the legal link
+   is where people already look for the studio's details. */
+.footer-terms {
+  display: inline-block;
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-terms:hover {
+  color: var(--gold);
+}
+
+/* Sits under the intro paragraph, so a visitor can see at a glance whether
+   the terms they read last time are the terms in force now. */
+.terms-updated {
+  margin: 18px 0 0;
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.terms-body {
+  padding: 64px var(--pad) var(--section);
+  background: var(--paper);
+}
+
+/* A reading measure, not the full shell: legal prose is unreadable at the
+   width the rest of the site lays out to. */
+.terms-body .shell {
+  max-width: 76ch;
+}
+
+.terms-section + .terms-section {
+  margin-top: 46px;
+}
+
+.terms-section h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 0 0 16px;
+  font-size: clamp(21px, 2.2vw, 26px);
+}
+
+.terms-number {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+}
+
+.terms-section p {
+  margin: 0 0 14px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.terms-section p:last-child {
+  margin-bottom: 0;
+}
+
+.terms-section a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.terms-section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.terms-section li {
+  margin-bottom: 10px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .terms-body {
+    padding-top: 44px;
+  }
+
+  .terms-section + .terms-section {
+    margin-top: 34px;
+  }
+
+  .terms-section p,
+  .terms-section li {
+    font-size: 16px;
+  }
+}

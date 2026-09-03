@@ -21,6 +21,7 @@ import SocialFlipButton from "./SocialFlipButton.jsx";
 import ScrollFloat from "./ScrollFloat.jsx";
 import FaqAccordion from "./FaqAccordion.jsx";
 import StoreBadges from "./StoreBadges.jsx";
+import TermsPage from "./TermsPage.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -46,7 +47,8 @@ const PAGES = {
   "#/decor": "decor",
   "#/kids": "kids",
   "#/gallery": "gallery",
-  "#/calculator": "calculator"
+  "#/calculator": "calculator",
+  "#/terms": "terms"
 };
 
 const readRoute = () => PAGES[window.location.hash] ?? "home";
@@ -520,6 +522,8 @@ function App() {
         <GalleryPage onBookConsultation={bookConsultation} />
       ) : route === "calculator" ? (
         <CalculatorPage />
+      ) : route === "terms" ? (
+        <TermsPage email={STUDIO_EMAIL} phone={STUDIO_PHONE} />
       ) : (
       <>
       <section id="home" className="hero">
@@ -1005,6 +1009,9 @@ function App() {
             <p>Chennai</p>
             <p>{STUDIO_PHONE}</p>
             <p>{STUDIO_EMAIL}</p>
+            <a className="footer-terms" href="#/terms">
+              Terms of Service
+            </a>
           </div>
         </div>
 
