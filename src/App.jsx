@@ -677,16 +677,14 @@ function App() {
 
       <section id="portfolio" className="portfolio">
         <div className="portfolio-head">
-          <NeonReveal>
-            <div className="section-head">
-              <p className="eyebrow">Featured</p>
-              <h2>Our Portfolio</h2>
-              <p>
-                A selection of our completed residential interiors across
-                Chennai.
-              </p>
-            </div>
-          </NeonReveal>
+          <div className="section-head">
+            <p className="eyebrow">Featured</p>
+            <h2>Our Portfolio</h2>
+            <p>
+              A selection of our completed residential interiors across
+              Chennai.
+            </p>
+          </div>
         </div>
 
         {RESIDENCES.map((residence) => (
