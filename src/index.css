@@ -344,12 +344,14 @@ img {
   transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
 }
 
-/* Over the hero photo the bar is transparent; it solidifies once scrolled. */
+/* Over the hero photo the bar is transparent; it solidifies once scrolled,
+   onto the same --ink-deep the footer sits on, so the page opens and closes
+   on the same colour. The links need no scrolled-state override for this:
+   they are already light for the hero, and they stay light here. */
 .header.is-scrolled {
   padding: 14px var(--pad);
-  background: rgba(252, 251, 248, 0.94);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 1px 0 var(--line);
+  background: var(--ink-deep);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 /* The kitchen page has no dark hero to sit over, so the bar carries its own
@@ -462,10 +464,6 @@ img {
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
-.header.is-scrolled .nav-dropdown-arrow {
-  color: var(--ink);
-}
-
 .nav-dropdown-toggle:hover .nav-dropdown-arrow {
   color: var(--gold);
 }
@@ -533,10 +531,6 @@ img {
   .nav-dropdown-arrow {
     transition: color 0.25s ease;
   }
-}
-
-.header.is-scrolled .nav-links a {
-  color: var(--ink);
 }
 
 .nav-links a:hover {
