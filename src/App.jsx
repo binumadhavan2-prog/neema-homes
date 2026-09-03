@@ -22,6 +22,7 @@ import ScrollFloat from "./ScrollFloat.jsx";
 import FaqAccordion from "./FaqAccordion.jsx";
 import StoreBadges from "./StoreBadges.jsx";
 import TermsPage from "./TermsPage.jsx";
+import NeonReveal from "./NeonReveal.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -676,14 +677,16 @@ function App() {
 
       <section id="portfolio" className="portfolio">
         <div className="portfolio-head">
-          <div className="section-head">
-            <p className="eyebrow">Featured</p>
-            <h2>Our Portfolio</h2>
-            <p>
-              A selection of our completed residential interiors across
-              Chennai.
-            </p>
-          </div>
+          <NeonReveal>
+            <div className="section-head">
+              <p className="eyebrow">Featured</p>
+              <h2>Our Portfolio</h2>
+              <p>
+                A selection of our completed residential interiors across
+                Chennai.
+              </p>
+            </div>
+          </NeonReveal>
         </div>
 
         {RESIDENCES.map((residence) => (
