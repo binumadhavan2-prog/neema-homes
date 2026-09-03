@@ -24,6 +24,7 @@ import StoreBadges from "./StoreBadges.jsx";
 import TermsPage from "./TermsPage.jsx";
 import NeonReveal from "./NeonReveal.jsx";
 import RotatingWord from "./RotatingWord.jsx";
+import ReviewsSection from "./ReviewsSection.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -1039,6 +1040,8 @@ function App() {
           <FaqAccordion items={FAQS} />
         </div>
       </section>
+
+      <ReviewsSection />
       </>
       )}
 

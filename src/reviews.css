@@ -1,0 +1,384 @@
+/* ==========================================================
+   Reviews
+   ========================================================== */
+
+.reviews {
+  padding: var(--section) var(--pad);
+  background: var(--cream);
+}
+
+.reviews .section-head {
+  margin-bottom: 48px;
+}
+
+.reviews-average {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 14px 0 0;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- stars ---------- */
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.star {
+  color: rgba(18, 32, 60, 0.18);
+}
+
+.star.is-on {
+  color: var(--gold);
+}
+
+/* ---------- layout ---------- */
+
+.reviews-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: start;
+  max-width: var(--shell);
+  margin: 0 auto;
+}
+
+.reviews-list {
+  display: grid;
+  gap: 20px;
+}
+
+.reviews-empty {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* A shade under the section's cream rather than the paper white it started
+   on, so a review reads as a card sitting on the page. */
+.review-card {
+  padding: 24px 26px;
+  background: #ece3d6;
+  border: 1px solid #ddd2c0;
+}
+
+.review-card blockquote {
+  margin: 14px 0 16px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.review-by {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.review-by strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ---------- the form ---------- */
+
+.review-form {
+  padding: 28px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.review-form h3 {
+  margin: 0 0 20px;
+  font-size: 21px;
+}
+
+.review-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.review-form input,
+.review-form textarea {
+  width: 100%;
+  margin-bottom: 16px;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--paper);
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.review-form textarea {
+  resize: vertical;
+}
+
+.review-form input:focus-visible,
+.review-form textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+
+.review-form .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.review-form .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* The rating is a radio group: the inputs themselves are hidden, and the
+   stars they label carry the state, so keyboard and screen readers get a
+   real set of five choices rather than five clickable spans. */
+.star-picker {
+  margin: 0 0 20px;
+  padding: 0;
+  border: none;
+}
+
+.star-picker legend {
+  padding: 0;
+  margin-bottom: 6px;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.star-picker-row {
+  display: flex;
+  gap: 4px;
+}
+
+.star-choice {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+  color: rgba(18, 32, 60, 0.2);
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.star-choice.is-on {
+  color: var(--gold);
+}
+
+.star-choice:active {
+  transform: scale(0.92);
+}
+
+.star-choice input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Focus has to be visible even though the input is not */
+.star-choice:has(input:focus-visible) {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.review-note {
+  margin: 12px 0 0;
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.review-sent {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.review-error {
+  margin: 0 0 14px;
+  padding: 11px 14px;
+  border: 1px solid #e7b4b4;
+  border-radius: 2px;
+  background: #fdf2f2;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #9b2c2c;
+}
+
+/* For text that names a control for assistive tech but would be noise on
+   screen — the star labels, here. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .reviews-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-choice {
+    transition: none;
+  }
+}
+
+/* ---------- attachments ---------- */
+
+/* Whatever the client photographed, at a size that reads on the card
+   without taking it over. Videos keep their controls. */
+.review-media {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.review-media img,
+.review-media video {
+  width: 108px;
+  height: 108px;
+  object-fit: cover;
+  border-radius: 2px;
+  background: rgba(18, 32, 60, 0.06);
+}
+
+.review-media video {
+  width: 190px;
+}
+
+.review-file {
+  padding: 9px 10px;
+  font-size: 13px;
+}
+
+.review-file::file-selector-button {
+  margin-right: 10px;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--cream);
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.review-attachments {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.review-attachments li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 10px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.review-attachments span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.review-attachments button {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(18, 32, 60, 0.08);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.review-attachments button:hover {
+  background: rgba(18, 32, 60, 0.16);
+}
+
+/* ---------- attachments in the dashboard ---------- */
+
+/* An admin has to see what is attached before publishing it, not just the
+   words — the attachment is the part that most needs looking at. */
+.review-media-admin {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 0;
+}
+
+.review-media-admin img,
+.review-media-admin video {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 2px;
+  border: 1px solid var(--line);
+}
+
+/* Each attachment carries its own delete, so one bad photo can go without
+   taking the review with it. */
+.review-media-item {
+  position: relative;
+  margin: 0;
+  line-height: 0;
+}
+
+.review-media-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(13, 25, 48, 0.78);
+  font-size: 15px;
+  line-height: 1;
+  color: #fff;
+  cursor: pointer;
+}
+
+.review-media-remove:hover {
+  background: #9b2c2c;
+}

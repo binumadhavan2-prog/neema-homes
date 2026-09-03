@@ -4,6 +4,7 @@ import { COLLECTIONS, TABLE, imageSrc, orderedQuery } from "./content.js";
 import ItemEditor from "./ItemEditor.jsx";
 import RatesManager from "./RatesManager.jsx";
 import EnquiriesManager from "./EnquiriesManager.jsx";
+import ReviewsManager from "./ReviewsManager.jsx";
 import "./admin.css";
 
 // Sort orders are stored in tens so a single move only has to renumber the
@@ -320,7 +321,8 @@ function ItemsManager({ collection }) {
 const TABS = [
   ...COLLECTIONS.map((entry) => ({ key: entry.key, label: entry.label })),
   { key: "rates", label: "Price Calculator" },
-  { key: "enquiries", label: "Enquiries" }
+  { key: "enquiries", label: "Enquiries" },
+  { key: "reviews", label: "Reviews" }
 ];
 
 function Manager({ session }) {
@@ -365,6 +367,8 @@ function Manager({ session }) {
         <RatesManager />
       ) : tab === "enquiries" ? (
         <EnquiriesManager />
+      ) : tab === "reviews" ? (
+        <ReviewsManager />
       ) : (
         <ItemsManager collection={tab} key={tab} />
       )}
