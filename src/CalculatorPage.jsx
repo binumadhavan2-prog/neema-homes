@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ActionButton from "./ActionButton.jsx";
 import EnquiryCard from "./EnquiryCard.jsx";
+import RotatingWord from "./RotatingWord.jsx";
 import "./calculator.css";
 import {
   MAX_AREA,
@@ -130,7 +131,13 @@ export default function CalculatorPage() {
       <section className="product-intro">
         <div className="shell">
           <p className="eyebrow">Price Calculator</p>
-          <h1>Estimate Your Interiors</h1>
+          {/* The rooms spin through the heading. aria-label carries the
+              whole sentence, because the visible half of it changes every
+              couple of seconds and the rotating half is hidden. */}
+          <h1 aria-label="Estimate your interiors">
+            Estimate Your{" "}
+            <RotatingWord items={categories.map((category) => category.name)} />
+          </h1>
           <p className="product-intro-text">
             Enter a room's area and choose a finish to see an indicative range.
             Every home is different, so treat the figure as a starting point
