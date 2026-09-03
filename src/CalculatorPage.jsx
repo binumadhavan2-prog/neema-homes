@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ActionButton from "./ActionButton.jsx";
 import EnquiryCard from "./EnquiryCard.jsx";
+import RotatingWord from "./RotatingWord.jsx";
 import "./calculator.css";
 import {
   MAX_AREA,
@@ -10,6 +11,19 @@ import {
   formatINR,
   useCalculatorContent
 } from "./calculatorRates.js";
+
+// The last word of the heading turns over. "Interiors" leads so the line
+// reads as written on first paint. This is its own list rather than the
+// loaded category names: those are singular and include Decorative Units,
+// and the heading wants plurals.
+const HEADING_WORDS = [
+  "Interiors",
+  "Kitchens",
+  "Bedrooms",
+  "Living Rooms",
+  "Dining Rooms",
+  "Kids Rooms"
+];
 
 // One estimator per interior work. Each section keeps its own area and tier,
 // so a visitor can price a kitchen and a bedroom side by side without one
@@ -130,7 +144,11 @@ export default function CalculatorPage() {
       <section className="product-intro">
         <div className="shell">
           <p className="eyebrow">Price Calculator</p>
-          <h1>Estimate Your Interiors</h1>
+          {/* aria-label holds the written line, since the last word is
+              decorative and changes on a timer. */}
+          <h1 aria-label="Estimate your interiors">
+            Estimate Your <RotatingWord items={HEADING_WORDS} />
+          </h1>
           <p className="product-intro-text">
             Enter a room's area and choose a finish to see an indicative range.
             Every home is different, so treat the figure as a starting point

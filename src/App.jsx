@@ -30,17 +30,9 @@ const WHAT_WE_DO = [
   { label: "Our Portfolio", href: "#portfolio" }
 ];
 
-// The last word of the hero headline cycles through these. "Design" leads
-// so the headline reads as written on first paint, and the rest are the
-// rooms the studio actually details — same six as the Products menu.
-const HERO_WORDS = [
-  "Design",
-  "Kitchens",
-  "Bedrooms",
-  "Living Rooms",
-  "Dining Rooms",
-  "Kids Rooms"
-];
+// The tail of the hero headline, alternating: the line reads as written on
+// arrival, then turns over to "We Design" and back again, indefinitely.
+const HERO_WORDS = ["Design", "We Design"];
 
 const PRODUCTS = [
   { label: "Kitchen", href: "#/kitchen" },
