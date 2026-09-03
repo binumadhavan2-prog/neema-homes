@@ -1,0 +1,60 @@
+/* ==========================================================
+   RotatingWord
+   ========================================================== */
+
+/* Inline-block with a hidden sizer inside: the sizer holds the width of the
+   longest room name so the heading never reflows mid-spin, and the visible
+   word is absolutely positioned over it. */
+.rotating-word {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  color: var(--gold);
+}
+
+/* Grid, with every word in the same cell: the box takes the width of the
+   widest one that actually renders, and the height of one line. */
+.rotating-word-sizer {
+  display: inline-grid;
+  /* Children keep their own width rather than stretching to the cell; the
+     grid still sizes to the widest of them. */
+  justify-items: start;
+  visibility: hidden;
+}
+
+.rotating-word-sizer > span {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+}
+
+/* Keyed on the word, so React remounts this on every change and the enter
+   animation runs again — no timers or transition bookkeeping needed. */
+.rotating-word-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  animation: rotating-word-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.rotating-word-item.is-static {
+  animation: none;
+}
+
+@keyframes rotating-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(88%) rotateX(-55deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotating-word-item {
+    animation: none;
+  }
+}
