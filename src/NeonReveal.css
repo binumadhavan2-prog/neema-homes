@@ -1,0 +1,84 @@
+/* The sweep runs edge to edge inside the container, so the bar has to be
+   free to sit outside the content box without widening the page. */
+.neon-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hidden until the sweep uncovers it. The inline clip-path GSAP writes
+   wins over this one, and the reduced-motion branch clears it outright. */
+.neon-reveal-content {
+  clip-path: inset(0% 100% 0% 0%);
+}
+
+/* A zero-width rail whose `left` is driven from 0% to 100%. The glow layers
+   hang off it centred, so the light sits exactly on the percentage the clip
+   is opened to — an earlier version anchored them to the right edge of a
+   full-width bar and put the glow a container-width away from the reveal. */
+.neon-reveal-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.neon-reveal-bar > span {
+  position: absolute;
+  top: -6%;
+  left: 0;
+  height: 112%;
+  transform: translateX(-50%);
+  border-radius: 999px;
+}
+
+/* Three layers, widest and softest first: a neon tube is a hot line inside
+   a saturated halo inside a wide, weak bloom. One glowing rule with a
+   box-shadow reads as a border instead.
+
+   The core is the site's darker brass rather than the near-white a neon
+   sign would use, because this section sits on --paper (#fcfbf8) and a
+   white-hot core on cream is invisible. The dark-ground variant below puts
+   the white core back where it actually works. */
+.neon-reveal-bloom {
+  width: 34px;
+  background: var(--gold);
+  filter: blur(18px);
+  opacity: 0.55;
+}
+
+.neon-reveal-halo {
+  width: 9px;
+  background: var(--gold);
+  filter: blur(4px);
+  opacity: 0.95;
+}
+
+.neon-reveal-core {
+  width: 3px;
+  background: var(--gold-dark);
+  box-shadow:
+    0 0 6px rgba(201, 162, 77, 0.95),
+    0 0 16px rgba(201, 162, 77, 0.8),
+    0 0 34px rgba(201, 162, 77, 0.5);
+}
+
+.neon-reveal.is-on-dark .neon-reveal-core {
+  background: #fffaf0;
+}
+
+.neon-reveal.is-on-dark .neon-reveal-bloom {
+  opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-reveal-content {
+    clip-path: none;
+  }
+
+  .neon-reveal-bar {
+    display: none;
+  }
+}
