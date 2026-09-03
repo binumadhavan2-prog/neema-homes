@@ -2082,10 +2082,20 @@ a.store-badge:hover {
     transparent 60%
   );
   background-size: 300% 100%;
+  /* Where the sweep ends, so the resting word carries no highlight — the
+     shine is something that happens, not something that sits there. */
+  background-position: -160% 0;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: wordmark-shine 2.6s linear infinite;
+}
+
+/* The shine runs once each time the footer comes into view, rather than
+   looping forever while the footer is off-screen. An IntersectionObserver
+   adds .is-lit on the way in and takes it off on the way out, which re-arms
+   it for the next visit. */
+.footer-wordmark.is-lit .char::after {
+  animation: wordmark-shine 2.6s linear 1;
   animation-delay: calc(var(--char-index) * 0.06s);
 }
 
@@ -2101,7 +2111,7 @@ a.store-badge:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .footer-wordmark .char::after {
+  .footer-wordmark.is-lit .char::after {
     animation: none;
   }
 }
