@@ -1882,6 +1882,64 @@ a.flip-tile:hover .flip-back {
   }
 }
 
+/* ---------- footer store badges ---------- */
+
+.store-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 18px 9px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+a.store-badge:hover {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--gold);
+}
+
+/* No listing yet — the badge still reads, it just does not offer a press */
+.store-badge.is-idle {
+  border-style: dashed;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.store-badge-mark {
+  display: grid;
+  place-items: center;
+}
+
+.store-badge-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.store-badge-hint {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.store-badge-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
 /* ---------- footer ---------- */
 
 .footer {
