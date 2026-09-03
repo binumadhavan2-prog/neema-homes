@@ -20,6 +20,7 @@ import HeroSlider from "./HeroSlider.jsx";
 import SocialFlipButton from "./SocialFlipButton.jsx";
 import ScrollFloat from "./ScrollFloat.jsx";
 import FaqAccordion from "./FaqAccordion.jsx";
+import StoreBadges from "./StoreBadges.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -262,6 +263,14 @@ const SOCIAL_FLIP = [
   { letter: "A", platform: "pinterest", label: "Pinterest", url: "" },
   { letter: "C", platform: "whatsapp", label: "WhatsApp", url: whatsappHref },
   { letter: "T", platform: "email", label: "Email", url: `mailto:${STUDIO_EMAIL}` }
+];
+
+// The two store badges under the flip row. Fill in `url` as each listing
+// goes live — until then the badge renders as a plain badge rather than a
+// link, the same way an unfilled social tile does.
+const APP_STORES = [
+  { store: "play", hint: "Get it on", name: "Google Play", url: "" },
+  { store: "apple", hint: "Download on the", name: "App Store", url: "" }
 ];
 
 const mapEmbedSrc = `https://www.google.com/maps?q=${encodeURIComponent(
@@ -978,6 +987,8 @@ function App() {
             </p>
 
             <SocialFlipButton items={SOCIAL_FLIP} />
+
+            <StoreBadges items={APP_STORES} />
           </div>
 
           <div className="footer-links">
