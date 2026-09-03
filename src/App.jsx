@@ -23,10 +23,23 @@ import FaqAccordion from "./FaqAccordion.jsx";
 import StoreBadges from "./StoreBadges.jsx";
 import TermsPage from "./TermsPage.jsx";
 import NeonReveal from "./NeonReveal.jsx";
+import RotatingWord from "./RotatingWord.jsx";
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
   { label: "Our Portfolio", href: "#portfolio" }
+];
+
+// The last word of the hero headline cycles through these. "Design" leads
+// so the headline reads as written on first paint, and the rest are the
+// rooms the studio actually details — same six as the Products menu.
+const HERO_WORDS = [
+  "Design",
+  "Kitchens",
+  "Bedrooms",
+  "Living Rooms",
+  "Dining Rooms",
+  "Kids Rooms"
 ];
 
 const PRODUCTS = [
@@ -569,7 +582,12 @@ function App() {
         <div className="hero-content">
           <p className="eyebrow">Neema Homes · Chennai</p>
 
-          <h1>Premium Residential Interior Design</h1>
+          {/* aria-label keeps the written headline for screen readers,
+              since the last word is decorative and changes on a timer. */}
+          <h1 aria-label="Premium Residential Interior Design">
+            Premium Residential Interior{" "}
+            <RotatingWord items={HERO_WORDS} interval={2600} />
+          </h1>
 
           <p>
             Creating beautiful, functional homes that reflect your lifestyle.
