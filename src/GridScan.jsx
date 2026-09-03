@@ -289,10 +289,21 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
   }
 }
 
+// The colours arrive converted to linear (convertSRGBToLinear on the way
+// in), but this shader writes gl_FragColor itself and so never picks up
+// three's <colorspace_fragment> include. Without this the authored hex is
+// displayed as its own linear values — #c9a24d gold comes out a darker,
+// redder orange. Convert back on the way out.
+vec3 linearToSRGB(vec3 c){
+  vec3 lo = c * 12.92;
+  vec3 hi = 1.055 * pow(max(c, vec3(0.0)), vec3(1.0 / 2.4)) - 0.055;
+  return mix(lo, hi, step(vec3(0.0031308), c));
+}
+
 void main(){
   vec4 c;
   mainImage(c, vUv * iResolution.xy);
-  gl_FragColor = c;
+  gl_FragColor = vec4(linearToSRGB(c.rgb), c.a);
 }
 `;
 
