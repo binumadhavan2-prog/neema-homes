@@ -54,7 +54,8 @@ export default function NeonReveal({
   duration = 1.15,
   ease = "power2.inOut",
   start = "top 78%",
-  flicker = true
+  flicker = true,
+  replay = true
 }) {
   const containerRef = useRef(null);
 
@@ -73,8 +74,15 @@ export default function NeonReveal({
       return;
     }
 
+    // `restart none none reset`: sweep whenever it enters going down, and
+    // once it has left upwards put it back to hidden so the next pass gets
+    // the sweep again. Scrolling up into it from below leaves it revealed —
+    // re-running the sweep under a reader moving the other way would read
+    // as a glitch rather than as an entrance.
     const timeline = gsap.timeline({
-      scrollTrigger: { trigger: el, start, once: true }
+      scrollTrigger: replay
+        ? { trigger: el, start, toggleActions: "restart none none reset" }
+        : { trigger: el, start, once: true }
     });
 
     // The bar leads and the clip follows it exactly, so the content appears
@@ -107,13 +115,33 @@ export default function NeonReveal({
     // resize event and leave the trigger measuring a stale document.
     const unobserve = observeBody();
 
+    // A photograph has no height until it loads. On a cold load the whole
+    // page is short enough that every trigger sits inside the viewport and
+    // fires at once, and then the images arrive and push the grid down — so
+    // the sweep is spent before the photo it belongs to is ever on screen.
+    // Remeasure once the images inside this instance have landed.
+    const images = [...el.querySelectorAll("img")].filter((img) => !img.complete);
+    let outstanding = images.length;
+    const onImageSettled = () => {
+      outstanding -= 1;
+      if (outstanding <= 0) ScrollTrigger.refresh();
+    };
+    images.forEach((img) => {
+      img.addEventListener("load", onImageSettled, { once: true });
+      img.addEventListener("error", onImageSettled, { once: true });
+    });
+
     return () => {
+      images.forEach((img) => {
+        img.removeEventListener("load", onImageSettled);
+        img.removeEventListener("error", onImageSettled);
+      });
       unobserve();
       timeline.scrollTrigger?.kill();
       timeline.kill();
       gsap.set([bar, content], { clearProps: "all" });
     };
-  }, [duration, ease, start, flicker]);
+  }, [duration, ease, start, flicker, replay]);
 
   return (
     <div ref={containerRef} className={`neon-reveal ${className}`}>
