@@ -23,11 +23,6 @@ import FaqAccordion from "./FaqAccordion.jsx";
 import StoreBadges from "./StoreBadges.jsx";
 import TermsPage from "./TermsPage.jsx";
 import NeonReveal from "./NeonReveal.jsx";
-// three + postprocessing are around 600kB of the bundle, for a decoration
-// sitting behind the hero copy. Loading it after the first paint keeps that
-// weight off the critical path; until it arrives the hero is simply the
-// photographs, which is what it was before.
-const GridScan = lazy(() => import("./GridScan.jsx"));
 
 const WHAT_WE_DO = [
   { label: "Customised Interior", href: "#services" },
@@ -551,36 +546,6 @@ function App() {
       <>
       <section id="home" className="hero">
         <HeroSlider slides={HERO_SLIDES} />
-
-        {/* A scan sweeping over the hero photographs. The grid the shader is
-            named for is switched off — only the beam and its aura show — and
-            the whole thing is skipped outright for reduced motion rather than
-            run behind a hidden element. */}
-        {!prefersReducedMotion() && (
-          <Suspense fallback={null}>
-          {/* scanPhaseTaper is clamped to 0.49 in the shader, so the
-              component's 0.9 default reads as "full strength only at
-              mid-sweep"; 0.3 holds the beam at strength for longer. The
-              band's width is 0.18 * scanGlow * scanSoftness, and these
-              values make it about a third of the default — over a
-              photograph that is a passing light rather than a wash. */}
-          <GridScan
-            className="hero-scan"
-            showGrid={false}
-            scanColor="#c9a24d"
-            scanOpacity={0.5}
-            scanDirection="forward"
-            scanDuration={3.4}
-            scanDelay={4.5}
-            scanPhaseTaper={0.3}
-            scanSoftness={1.1}
-            scanGlow={0.32}
-            sensitivity={0.4}
-            enablePost={false}
-            noiseIntensity={0}
-          />
-          </Suspense>
-        )}
 
         <div className="hero-inner">
         <div className="hero-content">
