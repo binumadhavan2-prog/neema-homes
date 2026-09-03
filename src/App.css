@@ -2426,8 +2426,9 @@ a.store-badge:hover {
 }
 
 /* A reading measure, not the full shell: legal prose is unreadable at the
-   width the rest of the site lays out to. */
-.terms-body .shell {
+   width the rest of the site lays out to. The heading block takes the same
+   measure so the h1 and the clauses share a left edge. */
+.terms-page .shell {
   max-width: 76ch;
 }
 

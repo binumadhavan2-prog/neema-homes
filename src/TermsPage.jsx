@@ -128,7 +128,7 @@ const SECTIONS = [
 
 export default function TermsPage({ email, phone }) {
   return (
-    <main className="product-page">
+    <main className="product-page terms-page">
       <section className="product-intro">
         <div className="shell">
           <p className="eyebrow">Legal</p>
