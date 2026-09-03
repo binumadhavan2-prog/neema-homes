@@ -230,6 +230,23 @@ const FAQS = [
   }
 ];
 
+// The studio's own numbers, and nothing else. Fill in a `value` and that
+// tile appears; leave it empty and it stays out, so the section can never
+// show a figure NEEMA HOMES has not earned. If a slot does not apply,
+// delete the row rather than inventing something for it.
+//
+// `note` is for a claim that needs a qualifier — a warranty period, say,
+// which is a promise to a client and must match what the quotation says.
+// Shape: { value, label, note }
+const WHY_US = [
+  { value: "", label: "Homes completed" },
+  { value: "", label: "Years designing in Chennai" },
+  { value: "", label: "Designers on the team" },
+  { value: "", label: "Checks before handover" },
+  { value: "", label: "Localities delivered in" },
+  { value: "", label: "Warranty on our modular work", note: "" }
+];
+
 // Real client quotes only — add entries as they come in and the section
 // appears on its own. Shape: { quote, name, residence }
 const TESTIMONIALS = [];
@@ -737,6 +754,31 @@ function App() {
           </div>
         )}
       </section>
+
+      {WHY_US.some((stat) => stat.value) && (
+        <section id="why-us" className="why-us">
+          <div className="shell">
+            <div className="section-head">
+              <p className="eyebrow">Why choose us</p>
+              <h2>What we bring to your home</h2>
+            </div>
+
+            <div className="why-us-grid">
+              {WHY_US.filter((stat) => stat.value).map((stat) => (
+                <div className="why-us-stat" key={stat.label}>
+                  <p className="why-us-value">{stat.value}</p>
+                  <p className="why-us-label">{stat.label}</p>
+                  {stat.note && <p className="why-us-note">{stat.note}</p>}
+                </div>
+              ))}
+            </div>
+
+            <ActionButton className="btn" onAction={bookConsultation}>
+              Book a Consultation
+            </ActionButton>
+          </div>
+        </section>
+      )}
 
       {TESTIMONIALS.length > 0 && (
         <section id="testimonials" className="testimonials">
