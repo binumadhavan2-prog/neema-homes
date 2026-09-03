@@ -437,11 +437,40 @@ img {
 
 /* ---------- nav dropdowns ---------- */
 
+/* What We Do, Products and Contact fill on hover and stay filled while
+   their menu is open, so the open item is visibly the one you are in — the
+   letters changing colour alone did not read as a selection.
+   The padding is cancelled by an equal negative margin, so the pill has
+   room to sit around the label without moving anything in the bar. */
 .nav-dropdown {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  padding: 7px 14px;
+  margin: -7px -14px;
+  border-radius: 999px;
+  transition: background 0.25s ease;
+}
+
+.nav-dropdown:hover,
+.nav-dropdown:has(.nav-dropdown-toggle.is-open) {
+  background: rgba(201, 162, 77, 0.16);
+}
+
+/* Direct child only: the submenu links live inside this element too, and
+   they are dark on a cream panel — sweeping them gold with the label made
+   them near-unreadable. */
+.nav-links .nav-dropdown:hover > a,
+.nav-links .nav-dropdown:has(.nav-dropdown-toggle.is-open) > a,
+.nav-dropdown:has(.nav-dropdown-toggle.is-open) .nav-dropdown-arrow {
+  color: var(--gold);
+}
+
+/* The fill is the state now; the sliding underline underneath it would be
+   two answers to the same question. */
+.nav-links .nav-dropdown > a::after {
+  display: none;
 }
 
 .nav-dropdown-toggle {
