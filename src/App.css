@@ -2495,3 +2495,71 @@ a.store-badge:hover {
     font-size: 16px;
   }
 }
+
+/* ==========================================================
+   Why choose us
+   ========================================================== */
+
+.why-us {
+  padding: var(--section) var(--pad);
+  background: var(--paper);
+  text-align: center;
+}
+
+.why-us .section-head {
+  margin-bottom: 56px;
+}
+
+/* Centred flex rather than a grid: the studio decides how many stats it
+   has, and a grid with a fixed column count orphans the last tile of an
+   awkward row. Wrapping from the centre keeps any count looking deliberate,
+   which is also why the tiles are separated by space rather than by rules —
+   a divider on a wrapped row's last tile reads as a mistake. */
+.why-us-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 44px 56px;
+  margin-bottom: 52px;
+}
+
+.why-us-stat {
+  flex: 0 1 180px;
+  padding: 6px 0;
+}
+
+.why-us-value {
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.why-us-label {
+  margin: 10px 0 0;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* The qualifier on a claim that is a promise — kept small and directly
+   under the label it qualifies, never floated away from it. */
+.why-us-note {
+  margin: 6px 0 0;
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+@media (max-width: 900px) {
+  .why-us-grid {
+    gap: 36px 40px;
+  }
+
+  .why-us-stat {
+    flex-basis: 150px;
+  }
+}
