@@ -6,6 +6,39 @@ import "./NeonReveal.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// One ResizeObserver shared by every instance on the page, coalesced into a
+// single refresh per frame. The portfolio grid puts a dozen of these on the
+// home page, and an observer apiece would fire a dozen full ScrollTrigger
+// refreshes — each one remeasuring every trigger on the page — for one
+// layout change. The last instance to unmount tears it down.
+let bodyObserver = null;
+let observerRefs = 0;
+let refreshQueued = false;
+
+function observeBody() {
+  observerRefs += 1;
+
+  if (!bodyObserver) {
+    bodyObserver = new ResizeObserver(() => {
+      if (refreshQueued) return;
+      refreshQueued = true;
+      requestAnimationFrame(() => {
+        refreshQueued = false;
+        ScrollTrigger.refresh();
+      });
+    });
+    bodyObserver.observe(document.body);
+  }
+
+  return () => {
+    observerRefs -= 1;
+    if (observerRefs === 0 && bodyObserver) {
+      bodyObserver.disconnect();
+      bodyObserver = null;
+    }
+  };
+}
+
 // A neon bar that sweeps across the container once it scrolls into view,
 // uncovering the content in its wake. The bar is three stacked layers — a
 // white-hot core, a coloured halo and a wide bloom — because a single
@@ -72,11 +105,10 @@ export default function NeonReveal({
     // Photographs above settle in late and the hash router swaps whole
     // pages under this one, both of which change the page height without a
     // resize event and leave the trigger measuring a stale document.
-    const observer = new ResizeObserver(() => ScrollTrigger.refresh());
-    observer.observe(document.body);
+    const unobserve = observeBody();
 
     return () => {
-      observer.disconnect();
+      unobserve();
       timeline.scrollTrigger?.kill();
       timeline.kill();
       gsap.set([bar, content], { clearProps: "all" });
