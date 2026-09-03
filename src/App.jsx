@@ -344,6 +344,7 @@ function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const footerWordmarkRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState("");
@@ -357,6 +358,23 @@ function App() {
   const submitTimer = useRef(null);
 
   useEffect(() => () => clearTimeout(submitTimer.current), []);
+
+  // The wordmark's shine used to loop forever, including while the footer
+  // was nowhere near the viewport. Now it plays once on arrival: the class
+  // goes on as the footer comes into view and comes off as it leaves, which
+  // re-arms it for the next visit. Reduced motion never gets the class.
+  useEffect(() => {
+    const el = footerWordmarkRef.current;
+    if (!el || prefersReducedMotion()) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => el.classList.toggle("is-lit", entry.isIntersecting),
+      { threshold: 0.35 }
+    );
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, []);
 
   // The browser jumps on hashchange before React swaps the page in, so an
   // anchor arrived at from the kitchen page needs scrolling again after.
@@ -1021,7 +1039,7 @@ function App() {
             view. Ending on the word's own centre rather than the component's
             default keeps that last point reachable — the default ends 40% up
             the viewport, which the page cannot reach this close to its end. */}
-        <div className="footer-wordmark" aria-hidden="true">
+        <div className="footer-wordmark" aria-hidden="true" ref={footerWordmarkRef}>
           <ScrollFloat
             scrollStart="top bottom"
             scrollEnd="center bottom-=10%"
