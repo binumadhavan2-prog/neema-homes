@@ -510,9 +510,9 @@ img {
   margin: 0;
   padding: 8px 0;
   list-style: none;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  box-shadow: 0 16px 40px rgba(18, 32, 60, 0.14);
+  background: var(--gold);
+  border: 1px solid var(--gold-dark);
+  box-shadow: 0 16px 40px rgba(18, 32, 60, 0.22);
 }
 
 /* Contact sits at the end of the bar, so its menu hangs from the right */
@@ -534,9 +534,11 @@ img {
   display: none;
 }
 
+/* The row under the cursor goes coffee, and its text has to come with it —
+   ink on coffee is unreadable. */
 .nav-links .nav-submenu a:hover {
-  background: var(--cream);
-  color: var(--gold-dark);
+  background: var(--coffee);
+  color: var(--cream);
 }
 
 .nav-submenu-hint {
@@ -546,7 +548,13 @@ img {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brass);
+  /* Brass on a gold panel is nearly invisible, so the hints in the Contact
+     menu take a muted ink instead, and lighten with the row on hover. */
+  color: rgba(18, 32, 60, 0.72);
+}
+
+.nav-links .nav-submenu a:hover .nav-submenu-hint {
+  color: rgba(245, 239, 230, 0.78);
 }
 
 /* A detail is a line of information, not a destination — it wraps rather
