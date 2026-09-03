@@ -708,7 +708,12 @@ function App() {
                   }
                 >
                   <div className="portfolio-media">
-                    <img src={room.image} alt={room.title} />
+                    {/* Inside the media frame, not around it: the frame owns
+                        the hover shadow, and a clipping wrapper outside it
+                        would cut that shadow off. */}
+                    <NeonReveal>
+                      <img src={room.image} alt={room.title} />
+                    </NeonReveal>
                   </div>
 
                   <div className="portfolio-info">
