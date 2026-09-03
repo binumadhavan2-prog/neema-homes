@@ -9,7 +9,12 @@ import "./RotatingWord.css";
 // The words are decorative: the heading around them carries the real
 // sentence for screen readers, and this is hidden from them. Reduced motion
 // gets the first word, standing still.
-export default function RotatingWord({ items = [], interval = 2100 }) {
+// `cycleFrom` is where the loop restarts. At 0 every word keeps coming
+// round. At 1 the first word is a lead-in — shown on arrival, then dropped
+// out of the rotation for good, which is what the hero wants: the headline
+// reads as written when you land, then turns over what the studio designs
+// and never claims the plain word again.
+export default function RotatingWord({ items = [], interval = 2100, cycleFrom = 0 }) {
   const [index, setIndex] = useState(0);
   const reduced =
     typeof window !== "undefined" &&
@@ -18,13 +23,13 @@ export default function RotatingWord({ items = [], interval = 2100 }) {
   useEffect(() => {
     if (reduced || items.length < 2) return;
 
-    const id = setInterval(
-      () => setIndex((i) => (i + 1) % items.length),
-      Math.max(600, interval)
-    );
+    const restart = Math.min(Math.max(0, cycleFrom), items.length - 1);
+    const id = setInterval(() => {
+      setIndex((i) => (i + 1 >= items.length ? restart : i + 1));
+    }, Math.max(600, interval));
 
     return () => clearInterval(id);
-  }, [items.length, interval, reduced]);
+  }, [items.length, interval, reduced, cycleFrom]);
 
   if (items.length === 0) return null;
 
