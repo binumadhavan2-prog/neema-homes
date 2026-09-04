@@ -72,7 +72,10 @@ const SERVICES = [
   {
     number: "02",
     icon: "space-planning",
+    // `image` stays on as the video's poster, so the card is never blank
+    // while 3.7MB loads — and it is what reduced motion gets instead.
     image: "/images/service-space-planning.jpg",
+    video: "/videos/service-space-planning.mp4",
     imageAlt: "A colour-rendered floor plan being marked up by hand",
     title: "Space Planning",
     description: "Smart layouts to maximize comfort and functionality."
@@ -651,7 +654,23 @@ function App() {
             <div className="service-card" key={service.number}>
               {service.image && (
                 <div className="service-media">
-                  <img src={service.image} alt={service.imageAlt} />
+                  {/* A card that moves is still a decorative background, so
+                      it is muted, looping and inert — and under reduced
+                      motion it falls back to the still it posters with. */}
+                  {service.video && !prefersReducedMotion() ? (
+                    <video
+                      src={service.video}
+                      poster={service.image}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      aria-label={service.imageAlt}
+                    />
+                  ) : (
+                    <img src={service.image} alt={service.imageAlt} />
+                  )}
                 </div>
               )}
 
